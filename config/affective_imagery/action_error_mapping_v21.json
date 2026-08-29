@@ -1,0 +1,870 @@
+{
+  "contract_schema": "affective_imagery.action_error_mapping",
+  "contract_schema_version": 2,
+  "mapping_version": "2.1-wave1-integration-candidate",
+  "scope": "sentence",
+  "priority_order": "lower_wins",
+  "input_fields": [
+    "audit_group",
+    "package_level",
+    "dimension_code",
+    "polarity",
+    "human_packaging_visual",
+    "human_relation_valid",
+    "human_package_level",
+    "human_dimension_code",
+    "human_additional_dimension_codes",
+    "human_polarity"
+  ],
+  "transforms": [
+    {
+      "op": "split_union",
+      "target": "human_dimension_values",
+      "sources": [
+        "human_dimension_code",
+        "human_additional_dimension_codes"
+      ],
+      "delimiter": "|",
+      "ignore_values": [
+        "",
+        "none",
+        "uncertain"
+      ]
+    },
+    {
+      "op": "map_value",
+      "target": "model_package_level",
+      "source": "package_level",
+      "mapping": {
+        "": "",
+        "outer": "outer",
+        "inner": "inner",
+        "ambiguous": "ambiguous",
+        "outer_retail_package": "outer",
+        "inner_sachet_wrapper": "inner",
+        "ambiguous_package_level": "ambiguous"
+      },
+      "on_unmapped": "error"
+    }
+  ],
+  "declared_vocabulary": {
+    "dimensions": [
+      "general_visual_appeal",
+      "cute_friendly",
+      "premium_refined",
+      "gift_presentation",
+      "simple_modern",
+      "natural_botanical",
+      "calming_soft",
+      "cheerful_colorful",
+      "traditional_vintage",
+      "negative_appearance",
+      "none",
+      "uncertain"
+    ],
+    "human_polarity": [
+      "positive",
+      "negative",
+      "uncertain"
+    ]
+  },
+  "action_enum": [
+    "keep",
+    "drop",
+    "change_dimension",
+    "change_package_level",
+    "change_polarity",
+    "add_missing"
+  ],
+  "error_type_enum": [
+    "none",
+    "nonvisual_content",
+    "shipping_or_seller",
+    "inner_packaging",
+    "ambiguous_package_level",
+    "wrong_dimension",
+    "negation_error",
+    "relation_missing",
+    "missed_relation",
+    "duplicate_or_near_duplicate",
+    "context_missing",
+    "other"
+  ],
+  "rules": [
+    {
+      "rule_id": "decision_relevant_uncertainty_visual",
+      "priority": 11,
+      "conditions": [
+        {
+          "operator": "exact",
+          "field": "human_packaging_visual",
+          "value": "uncertain"
+        }
+      ],
+      "result": {
+        "status": "unresolved",
+        "reason_code": "decision_relevant_uncertainty"
+      }
+    },
+    {
+      "rule_id": "decision_relevant_uncertainty_relation",
+      "priority": 12,
+      "conditions": [
+        {
+          "operator": "exact",
+          "field": "human_relation_valid",
+          "value": "uncertain"
+        }
+      ],
+      "result": {
+        "status": "unresolved",
+        "reason_code": "decision_relevant_uncertainty"
+      }
+    },
+    {
+      "rule_id": "incomplete_relation_target_package",
+      "priority": 13,
+      "conditions": [
+        {
+          "operator": "exact",
+          "field": "human_packaging_visual",
+          "value": "yes"
+        },
+        {
+          "operator": "exact",
+          "field": "human_relation_valid",
+          "value": "yes"
+        },
+        {
+          "operator": "in",
+          "field": "human_package_level",
+          "values": [
+            "",
+            "non_packaging",
+            "uncertain"
+          ]
+        }
+      ],
+      "result": {
+        "status": "unresolved",
+        "reason_code": "incomplete_valid_relation_target"
+      }
+    },
+    {
+      "rule_id": "incomplete_relation_target_dimension",
+      "priority": 14,
+      "conditions": [
+        {
+          "operator": "exact",
+          "field": "human_packaging_visual",
+          "value": "yes"
+        },
+        {
+          "operator": "exact",
+          "field": "human_relation_valid",
+          "value": "yes"
+        },
+        {
+          "operator": "in",
+          "field": "human_dimension_code",
+          "values": [
+            "",
+            "none",
+            "uncertain"
+          ]
+        }
+      ],
+      "result": {
+        "status": "unresolved",
+        "reason_code": "incomplete_valid_relation_target"
+      }
+    },
+    {
+      "rule_id": "incomplete_relation_target_polarity",
+      "priority": 15,
+      "conditions": [
+        {
+          "operator": "exact",
+          "field": "human_packaging_visual",
+          "value": "yes"
+        },
+        {
+          "operator": "exact",
+          "field": "human_relation_valid",
+          "value": "yes"
+        },
+        {
+          "operator": "in",
+          "field": "human_polarity",
+          "values": [
+            "",
+            "uncertain"
+          ]
+        }
+      ],
+      "result": {
+        "status": "unresolved",
+        "reason_code": "incomplete_valid_relation_target"
+      }
+    },
+    {
+      "rule_id": "negative_appearance_positive_requires_adjudication",
+      "priority": 16,
+      "conditions": [
+        {
+          "operator": "exact",
+          "field": "human_packaging_visual",
+          "value": "yes"
+        },
+        {
+          "operator": "exact",
+          "field": "human_relation_valid",
+          "value": "yes"
+        },
+        {
+          "operator": "exact",
+          "field": "human_dimension_code",
+          "value": "negative_appearance"
+        },
+        {
+          "operator": "exact",
+          "field": "human_polarity",
+          "value": "positive"
+        }
+      ],
+      "result": {
+        "status": "unresolved",
+        "reason_code": "dimension_polarity_requires_adjudication"
+      }
+    },
+    {
+      "rule_id": "represented_relation_invalid_visual",
+      "priority": 23,
+      "conditions": [
+        {
+          "operator": "in",
+          "field": "audit_group",
+          "values": [
+            "outer_relation_evidence",
+            "inner_relation_evidence",
+            "ambiguous_relation_evidence",
+            "recovered_v21"
+          ]
+        },
+        {
+          "operator": "in",
+          "field": "dimension_code",
+          "values": [
+            "general_visual_appeal",
+            "cute_friendly",
+            "premium_refined",
+            "gift_presentation",
+            "simple_modern",
+            "natural_botanical",
+            "calming_soft",
+            "cheerful_colorful",
+            "traditional_vintage",
+            "negative_appearance"
+          ]
+        },
+        {
+          "operator": "exact",
+          "field": "human_packaging_visual",
+          "value": "no"
+        }
+      ],
+      "result": {
+        "status": "resolved",
+        "action": "drop",
+        "error_type": "relation_missing"
+      }
+    },
+    {
+      "rule_id": "represented_relation_invalid_relation",
+      "priority": 24,
+      "conditions": [
+        {
+          "operator": "in",
+          "field": "audit_group",
+          "values": [
+            "outer_relation_evidence",
+            "inner_relation_evidence",
+            "ambiguous_relation_evidence",
+            "recovered_v21"
+          ]
+        },
+        {
+          "operator": "in",
+          "field": "dimension_code",
+          "values": [
+            "general_visual_appeal",
+            "cute_friendly",
+            "premium_refined",
+            "gift_presentation",
+            "simple_modern",
+            "natural_botanical",
+            "calming_soft",
+            "cheerful_colorful",
+            "traditional_vintage",
+            "negative_appearance"
+          ]
+        },
+        {
+          "operator": "exact",
+          "field": "human_relation_valid",
+          "value": "no"
+        }
+      ],
+      "result": {
+        "status": "resolved",
+        "action": "drop",
+        "error_type": "relation_missing"
+      }
+    },
+    {
+      "rule_id": "human_target_is_inner_packaging",
+      "priority": 30,
+      "conditions": [
+        {
+          "operator": "in",
+          "field": "audit_group",
+          "values": [
+            "outer_relation_evidence",
+            "inner_relation_evidence",
+            "ambiguous_relation_evidence",
+            "recovered_v21"
+          ]
+        },
+        {
+          "operator": "in",
+          "field": "dimension_code",
+          "values": [
+            "general_visual_appeal",
+            "cute_friendly",
+            "premium_refined",
+            "gift_presentation",
+            "simple_modern",
+            "natural_botanical",
+            "calming_soft",
+            "cheerful_colorful",
+            "traditional_vintage",
+            "negative_appearance"
+          ]
+        },
+        {
+          "operator": "exact",
+          "field": "human_packaging_visual",
+          "value": "yes"
+        },
+        {
+          "operator": "exact",
+          "field": "human_relation_valid",
+          "value": "yes"
+        },
+        {
+          "operator": "field_ne",
+          "field": "model_package_level",
+          "other_field": "human_package_level"
+        },
+        {
+          "operator": "exact",
+          "field": "human_package_level",
+          "value": "inner"
+        }
+      ],
+      "result": {
+        "status": "resolved",
+        "action": "change_package_level",
+        "error_type": "inner_packaging"
+      }
+    },
+    {
+      "rule_id": "model_relation_is_inner_packaging",
+      "priority": 31,
+      "conditions": [
+        {
+          "operator": "in",
+          "field": "audit_group",
+          "values": [
+            "outer_relation_evidence",
+            "inner_relation_evidence",
+            "ambiguous_relation_evidence",
+            "recovered_v21"
+          ]
+        },
+        {
+          "operator": "in",
+          "field": "dimension_code",
+          "values": [
+            "general_visual_appeal",
+            "cute_friendly",
+            "premium_refined",
+            "gift_presentation",
+            "simple_modern",
+            "natural_botanical",
+            "calming_soft",
+            "cheerful_colorful",
+            "traditional_vintage",
+            "negative_appearance"
+          ]
+        },
+        {
+          "operator": "exact",
+          "field": "human_packaging_visual",
+          "value": "yes"
+        },
+        {
+          "operator": "exact",
+          "field": "human_relation_valid",
+          "value": "yes"
+        },
+        {
+          "operator": "field_ne",
+          "field": "model_package_level",
+          "other_field": "human_package_level"
+        },
+        {
+          "operator": "exact",
+          "field": "model_package_level",
+          "value": "inner"
+        }
+      ],
+      "result": {
+        "status": "resolved",
+        "action": "change_package_level",
+        "error_type": "inner_packaging"
+      }
+    },
+    {
+      "rule_id": "human_target_package_level_is_ambiguous",
+      "priority": 32,
+      "conditions": [
+        {
+          "operator": "in",
+          "field": "audit_group",
+          "values": [
+            "outer_relation_evidence",
+            "inner_relation_evidence",
+            "ambiguous_relation_evidence",
+            "recovered_v21"
+          ]
+        },
+        {
+          "operator": "in",
+          "field": "dimension_code",
+          "values": [
+            "general_visual_appeal",
+            "cute_friendly",
+            "premium_refined",
+            "gift_presentation",
+            "simple_modern",
+            "natural_botanical",
+            "calming_soft",
+            "cheerful_colorful",
+            "traditional_vintage",
+            "negative_appearance"
+          ]
+        },
+        {
+          "operator": "exact",
+          "field": "human_packaging_visual",
+          "value": "yes"
+        },
+        {
+          "operator": "exact",
+          "field": "human_relation_valid",
+          "value": "yes"
+        },
+        {
+          "operator": "field_ne",
+          "field": "model_package_level",
+          "other_field": "human_package_level"
+        },
+        {
+          "operator": "exact",
+          "field": "human_package_level",
+          "value": "ambiguous"
+        }
+      ],
+      "result": {
+        "status": "resolved",
+        "action": "change_package_level",
+        "error_type": "ambiguous_package_level"
+      }
+    },
+    {
+      "rule_id": "model_package_level_is_ambiguous",
+      "priority": 33,
+      "conditions": [
+        {
+          "operator": "in",
+          "field": "audit_group",
+          "values": [
+            "outer_relation_evidence",
+            "inner_relation_evidence",
+            "ambiguous_relation_evidence",
+            "recovered_v21"
+          ]
+        },
+        {
+          "operator": "in",
+          "field": "dimension_code",
+          "values": [
+            "general_visual_appeal",
+            "cute_friendly",
+            "premium_refined",
+            "gift_presentation",
+            "simple_modern",
+            "natural_botanical",
+            "calming_soft",
+            "cheerful_colorful",
+            "traditional_vintage",
+            "negative_appearance"
+          ]
+        },
+        {
+          "operator": "exact",
+          "field": "human_packaging_visual",
+          "value": "yes"
+        },
+        {
+          "operator": "exact",
+          "field": "human_relation_valid",
+          "value": "yes"
+        },
+        {
+          "operator": "field_ne",
+          "field": "model_package_level",
+          "other_field": "human_package_level"
+        },
+        {
+          "operator": "exact",
+          "field": "model_package_level",
+          "value": "ambiguous"
+        }
+      ],
+      "result": {
+        "status": "resolved",
+        "action": "change_package_level",
+        "error_type": "ambiguous_package_level"
+      }
+    },
+    {
+      "rule_id": "correctly_absent_relation_visual",
+      "priority": 40,
+      "conditions": [
+        {
+          "operator": "in",
+          "field": "audit_group",
+          "values": [
+            "uncertain_not_recovered",
+            "strict_without_relation_evidence"
+          ]
+        },
+        {
+          "operator": "exact",
+          "field": "dimension_code",
+          "value": ""
+        },
+        {
+          "operator": "exact",
+          "field": "human_packaging_visual",
+          "value": "no"
+        }
+      ],
+      "result": {
+        "status": "resolved",
+        "action": "keep",
+        "error_type": "none"
+      }
+    },
+    {
+      "rule_id": "correctly_absent_relation_relation",
+      "priority": 41,
+      "conditions": [
+        {
+          "operator": "in",
+          "field": "audit_group",
+          "values": [
+            "uncertain_not_recovered",
+            "strict_without_relation_evidence"
+          ]
+        },
+        {
+          "operator": "exact",
+          "field": "dimension_code",
+          "value": ""
+        },
+        {
+          "operator": "exact",
+          "field": "human_relation_valid",
+          "value": "no"
+        }
+      ],
+      "result": {
+        "status": "resolved",
+        "action": "keep",
+        "error_type": "none"
+      }
+    },
+    {
+      "rule_id": "complete_valid_relation_is_missing",
+      "priority": 42,
+      "conditions": [
+        {
+          "operator": "in",
+          "field": "audit_group",
+          "values": [
+            "uncertain_not_recovered",
+            "strict_without_relation_evidence"
+          ]
+        },
+        {
+          "operator": "exact",
+          "field": "dimension_code",
+          "value": ""
+        },
+        {
+          "operator": "exact",
+          "field": "human_packaging_visual",
+          "value": "yes"
+        },
+        {
+          "operator": "exact",
+          "field": "human_relation_valid",
+          "value": "yes"
+        },
+        {
+          "operator": "in",
+          "field": "human_package_level",
+          "values": [
+            "outer",
+            "inner",
+            "ambiguous"
+          ]
+        },
+        {
+          "operator": "in",
+          "field": "human_dimension_code",
+          "values": [
+            "general_visual_appeal",
+            "cute_friendly",
+            "premium_refined",
+            "gift_presentation",
+            "simple_modern",
+            "natural_botanical",
+            "calming_soft",
+            "cheerful_colorful",
+            "traditional_vintage",
+            "negative_appearance"
+          ]
+        },
+        {
+          "operator": "in",
+          "field": "human_polarity",
+          "values": [
+            "positive",
+            "negative"
+          ]
+        }
+      ],
+      "result": {
+        "status": "resolved",
+        "action": "add_missing",
+        "error_type": "missed_relation"
+      }
+    },
+    {
+      "rule_id": "model_dimension_not_accepted",
+      "priority": 50,
+      "conditions": [
+        {
+          "operator": "in",
+          "field": "audit_group",
+          "values": [
+            "outer_relation_evidence",
+            "inner_relation_evidence",
+            "ambiguous_relation_evidence",
+            "recovered_v21"
+          ]
+        },
+        {
+          "operator": "in",
+          "field": "dimension_code",
+          "values": [
+            "general_visual_appeal",
+            "cute_friendly",
+            "premium_refined",
+            "gift_presentation",
+            "simple_modern",
+            "natural_botanical",
+            "calming_soft",
+            "cheerful_colorful",
+            "traditional_vintage",
+            "negative_appearance"
+          ]
+        },
+        {
+          "operator": "exact",
+          "field": "human_packaging_visual",
+          "value": "yes"
+        },
+        {
+          "operator": "exact",
+          "field": "human_relation_valid",
+          "value": "yes"
+        },
+        {
+          "operator": "field_eq",
+          "field": "model_package_level",
+          "other_field": "human_package_level"
+        },
+        {
+          "operator": "collection_not_contains_field",
+          "field": "human_dimension_values",
+          "other_field": "dimension_code"
+        }
+      ],
+      "result": {
+        "status": "resolved",
+        "action": "change_dimension",
+        "error_type": "wrong_dimension"
+      }
+    },
+    {
+      "rule_id": "polarity_only_requires_adjudication",
+      "priority": 60,
+      "conditions": [
+        {
+          "operator": "in",
+          "field": "audit_group",
+          "values": [
+            "outer_relation_evidence",
+            "inner_relation_evidence",
+            "ambiguous_relation_evidence",
+            "recovered_v21"
+          ]
+        },
+        {
+          "operator": "in",
+          "field": "dimension_code",
+          "values": [
+            "general_visual_appeal",
+            "cute_friendly",
+            "premium_refined",
+            "gift_presentation",
+            "simple_modern",
+            "natural_botanical",
+            "calming_soft",
+            "cheerful_colorful",
+            "traditional_vintage",
+            "negative_appearance"
+          ]
+        },
+        {
+          "operator": "exact",
+          "field": "human_packaging_visual",
+          "value": "yes"
+        },
+        {
+          "operator": "exact",
+          "field": "human_relation_valid",
+          "value": "yes"
+        },
+        {
+          "operator": "field_eq",
+          "field": "model_package_level",
+          "other_field": "human_package_level"
+        },
+        {
+          "operator": "collection_contains_field",
+          "field": "human_dimension_values",
+          "other_field": "dimension_code"
+        },
+        {
+          "operator": "field_ne",
+          "field": "polarity",
+          "other_field": "human_polarity"
+        }
+      ],
+      "result": {
+        "status": "unresolved",
+        "reason_code": "polarity_only_requires_adjudication"
+      }
+    },
+    {
+      "rule_id": "represented_relation_matches",
+      "priority": 70,
+      "conditions": [
+        {
+          "operator": "in",
+          "field": "audit_group",
+          "values": [
+            "outer_relation_evidence",
+            "inner_relation_evidence",
+            "ambiguous_relation_evidence",
+            "recovered_v21"
+          ]
+        },
+        {
+          "operator": "in",
+          "field": "dimension_code",
+          "values": [
+            "general_visual_appeal",
+            "cute_friendly",
+            "premium_refined",
+            "gift_presentation",
+            "simple_modern",
+            "natural_botanical",
+            "calming_soft",
+            "cheerful_colorful",
+            "traditional_vintage",
+            "negative_appearance"
+          ]
+        },
+        {
+          "operator": "exact",
+          "field": "human_packaging_visual",
+          "value": "yes"
+        },
+        {
+          "operator": "exact",
+          "field": "human_relation_valid",
+          "value": "yes"
+        },
+        {
+          "operator": "field_eq",
+          "field": "model_package_level",
+          "other_field": "human_package_level"
+        },
+        {
+          "operator": "collection_contains_field",
+          "field": "human_dimension_values",
+          "other_field": "dimension_code"
+        },
+        {
+          "operator": "field_eq",
+          "field": "polarity",
+          "other_field": "human_polarity"
+        }
+      ],
+      "result": {
+        "status": "resolved",
+        "action": "keep",
+        "error_type": "none"
+      }
+    }
+  ],
+  "fallback": {
+    "status": "unresolved",
+    "reason_code": "no_contract_rule_matched"
+  },
+  "provenance": {
+    "authority": "P1 business contract Line A + production evaluator Line C",
+    "semantic_error_candidates_dependency": false,
+    "automatic_other": false,
+    "change_polarity_schema_support": true,
+    "change_polarity_automatic": false,
+    "polarity_only": "unresolved until structured causal producer exists"
+  }
+}
