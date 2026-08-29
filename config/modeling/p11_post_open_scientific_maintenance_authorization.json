@@ -1,0 +1,66 @@
+{
+  "active_authorization_path": "config/modeling/p11_post_open_scientific_maintenance_authorization.json",
+  "authorization_status": "ACTIVE_SINGLE_MAINTENANCE",
+  "authorization_version": "p11_scientific_maintenance_v1",
+  "baseline_main_commit": "962d0963abe8e03704faf31da266c46e6fc222bb",
+  "execution_spec_git_blob": "5c58f4ad5780e1164cd132815ae2444457f8e198",
+  "execution_spec_git_content_sha256": "6C96BAFD61CD2CA688AA5AEFB5FC1AF6D21259F7A14D31A1A54F1771CAEBFF41",
+  "execution_spec_path": "config/modeling/p11_locked_test_execution_spec.json",
+  "formal_write_allowlist": [
+    "05_cluster_bootstrap_uncertainty.csv",
+    "07_r2_alternative_image_sensitivity.csv",
+    "09_r4_label_definition_robustness.csv",
+    "11_p11_summary.json",
+    "12_p11_provenance.json"
+  ],
+  "maintenance_producer_path": "scripts/modeling/p11_locked_test_evaluation.py",
+  "model_fit_allowed": false,
+  "old_superseded_sha256": {
+    "05_cluster_bootstrap_uncertainty.csv": "E2E35428D3FAAA728941CF3999429E51977EDF84F1FDBFD63CCF999FAACB13FA",
+    "07_r2_alternative_image_sensitivity.csv": "85C39A369EC57A1569FB98289681C95402A5EF4A89CB25C6AC6A53FFA0C8F363",
+    "09_r4_label_definition_robustness.csv": "FA23A2BB8F9F842BA3B761650D91E147C064EC35BB574070C31F89D26BBA92D7"
+  },
+  "old_superseded_status": {
+    "05_cluster_bootstrap_uncertainty.csv": "INVALID_SUPERSEDED",
+    "07_r2_alternative_image_sensitivity.csv": "INVALID_SUPERSEDED",
+    "09_r4_label_definition_robustness.csv": "INVALID_SUPERSEDED"
+  },
+  "opening_seal_sha256": "1FDE6050C00B7E4BBDA22017C2EBB0B6CDE7CD8AB9118764EBEC41266268C43E",
+  "ordinary_prepare_allowed": false,
+  "p10_contract_git_blob": "2A92AA0294EE691EFC621D3314EFA9F9FF8D28F1",
+  "p10_contract_path": "config/modeling/p10_development_model_contract.json",
+  "p10_formal_sha256": {
+    "01_development_modeling_manifest.csv": "53BC1EC856B87F4F9C5D369E05D2E54B5500612B9233C59FB723432CDBCEB554",
+    "02_cv_model_selection.csv": "60FF383214F7C8E83A49645B8610AAD77AF5588B6F6F700D64F2A30DEEFE8EDF",
+    "03_development_oof_scores.csv": "7F74AF185D0E4083AFFE3C2CB98E05255E2EE88D56758761466F4E010FC76936",
+    "04_final_model_specification.json": "856695F98581FFDC746A080520CC8A7C95FFDDF6C69A4AF0D9CDF990978EB639",
+    "05_final_model_parameters.npz": "5E17175BFC1D5BD7E1D333935E38F8C95355AA48E6D5E78E2572D2B6993DCE5B",
+    "06_interpretable_coefficient_stability.csv": "2D9CE00D4EE9FF37A7D23AC28D80429E5B8AFE1CAC81DA9CC49B7F018EFC870D",
+    "07_development_model_summary.json": "C60AD1027665352AEB008FB27DE15590C445ADCEE277EBAE53B4C5231DA121B9",
+    "08_p10_provenance.json": "FFF4F3EC104B1B5E0D273041DDFC8E74418C9FB9A26AAAFEDEE43637DF26B964"
+  },
+  "p11_contract_git_blob": "d29520b65fdcf8956ffb3e4d9453d3b18cfc989a",
+  "p11_contract_path": "config/modeling/p11_locked_test_evaluation_contract.json",
+  "performance_based_decision": false,
+  "pre_maintenance_formal_sha256": {
+    "00_locked_test_opening_seal.json": "1FDE6050C00B7E4BBDA22017C2EBB0B6CDE7CD8AB9118764EBEC41266268C43E",
+    "01_locked_test_manifest.csv": "D5A08EE016C8B3C1394A03764738AB3A58DC163C331919427C8D818B31CA8FAE",
+    "02_locked_test_predictions.csv": "F927730318275EF33EF7C74251E6FAAED67512A20C4678C493AF14C65E85336F",
+    "03_product_row_metrics.csv": "6685D65C1C0B7073F05BB4105D31630E603E651BC4DBB7361A85F214BB963B40",
+    "04_group_metrics.csv": "74DD911F48E0B4037166AEB781C16EA82975312569007D2DAE2F8EED0D077E1E",
+    "05_cluster_bootstrap_uncertainty.csv": "E2E35428D3FAAA728941CF3999429E51977EDF84F1FDBFD63CCF999FAACB13FA",
+    "06_r1_qa_exception_sensitivity.csv": "D5162E328B9046BA06A40D4D2C6000AEC9DA794BEDA99A328C17FAEF707A1314",
+    "07_r2_alternative_image_sensitivity.csv": "85C39A369EC57A1569FB98289681C95402A5EF4A89CB25C6AC6A53FFA0C8F363",
+    "08_r3_g_exposure_sensitivity.csv": "3DA923B3C57086EF9D3985B9EF076E5574A7AE0B2C324AF0C66142FBBDBA4247",
+    "09_r4_label_definition_robustness.csv": "FA23A2BB8F9F842BA3B761650D91E147C064EC35BB574070C31F89D26BBA92D7",
+    "10_r5_image_exception_diagnostics.csv": "AE022FB706DFDB6C90D438A0066F65DB5C3A757008D531EEDB7AE260CF95503A",
+    "11_p11_summary.json": "BFB380B2FEBE53DFBB5213124A6C2DBA9F66A25E784CD6E88C77DDEFEADC40EF",
+    "12_p11_provenance.json": "ABD69F92EEF3AC728CDFFD29350E5EB714D47923EF30A63F27DAB4F43F965309"
+  },
+  "pre_open_commit": "600c91d311918536ca1453c99b4eff1a334f521e",
+  "primary_prediction_rescoring_allowed": false,
+  "r2_sensitivity_frozen_scoring_allowed": true,
+  "reviewed_head": "a26b71adb163ce336e20a65c2b1ab7c06586873f",
+  "scientific_protocol_changed": false,
+  "test_path": "tests/test_p11_locked_test_evaluation.py"
+}
