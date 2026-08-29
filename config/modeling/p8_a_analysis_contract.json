@@ -37,38 +37,399 @@
     "outer_main_observed_positive_count": 232
   },
   "g_source_artifacts": {
-    "01_product_exposure_label_table.csv": {"path": "data/processed/review_exposure_pu_diagnostics_v21_5180/01_product_exposure_label_table.csv", "sha256": "EFC22ABECCEC58240FE9C5FD62B714DBE32EDEF883CC66A9B902533F0A015699"},
-    "02_exposure_threshold_summary.csv": {"path": "data/processed/review_exposure_pu_diagnostics_v21_5180/02_exposure_threshold_summary.csv", "sha256": "ABBD001EDA59D850E15999DB3085DC2204FD6EAE8D872CBE11DA3EE44CB3CD3B"},
-    "03_exposure_strata_summary.csv": {"path": "data/processed/review_exposure_pu_diagnostics_v21_5180/03_exposure_strata_summary.csv", "sha256": "22FC044F63A6DBDDF87B9503963F9BFD4B44F88DD01FA7BCD7D8A7E967FDB534"},
-    "04_dimension_exposure_summary.csv": {"path": "data/processed/review_exposure_pu_diagnostics_v21_5180/04_dimension_exposure_summary.csv", "sha256": "2E1B878C3D1154E3D102BFA5435A3A5C34983C28C0D9B330CC2940C718D22E51"},
-    "05_label_exposure_association.csv": {"path": "data/processed/review_exposure_pu_diagnostics_v21_5180/05_label_exposure_association.csv", "sha256": "0900BEA09DF8BBA174203A7576DAF2F11453A7F67D01C423D5B7BF7F08BF8C2D"},
-    "06_method_summary.json": {"path": "data/processed/review_exposure_pu_diagnostics_v21_5180/06_method_summary.json", "sha256": "55E0BD81CA15DA70C6396909CA4D52455688193E5944F0CD5191CE817036B552"},
-    "07_v2_v21_exposure_comparison.csv": {"path": "data/processed/review_exposure_pu_diagnostics_v21_5180/07_v2_v21_exposure_comparison.csv", "sha256": "769B3B5E6AFC46CA5F916E4C0E79BC98BCF35BAB83A09DA484810DB3D43E8C04"},
-    "08_v2_v21_exposure_comparison.json": {"path": "data/processed/review_exposure_pu_diagnostics_v21_5180/08_v2_v21_exposure_comparison.json", "sha256": "EF30F8AA258E138636CE955EDB218DB132CBA20E6FC6E2788A9B30E975C35456"}
+    "01_product_exposure_label_table.csv": {
+      "path": "data/processed/review_exposure_pu_diagnostics_v21_5180/01_product_exposure_label_table.csv",
+      "sha256": "EFC22ABECCEC58240FE9C5FD62B714DBE32EDEF883CC66A9B902533F0A015699"
+    },
+    "02_exposure_threshold_summary.csv": {
+      "path": "data/processed/review_exposure_pu_diagnostics_v21_5180/02_exposure_threshold_summary.csv",
+      "sha256": "ABBD001EDA59D850E15999DB3085DC2204FD6EAE8D872CBE11DA3EE44CB3CD3B"
+    },
+    "03_exposure_strata_summary.csv": {
+      "path": "data/processed/review_exposure_pu_diagnostics_v21_5180/03_exposure_strata_summary.csv",
+      "sha256": "22FC044F63A6DBDDF87B9503963F9BFD4B44F88DD01FA7BCD7D8A7E967FDB534"
+    },
+    "04_dimension_exposure_summary.csv": {
+      "path": "data/processed/review_exposure_pu_diagnostics_v21_5180/04_dimension_exposure_summary.csv",
+      "sha256": "2E1B878C3D1154E3D102BFA5435A3A5C34983C28C0D9B330CC2940C718D22E51"
+    },
+    "05_label_exposure_association.csv": {
+      "path": "data/processed/review_exposure_pu_diagnostics_v21_5180/05_label_exposure_association.csv",
+      "sha256": "0900BEA09DF8BBA174203A7576DAF2F11453A7F67D01C423D5B7BF7F08BF8C2D"
+    },
+    "06_method_summary.json": {
+      "path": "data/processed/review_exposure_pu_diagnostics_v21_5180/06_method_summary.json",
+      "sha256": "55E0BD81CA15DA70C6396909CA4D52455688193E5944F0CD5191CE817036B552"
+    },
+    "07_v2_v21_exposure_comparison.csv": {
+      "path": "data/processed/review_exposure_pu_diagnostics_v21_5180/07_v2_v21_exposure_comparison.csv",
+      "sha256": "769B3B5E6AFC46CA5F916E4C0E79BC98BCF35BAB83A09DA484810DB3D43E8C04"
+    },
+    "08_v2_v21_exposure_comparison.json": {
+      "path": "data/processed/review_exposure_pu_diagnostics_v21_5180/08_v2_v21_exposure_comparison.json",
+      "sha256": "EF30F8AA258E138636CE955EDB218DB132CBA20E6FC6E2788A9B30E975C35456"
+    }
   },
-  "product_universe": {"count": 5180, "main_modeling_population_rule": "primary_freeze_status in {frozen_primary, frozen_primary_with_qa_exception}", "expected_main_modeling_population": 5179, "excluded_status": "excluded_non_primary", "excluded_count": 1, "known_qa_exception_count": 83, "qa_exception_policy": "retain all frozen_primary_with_qa_exception in main analysis; exclude only in predeclared sensitivity R1"},
-  "image_exposure_policy": {"main_exposure": "frozen primary exposure", "sensitivity_exposure": "frozen sensitivity exposure only when sensitivity_status == available", "unresolved_sensitivity": "retain frozen primary exposure", "excluded_non_primary": "never reenters main image modeling via fallback or sensitivity exposure", "primary_substitutions_allowed": false, "new_acquisition_or_review_allowed": false},
-  "label_semantics": {"one": "observed spontaneous consumer mention / observed positive", "zero": "PU-unlabeled / no observed positive", "zero_is_not": ["negative", "confirmed absence", "true absence", "consumer dislikes packaging"], "main_scientific_signal": "observed-positive propensity / observed spontaneous-mention signal"},
-  "canonical_pu_outcomes": ["has_any_outer_imagery_observed","has_any_all_level_imagery_evidence","general_visual_appeal_observed_positive_core","cute_friendly_observed_positive_core","premium_refined_observed_positive_core","gift_presentation_observed_positive_core","simple_modern_observed_positive_core","natural_botanical_observed_positive_core","calming_soft_observed_positive_core","cheerful_colorful_observed_positive_core","traditional_vintage_observed_positive_core","negative_appearance_observed_positive_core","general_visual_appeal_observed_positive_pilot","cute_friendly_observed_positive_pilot","premium_refined_observed_positive_pilot","gift_presentation_observed_positive_pilot","simple_modern_observed_positive_pilot","natural_botanical_observed_positive_pilot","calming_soft_observed_positive_pilot","cheerful_colorful_observed_positive_pilot","traditional_vintage_observed_positive_pilot","negative_appearance_observed_positive_pilot","general_visual_appeal_observed_positive_robust","cute_friendly_observed_positive_robust","premium_refined_observed_positive_robust","gift_presentation_observed_positive_robust","simple_modern_observed_positive_robust","natural_botanical_observed_positive_robust","calming_soft_observed_positive_robust","cheerful_colorful_observed_positive_robust","traditional_vintage_observed_positive_robust","negative_appearance_observed_positive_robust"],
-  "outcome_hierarchy": {"primary": "has_any_outer_imagery_observed", "primary_full_universe_expected_observed_positive_count": 232, "secondary_confirmatory": ["general_visual_appeal_observed_positive_core","cute_friendly_observed_positive_core"], "robustness": ["has_any_all_level_imagery_evidence","*_observed_positive_pilot","*_observed_positive_robust"], "dimension_fdr": {"method":"Benjamini-Hochberg","q":0.05,"family":"eligible core dimension outcomes derived from dimension_keep_core == 1","family_size":2,"primary_in_family":false,"pilot_robust_in_family":false}, "eligibility_fields_are_not_outcomes": true, "structural_zero_core_dimensions": ["premium_refined_observed_positive_core","gift_presentation_observed_positive_core","simple_modern_observed_positive_core","natural_botanical_observed_positive_core","calming_soft_observed_positive_core","cheerful_colorful_observed_positive_core","traditional_vintage_observed_positive_core","negative_appearance_observed_positive_core"]},
-  "review_derived_variable_policy": {"allowed_uses": ["label provenance","descriptive diagnostics","predeclared sensitivity stratification","frozen outcome eligibility semantics"], "predictor_use":"forbidden", "forbidden_predictor_name_patterns":["review","reviewer","sentence","helpful_vote","eligibility","dimension_keep","label","outcome"]},
-  "g_policy": {"g_main_cohort_filter":false,"g_final_threshold_selected":false,"g_role":"sensitivity_diagnostic","g_threshold_selection_by_model_performance":"forbidden","existing_threshold_grid":[0,1,3,5,10,20,50,100],"existing_strata_grid":["0","1-2","3-4","5-9","10-19","20-49","50-99","100+"],"grid_policy":"report all pre-existing frozen diagnostics; do not select a performance-best threshold or invent a new cutoff"},
-  "predictor_boundaries": {"allowed":["frozen retail packaging image bytes","deterministic features derived only from frozen image bytes"],"forbidden":["parent_asin","title","brand","store","categories","product_form","automatic_tea_type","review text","review count","sentence count","PU label-derived variables","G label/outcome-derived information","current Amazon metadata","web search data","OCR text features","packaging text transcription"],"identifiers_allowed_only_for":["join","split grouping","provenance"]},
-  "allowed_feature_families": {"primary":"pretrained image-only/image-encoder embedding, e.g. a frozen CLIP visual encoder family","representation_robustness":"one predeclared vision-only pretrained embedding family","interpretable_baseline":"small deterministic global color/luminance/contrast, edge/texture, and composition/layout summaries","exact_extraction_schema":"must be frozen in P9 before extraction","new_family_after_performance":"forbidden"},
-  "modeling_boundary": {"p8_a_modeling_started":false,"primary_benchmark":"regularized linear model on frozen image representation","nonlinear_robustness":"one predeclared family on the same frozen features","end_to_end_fine_tuning_primary":false,"pu_native_latent_inference":"sensitivity only unless separately reviewed","best_of_many_families_reporting":"forbidden"},
+  "product_universe": {
+    "count": 5180,
+    "main_modeling_population_rule": "primary_freeze_status in {frozen_primary, frozen_primary_with_qa_exception}",
+    "expected_main_modeling_population": 5179,
+    "excluded_status": "excluded_non_primary",
+    "excluded_count": 1,
+    "known_qa_exception_count": 83,
+    "qa_exception_policy": "retain all frozen_primary_with_qa_exception in main analysis; exclude only in predeclared sensitivity R1"
+  },
+  "image_exposure_policy": {
+    "main_exposure": "frozen primary exposure",
+    "sensitivity_exposure": "frozen sensitivity exposure only when sensitivity_status == available",
+    "unresolved_sensitivity": "retain frozen primary exposure",
+    "excluded_non_primary": "never reenters main image modeling via fallback or sensitivity exposure",
+    "primary_substitutions_allowed": false,
+    "new_acquisition_or_review_allowed": false
+  },
+  "label_semantics": {
+    "one": "observed spontaneous consumer mention / observed positive",
+    "zero": "PU-unlabeled / no observed positive",
+    "zero_is_not": [
+      "negative",
+      "confirmed absence",
+      "true absence",
+      "consumer dislikes packaging"
+    ],
+    "main_scientific_signal": "observed-positive propensity / observed spontaneous-mention signal"
+  },
+  "canonical_pu_outcomes": [
+    "has_any_outer_imagery_observed",
+    "has_any_all_level_imagery_evidence",
+    "general_visual_appeal_observed_positive_core",
+    "cute_friendly_observed_positive_core",
+    "premium_refined_observed_positive_core",
+    "gift_presentation_observed_positive_core",
+    "simple_modern_observed_positive_core",
+    "natural_botanical_observed_positive_core",
+    "calming_soft_observed_positive_core",
+    "cheerful_colorful_observed_positive_core",
+    "traditional_vintage_observed_positive_core",
+    "negative_appearance_observed_positive_core",
+    "general_visual_appeal_observed_positive_pilot",
+    "cute_friendly_observed_positive_pilot",
+    "premium_refined_observed_positive_pilot",
+    "gift_presentation_observed_positive_pilot",
+    "simple_modern_observed_positive_pilot",
+    "natural_botanical_observed_positive_pilot",
+    "calming_soft_observed_positive_pilot",
+    "cheerful_colorful_observed_positive_pilot",
+    "traditional_vintage_observed_positive_pilot",
+    "negative_appearance_observed_positive_pilot",
+    "general_visual_appeal_observed_positive_robust",
+    "cute_friendly_observed_positive_robust",
+    "premium_refined_observed_positive_robust",
+    "gift_presentation_observed_positive_robust",
+    "simple_modern_observed_positive_robust",
+    "natural_botanical_observed_positive_robust",
+    "calming_soft_observed_positive_robust",
+    "cheerful_colorful_observed_positive_robust",
+    "traditional_vintage_observed_positive_robust",
+    "negative_appearance_observed_positive_robust"
+  ],
+  "outcome_hierarchy": {
+    "primary": "has_any_outer_imagery_observed",
+    "primary_full_universe_expected_observed_positive_count": 232,
+    "secondary_confirmatory": [
+      "general_visual_appeal_observed_positive_core",
+      "cute_friendly_observed_positive_core"
+    ],
+    "robustness": [
+      "has_any_all_level_imagery_evidence",
+      "*_observed_positive_pilot",
+      "*_observed_positive_robust"
+    ],
+    "dimension_fdr": {
+      "method": "Benjamini-Hochberg",
+      "q": 0.05,
+      "family": "eligible core dimension outcomes derived from dimension_keep_core == 1",
+      "family_size": 2,
+      "primary_in_family": false,
+      "pilot_robust_in_family": false
+    },
+    "eligibility_fields_are_not_outcomes": true,
+    "structural_zero_core_dimensions": [
+      "premium_refined_observed_positive_core",
+      "gift_presentation_observed_positive_core",
+      "simple_modern_observed_positive_core",
+      "natural_botanical_observed_positive_core",
+      "calming_soft_observed_positive_core",
+      "cheerful_colorful_observed_positive_core",
+      "traditional_vintage_observed_positive_core",
+      "negative_appearance_observed_positive_core"
+    ]
+  },
+  "review_derived_variable_policy": {
+    "allowed_uses": [
+      "label provenance",
+      "descriptive diagnostics",
+      "predeclared sensitivity stratification",
+      "frozen outcome eligibility semantics"
+    ],
+    "predictor_use": "forbidden",
+    "forbidden_predictor_name_patterns": [
+      "review",
+      "reviewer",
+      "sentence",
+      "helpful_vote",
+      "eligibility",
+      "dimension_keep",
+      "label",
+      "outcome"
+    ]
+  },
+  "g_policy": {
+    "g_main_cohort_filter": false,
+    "g_final_threshold_selected": false,
+    "g_role": "sensitivity_diagnostic",
+    "g_threshold_selection_by_model_performance": "forbidden",
+    "existing_threshold_grid": [
+      0,
+      1,
+      3,
+      5,
+      10,
+      20,
+      50,
+      100
+    ],
+    "existing_strata_grid": [
+      "0",
+      "1-2",
+      "3-4",
+      "5-9",
+      "10-19",
+      "20-49",
+      "50-99",
+      "100+"
+    ],
+    "grid_policy": "report all pre-existing frozen diagnostics; do not select a performance-best threshold or invent a new cutoff"
+  },
+  "predictor_boundaries": {
+    "allowed": [
+      "frozen retail packaging image bytes",
+      "deterministic features derived only from frozen image bytes"
+    ],
+    "forbidden": [
+      "parent_asin",
+      "title",
+      "brand",
+      "store",
+      "categories",
+      "product_form",
+      "automatic_tea_type",
+      "review text",
+      "review count",
+      "sentence count",
+      "PU label-derived variables",
+      "G label/outcome-derived information",
+      "current Amazon metadata",
+      "web search data",
+      "OCR text features",
+      "packaging text transcription"
+    ],
+    "identifiers_allowed_only_for": [
+      "join",
+      "split grouping",
+      "provenance"
+    ]
+  },
+  "allowed_feature_families": {
+    "primary": "pretrained image-only/image-encoder embedding, e.g. a frozen CLIP visual encoder family",
+    "representation_robustness": "one predeclared vision-only pretrained embedding family",
+    "interpretable_baseline": "small deterministic global color/luminance/contrast, edge/texture, and composition/layout summaries",
+    "exact_extraction_schema": "must be frozen in P9 before extraction",
+    "new_family_after_performance": "forbidden"
+  },
+  "modeling_boundary": {
+    "p8_a_modeling_started": false,
+    "primary_benchmark": "regularized linear model on frozen image representation",
+    "nonlinear_robustness": "one predeclared family on the same frozen features",
+    "end_to_end_fine_tuning_primary": false,
+    "pu_native_latent_inference": "sensitivity only unless separately reviewed",
+    "best_of_many_families_reporting": "forbidden"
+  },
   "split_policy": {
-    "assigned_in_p8_a":false,"development_proportion":0.8,"locked_test_proportion":0.2,"group_key":"primary_response_sha256","duplicate_group_rule":"all products sharing an exact primary response SHA remain in one split","development_cv":"5-fold group-aware","deterministic_salt":"p8b_split_v1","primary_stratification_outcome":"has_any_outer_imagery_observed",
-    "stratification_objective":{"outcome":"has_any_outer_imagery_observed","tracked_totals":["product_count","observed_positive_count"],"loss_kind":"joint_additive_normalized_absolute_deviation","weights":{"product_count":1.0,"observed_positive_count":1.0},"formula":"abs(row deviation) / total rows + abs(observed-positive deviation) / total observed positives","lexicographic":false,"locked_test_target":"20% of full-universe rows and 20% of full-universe observed positives","development_fold_target":"20% of post-locked-test development rows and 20% of post-locked-test development observed positives","comparison":"minimum joint scalar loss; SHA is used only for deterministic ordering and ties"},
-    "hash_tie_break":{"expression":"SHA256(p8b_split_v1 + group key)","purpose":"deterministic ordering and tie-break only","seed_search":false,"favorable_split_retries":0},
-    "locked_test_algorithm":{"algorithm_version":"p8b_split_v1","input_universe":"all groups before locked-test partition","group_key":"primary_response_sha256","stratification_outcome":"has_any_outer_imagery_observed","tracked_totals":["product_count","observed_positive_count"],"target":"locked test target","loss_kind":"joint_additive_normalized_absolute_deviation","candidate_evaluation":"evaluate every candidate whole group assignment using the joint loss","steps":["Aggregate each primary_response_sha256 group into product_count and observed_positive_count.","Set locked-test row and observed-positive targets to 20% of full-universe totals.","From the current selected set, evaluate every remaining whole group candidate with the joint scalar loss.","Add the candidate with minimum loss only when it strictly improves the current loss; use SHA256(p8b_split_v1 + group key) and group key only for deterministic ties.","Stop when no remaining whole group improves the loss; assign all unselected groups to development and report both realized deviations."],"objective":"minimum joint scalar loss with equal row and observed-positive weights","group_integrity":"each whole group receives exactly one assignment","selection_rule":"no model performance, test-set tuning, seed changes, or favorable-split retry"},
-    "development_five_fold_algorithm":{"algorithm_version":"p8b_split_v1","input_universe":"groups assigned to development after locked-test partition only","group_key":"primary_response_sha256","stratification_outcome":"has_any_outer_imagery_observed","tracked_totals":["product_count","observed_positive_count"],"target":"development totals after locked test","fold_target_proportion":0.2,"loss_kind":"joint_additive_normalized_absolute_deviation","candidate_evaluation":"evaluate every candidate fold by the aggregate joint loss across all five folds after assignment","steps":["Consume only groups assigned to development by the locked-test algorithm.","Set each fold target to 20% of post-locked-test development rows and observed positives.","Process development groups in SHA256(p8b_split_v1 + group key) order.","For each group, evaluate all five whole-fold candidates by the aggregate equal-weight row plus observed-positive loss across all five folds after each tentative assignment; assign the minimum global loss; use fold index only for exact global-loss ties.","Report per-fold realized row and observed-positive counts and deviations from development-based targets."],"objective":"minimum aggregate global joint scalar loss across all five folds with equal row and observed-positive weights","group_integrity":"each development group receives exactly one fold","selection_rule":"no model performance, test-set tuning, seed changes, or favorable-split retry","global_loss":"sum of joint_balance_loss across all five folds after each tentative assignment"},
-    "future_assignment_algorithm":"deterministic group-aware approximate stratification using a fixed joint row and observed-positive balancing loss; SHA is ordering/tie-break only"
+    "assigned_in_p8_a": false,
+    "development_proportion": 0.8,
+    "locked_test_proportion": 0.2,
+    "group_key": "primary_response_sha256",
+    "duplicate_group_rule": "all products sharing an exact primary response SHA remain in one split",
+    "development_cv": "5-fold group-aware",
+    "deterministic_salt": "p8b_split_v1",
+    "primary_stratification_outcome": "has_any_outer_imagery_observed",
+    "stratification_objective": {
+      "outcome": "has_any_outer_imagery_observed",
+      "tracked_totals": [
+        "product_count",
+        "observed_positive_count"
+      ],
+      "loss_kind": "joint_additive_normalized_absolute_deviation",
+      "weights": {
+        "product_count": 1.0,
+        "observed_positive_count": 1.0
+      },
+      "formula": "abs(row deviation) / total rows + abs(observed-positive deviation) / total observed positives",
+      "lexicographic": false,
+      "locked_test_target": "20% of full-universe rows and 20% of full-universe observed positives",
+      "development_fold_target": "20% of post-locked-test development rows and 20% of post-locked-test development observed positives",
+      "comparison": "minimum joint scalar loss; SHA is used only for deterministic ordering and ties"
+    },
+    "hash_tie_break": {
+      "expression": "SHA256(p8b_split_v1 + group key)",
+      "purpose": "deterministic ordering and tie-break only",
+      "seed_search": false,
+      "favorable_split_retries": 0
+    },
+    "locked_test_algorithm": {
+      "algorithm_version": "p8b_split_v1",
+      "input_universe": "all groups before locked-test partition",
+      "group_key": "primary_response_sha256",
+      "stratification_outcome": "has_any_outer_imagery_observed",
+      "tracked_totals": [
+        "product_count",
+        "observed_positive_count"
+      ],
+      "target": "locked test target",
+      "loss_kind": "joint_additive_normalized_absolute_deviation",
+      "candidate_evaluation": "evaluate every candidate whole group assignment using the joint loss",
+      "steps": [
+        "Aggregate each primary_response_sha256 group into product_count and observed_positive_count.",
+        "Set locked-test row and observed-positive targets to 20% of full-universe totals.",
+        "From the current selected set, evaluate every remaining whole group candidate with the joint scalar loss.",
+        "Add the candidate with minimum loss only when it strictly improves the current loss; use SHA256(p8b_split_v1 + group key) and group key only for deterministic ties.",
+        "Stop when no remaining whole group improves the loss; assign all unselected groups to development and report both realized deviations."
+      ],
+      "objective": "minimum joint scalar loss with equal row and observed-positive weights",
+      "group_integrity": "each whole group receives exactly one assignment",
+      "selection_rule": "no model performance, test-set tuning, seed changes, or favorable-split retry"
+    },
+    "development_five_fold_algorithm": {
+      "algorithm_version": "p8b_split_v1",
+      "input_universe": "groups assigned to development after locked-test partition only",
+      "group_key": "primary_response_sha256",
+      "stratification_outcome": "has_any_outer_imagery_observed",
+      "tracked_totals": [
+        "product_count",
+        "observed_positive_count"
+      ],
+      "target": "development totals after locked test",
+      "fold_target_proportion": 0.2,
+      "loss_kind": "joint_additive_normalized_absolute_deviation",
+      "candidate_evaluation": "evaluate every candidate fold by the aggregate joint loss across all five folds after assignment",
+      "steps": [
+        "Consume only groups assigned to development by the locked-test algorithm.",
+        "Set each fold target to 20% of post-locked-test development rows and observed positives.",
+        "Process development groups in SHA256(p8b_split_v1 + group key) order.",
+        "For each group, evaluate all five whole-fold candidates by the aggregate equal-weight row plus observed-positive loss across all five folds after each tentative assignment; assign the minimum global loss; use fold index only for exact global-loss ties.",
+        "Report per-fold realized row and observed-positive counts and deviations from development-based targets."
+      ],
+      "objective": "minimum aggregate global joint scalar loss across all five folds with equal row and observed-positive weights",
+      "group_integrity": "each development group receives exactly one fold",
+      "selection_rule": "no model performance, test-set tuning, seed changes, or favorable-split retry",
+      "global_loss": "sum of joint_balance_loss across all five folds after each tentative assignment"
+    },
+    "future_assignment_algorithm": "deterministic group-aware approximate stratification using a fixed joint row and observed-positive balancing loss; SHA is ordering/tie-break only"
   },
-  "evaluation_policy":{"metrics":["AUROC","Average Precision / AUPRC","recall at predeclared top-score fractions","lift/enrichment relative to observed-positive base rate"],"interpretation":"observed-positive vs PU-unlabeled ranking/discrimination","calibration_interpretation":"calibration to the observed-positive indicator only","confidence_intervals":"cluster bootstrap","bootstrap_cluster_unit":"primary_response_sha256","locked_test_firewall":["feature-family selection","hyperparameter tuning","model-family selection","threshold selection","G decisions","outcome decisions","early stopping"]},
-  "sensitivity_analyses":{"R1":"known-QA-exception exclusion sensitivity; exclude only the 83 known P7-C exceptions","R2":"alternative image exposure sensitivity; compare primary vs frozen sensitivity exposure for 14 available products without changing split grouping","R3":"G quality/exposure sensitivity; report all existing frozen grid/rules or continuous diagnostic","R4":"label-definition robustness; compare core vs pilot/robust variants without promotion","R5":"known placeholder/image-exception subgroup descriptive score behavior"},
-  "forbidden_adaptations":["feature extraction in P8-A","model fitting in P8-A","split assignment in P8-A","test-set tuning","post-hoc metadata subgroups","performance-based G threshold selection","promoting pilot/robust outcomes to primary","treating PU zero as confirmed negative","re-searching or re-reviewing images","changing frozen P7 primary definition"],
-  "p8_b_requirements":["materialize modeling-ready manifest from frozen primary exposure","freeze deterministic group-aware split with p8b_split_v1","preserve primary_response_sha256 grouping","do not use test set during development decisions","retain sensitivity specifications from this contract"],
-  "formal_output_policy":{"directory":"data/processed/modeling_readiness_p8_5180/p8_a_analysis_contract","files":["01_upstream_freeze_audit.json","02_modeling_population_and_outcome_audit.json","03_g_role_and_sensitivity_audit.json","04_analysis_contract_snapshot.json","05_p8_a_provenance.json"],"git_tracked":false,"provenance_uses":"Git blob bytes for tracked producer, contract, and tracked dependencies","provenance_self_sha":"forbidden","no_feature_matrices":true,"no_split_assignment":true},
-  "verification_policy":{"verify_existing_network_calls":0,"verify_existing_model_calls":0,"verify_existing_writes":0,"feature_extraction_started":false,"model_fitting_started":false,"split_assigned":false},
-  "core_eligibility":{"source_artifact":"39_product_imagery_labels_v21.csv","source_semantics":"frozen V2.1","core_min_products":40,"keep_field_suffix":"_dimension_keep_core","sentence_count_field_suffix":"_sentence_count","observed_positive_field_suffix":"_observed_positive_core","rule":"dimension_keep_core == 1","observed_positive_core_semantics":"(sentence_count >= 1) AND (dimension_keep_core == 1)","global_keep_flag_consistency":true,"eligible_dimensions":["general_visual_appeal","cute_friendly"],"structural_zero_dimensions":["premium_refined","gift_presentation","simple_modern","natural_botanical","calming_soft","cheerful_colorful","traditional_vintage","negative_appearance"],"derived_at_prepare_time":true}
+  "evaluation_policy": {
+    "metrics": [
+      "AUROC",
+      "Average Precision / AUPRC",
+      "recall at predeclared top-score fractions",
+      "lift/enrichment relative to observed-positive base rate"
+    ],
+    "interpretation": "observed-positive vs PU-unlabeled ranking/discrimination",
+    "calibration_interpretation": "calibration to the observed-positive indicator only",
+    "confidence_intervals": "cluster bootstrap",
+    "bootstrap_cluster_unit": "primary_response_sha256",
+    "locked_test_firewall": [
+      "feature-family selection",
+      "hyperparameter tuning",
+      "model-family selection",
+      "threshold selection",
+      "G decisions",
+      "outcome decisions",
+      "early stopping"
+    ]
+  },
+  "sensitivity_analyses": {
+    "R1": "known-QA-exception exclusion sensitivity; exclude only the 83 known P7-C exceptions",
+    "R2": "alternative image exposure sensitivity; compare primary vs frozen sensitivity exposure for 14 available products without changing split grouping",
+    "R3": "G quality/exposure sensitivity; report all existing frozen grid/rules or continuous diagnostic",
+    "R4": "label-definition robustness; compare core vs pilot/robust variants without promotion",
+    "R5": "known placeholder/image-exception subgroup descriptive score behavior"
+  },
+  "forbidden_adaptations": [
+    "feature extraction in P8-A",
+    "model fitting in P8-A",
+    "split assignment in P8-A",
+    "test-set tuning",
+    "post-hoc metadata subgroups",
+    "performance-based G threshold selection",
+    "promoting pilot/robust outcomes to primary",
+    "treating PU zero as confirmed negative",
+    "re-searching or re-reviewing images",
+    "changing frozen P7 primary definition"
+  ],
+  "p8_b_requirements": [
+    "materialize modeling-ready manifest from frozen primary exposure",
+    "freeze deterministic group-aware split with p8b_split_v1",
+    "preserve primary_response_sha256 grouping",
+    "do not use test set during development decisions",
+    "retain sensitivity specifications from this contract"
+  ],
+  "formal_output_policy": {
+    "directory": "data/processed/modeling_readiness_p8_5180/p8_a_analysis_contract",
+    "files": [
+      "01_upstream_freeze_audit.json",
+      "02_modeling_population_and_outcome_audit.json",
+      "03_g_role_and_sensitivity_audit.json",
+      "04_analysis_contract_snapshot.json",
+      "05_p8_a_provenance.json"
+    ],
+    "git_tracked": false,
+    "provenance_uses": "Git blob bytes for tracked producer, contract, and tracked dependencies",
+    "provenance_self_sha": "forbidden",
+    "no_feature_matrices": true,
+    "no_split_assignment": true
+  },
+  "verification_policy": {
+    "verify_existing_network_calls": 0,
+    "verify_existing_model_calls": 0,
+    "verify_existing_writes": 0,
+    "feature_extraction_started": false,
+    "model_fitting_started": false,
+    "split_assigned": false
+  },
+  "core_eligibility": {
+    "source_artifact": "39_product_imagery_labels_v21.csv",
+    "source_semantics": "frozen V2.1",
+    "core_min_products": 40,
+    "keep_field_suffix": "_dimension_keep_core",
+    "sentence_count_field_suffix": "_sentence_count",
+    "observed_positive_field_suffix": "_observed_positive_core",
+    "rule": "dimension_keep_core == 1",
+    "observed_positive_core_semantics": "(sentence_count >= 1) AND (dimension_keep_core == 1)",
+    "global_keep_flag_consistency": true,
+    "eligible_dimensions": [
+      "general_visual_appeal",
+      "cute_friendly"
+    ],
+    "structural_zero_dimensions": [
+      "premium_refined",
+      "gift_presentation",
+      "simple_modern",
+      "natural_botanical",
+      "calming_soft",
+      "cheerful_colorful",
+      "traditional_vintage",
+      "negative_appearance"
+    ],
+    "derived_at_prepare_time": true
+  }
 }
