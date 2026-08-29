@@ -10,23 +10,27 @@ The study used Amazon Reviews'23 Grocery metadata and review records released by
 
 No accession number is assigned by the source repository.
 
-## What is not redistributed here
+## What is not redistributed
 
-This repository does not redistribute raw review text, raw product-image binaries, API responses, credentials, or internal account/reviewer information. Those materials remain subject to the original source terms and/or are unnecessary for publication.
+Raw Amazon review text, third-party product-image binaries, image-source URLs, credentials, API responses, and internal account/reviewer information are not redistributed. Those materials remain subject to the original source terms and/or are unnecessary to check the reported machine-learning results.
 
-## Derived materials needed for exact frozen-result reproduction
+## PeerJ Supplemental Data 1
 
-Exact reproduction of the manuscript model outputs requires a de-identified analysis-ready package containing, at minimum:
+The resubmission includes a separate publication-safe dataset, `Supplemental_Data_1_PeerJ.zip`. It contains:
 
-1. the final eligible `parent_asin` inventory and observed-positive outcome fields;
-2. the frozen development/held-out split and grouped-fold assignments;
-3. the frozen primary-image identifiers/hashes and analysis mappings;
-4. the 512-dimensional OpenCLIP embeddings or sufficient image references to recompute them;
-5. the 36 interpretable visual features;
-6. development model-selection outputs/final parameter arrays;
-7. held-out metric and bootstrap/sensitivity outputs used in the manuscript.
+- the 1,036-row held-out product manifest restricted to identifiers, the frozen image-response group hash, and the three modeled positive-unlabeled outcomes;
+- the 6,216 frozen held-out model scores (1,036 products × 6 frozen models);
+- a convenience joined labels-and-scores table;
+- the conventional AUROC correction table and audit provenance;
+- SHA-256 checksums.
 
-The internal project kept many of these formal row-level artifacts outside Git. A publication-safe export of those derived materials must therefore be added to this repository (or archived separately with a DOI) before PeerJ resubmission. Raw consumer review text and copyrighted image binaries need not be included in that export.
+The package deliberately excludes raw review text, copyrighted image binaries, image URLs/paths, embeddings, and credentials. The public GitHub repository contains the code needed to recompute the publication-facing held-out metrics from this supplemental package.
+
+## Reproducibility scope
+
+The public repository is centered on the manuscript's frozen machine-learning analysis: leakage-controlled split contracts, visual feature extraction specifications, development-only model selection/refit, held-out evaluation, post-lock interpretation, and figures. Raw-source preprocessing rules are described in the manuscript and validation documentation, with frozen source-code bindings recorded in `docs/PREPROCESSING_SOURCE_BINDINGS.md`.
+
+Exact regeneration of all upstream row-level intermediates from raw Amazon records would additionally require the third-party source files and product images under their original terms. Exact checking of the reported held-out ranking results does not require redistribution of those raw materials because the frozen publication-safe labels, group hashes, and scores are supplied as Supplemental Data 1.
 
 ## Positive-unlabeled observation semantics
 
