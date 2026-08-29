@@ -15,14 +15,30 @@ PUBLIC_RUNNABLE_PATHS = [
     "scripts/figures/figure04_design_strategies_v6.py",
 ]
 
-UPSTREAM_PATHS_NOT_PRESENT_IN_PUBLIC_CHECKOUT = [
+UPSTREAM_PUBLIC_PATHS = [
     "scripts/metadata/screen_full_metadata_v2.py",
     "scripts/metadata/secondary_clean_candidates_v21.py",
     "scripts/metadata/secondary_clean_candidates_v22.py",
     "scripts/reviews/match_reviews_to_valid_products.py",
     "scripts/reviews/clean_and_extract_packaging_sentences.py",
     "scripts/visual_packaging/strict_visual_packaging_classifier_v11.py",
-    "build_affective_imagery_labels_v21.py",
+    "scripts/labels/build_affective_imagery_labels_v21.py",
+    "scripts/images/audit_p7_source_inventory.py",
+    "scripts/images/acquire_p7_primary_assets.py",
+    "scripts/images/p7_c_primary_manifest_qa.py",
+    "scripts/images/p7_d_final_image_freeze.py",
+    "scripts/validation/_prepare_affective_imagery_validation_v21_core.py",
+    "scripts/validation/affective_imagery_action_error_mapping_v21.py",
+    "scripts/validation/affective_imagery_annotation_policy_v21.py",
+    "scripts/validation/affective_imagery_decision_sidecar_v21.py",
+    "scripts/validation/affective_imagery_final_adjudication_v21.py",
+    "scripts/validation/affective_imagery_validation_manifest_v21.py",
+    "scripts/validation/affective_imagery_validation_provenance_v21.py",
+    "scripts/validation/normalize_affective_imagery_actions_v21.py",
+    "scripts/validation/prepare_affective_imagery_validation_v21.py",
+    "scripts/validation/repair_affective_imagery_a2_rationales_v21.py",
+    "scripts/validation/summarize_affective_imagery_validation_v21.py",
+    "scripts/validation/validate_affective_imagery_annotations_v21.py",
 ]
 
 
@@ -31,20 +47,20 @@ def test_public_runnable_paths_exist():
     assert not missing, "Missing public runnable files: " + ", ".join(missing)
 
 
-def test_readme_does_not_present_absent_upstream_sources_as_public_runnable_code():
+def test_peerj_upstream_source_release_is_complete():
+    missing = [path for path in UPSTREAM_PUBLIC_PATHS if not (ROOT / path).is_file()]
+    assert not missing, "Missing PeerJ upstream source files: " + ", ".join(missing)
+
+
+def test_upstream_source_release_is_documented_as_public_code():
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    for path in UPSTREAM_PATHS_NOT_PRESENT_IN_PUBLIC_CHECKOUT:
-        assert f"`{path}`" not in readme, (
-            f"README presents absent historical source as a public path: {path}. "
-            "Point readers to docs/PREPROCESSING_SOURCE_BINDINGS.md instead."
-        )
-
-
-def test_reproducibility_does_not_instruct_running_absent_upstream_sources():
-    text = (ROOT / "docs" / "REPRODUCIBILITY.md").read_text(encoding="utf-8")
-    assert "once the publication-facing upstream scripts are present" not in text
-    for path in UPSTREAM_PATHS_NOT_PRESENT_IN_PUBLIC_CHECKOUT:
-        assert f"python {path}" not in text
+    reproducibility = (ROOT / "docs" / "REPRODUCIBILITY.md").read_text(encoding="utf-8")
+    provenance = (ROOT / "docs" / "PREPROCESSING_SOURCE_BINDINGS.md").read_text(encoding="utf-8")
+    for path in UPSTREAM_PUBLIC_PATHS:
+        assert f"`{path}`" in provenance, f"Missing provenance mapping for {path}"
+    assert "scripts/metadata/screen_full_metadata_v2.py" in readme
+    assert "scripts/reviews/clean_and_extract_packaging_sentences.py" in reproducibility
+    assert "scripts/labels/build_affective_imagery_labels_v21.py" in reproducibility
 
 
 def test_peerj_required_source_and_environment_disclosures_are_present():
