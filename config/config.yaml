@@ -1,0 +1,191 @@
+dataset:
+  repo_id: McAuley-Lab/Amazon-Reviews-2023
+  meta_config: raw_meta_Grocery_and_Gourmet_Food
+  review_config: raw_review_Grocery_and_Gourmet_Food
+  split: full
+
+paths:
+  data_dir: data
+  reports_dir: reports
+  fixtures_dir: tests/fixtures
+
+product_filter:
+  include_keywords:
+    - herbal tea
+    - flower tea
+    - floral tea
+    - blooming tea
+    - chamomile tea
+    - camomile tea
+    - hibiscus tea
+    - rose tea
+    - jasmine tea
+    - chrysanthemum tea
+    - lavender tea
+    - butterfly pea tea
+    - calendula tea
+    - elderflower tea
+    - linden flower tea
+  exclude_keywords:
+    - tea infuser
+    - tea kettle
+    - tea pot
+    - teapot
+    - tea strainer
+    - tea cup
+    - mug
+    - candle
+    - fragrance
+    - perfume
+    - essential oil
+    - soap
+    - shampoo
+    - candy
+    - chocolate
+    - cookie
+    - syrup
+    - supplement
+    - capsule
+    - seed
+    - plant
+    - artificial flower
+  tea_types:
+    chamomile: [chamomile, camomile]
+    hibiscus: [hibiscus, roselle]
+    rose: [rose tea, rose herbal, rose petal]
+    jasmine: [jasmine tea, jasmine flower]
+    chrysanthemum: [chrysanthemum]
+    lavender: [lavender tea, lavender herbal]
+    butterfly_pea: [butterfly pea]
+    blooming: [blooming tea, flowering tea]
+    elderflower: [elderflower]
+    mixed_herbal: [herbal tea, flower tea, floral tea]
+
+review_filter:
+  packaging_keywords:
+    - packaging
+    - package
+    - packaged
+    - box
+    - tin
+    - canister
+    - pouch
+    - bag
+    - label
+    - wrapper
+    - container
+    - design
+    - presentation
+    - gift
+    - ribbon
+  visual_keywords:
+    - beautiful
+    - pretty
+    - elegant
+    - lovely
+    - cute
+    - attractive
+    - aesthetic
+    - colorful
+    - colour
+    - color
+    - floral
+    - illustration
+    - design
+    - premium
+    - luxurious
+    - classy
+    - cheap-looking
+    - minimalist
+    - vintage
+  functional_keywords:
+    - sealed
+    - seal
+    - resealable
+    - ziplock
+    - airtight
+    - sturdy
+    - easy to open
+    - hard to open
+    - convenient
+    - storage
+    - freshness
+    - individually wrapped
+    - reusable
+    - recyclable
+  emotional_keywords:
+    - calming
+    - soothing
+    - warm
+    - comforting
+    - natural
+    - fresh
+    - healthy
+    - trustworthy
+    - elegant
+    - refined
+    - luxurious
+    - premium
+    - gift
+    - lovely
+    - romantic
+    - cheerful
+    - relaxing
+    - special
+  logistics_keywords:
+    - damaged
+    - crushed
+    - shipping
+    - delivery
+    - leaking
+    - leaked
+    - arrived broken
+    - dented
+    - torn
+    - smashed
+    - opened in transit
+
+scan:
+  progress_every: 25000
+  pilot:
+    meta_max_records: 150000
+    review_max_records: 1000000
+    max_candidate_products: 1500
+    image_download_limit: 30
+  full:
+    meta_max_records: null
+    review_max_records: null
+    max_candidate_products: null
+    image_download_limit: 300
+
+diagnostics:
+  min_reviews_per_product: 5
+  manual_sample_size: 300
+  thresholds:
+    demo:
+      candidate_products: 4
+      image_url_rate: 0.75
+      packaging_reviews: 5
+      products_with_min_reviews: 2
+      emotional_reviews: 3
+      max_logistics_only_rate: 0.50
+      unique_tea_types: 3
+      unique_brands: 3
+    pilot:
+      candidate_products: 50
+      image_url_rate: 0.70
+      packaging_reviews: 300
+      products_with_min_reviews: 20
+      emotional_reviews: 100
+      max_logistics_only_rate: 0.50
+      unique_tea_types: 3
+      unique_brands: 20
+    full:
+      candidate_products: 300
+      image_url_rate: 0.80
+      packaging_reviews: 3000
+      products_with_min_reviews: 100
+      emotional_reviews: 1000
+      max_logistics_only_rate: 0.40
+      unique_tea_types: 5
+      unique_brands: 80
