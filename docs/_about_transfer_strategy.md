@@ -1,0 +1,1 @@
+This repository copies publication-facing source files from a frozen internal source snapshot. Large scientific scripts are transferred without altering their scientific logic; public documentation is maintained separately.
