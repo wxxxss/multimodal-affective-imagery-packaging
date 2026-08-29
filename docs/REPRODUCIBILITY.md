@@ -1,52 +1,45 @@
 # Reproducibility workflow
 
-This document maps the frozen study workflow to the public code export. It is intentionally organized around the manuscript rather than the internal project-management history.
+This document maps the frozen study workflow to the publication-facing repository. It distinguishes (a) historical upstream data-construction stages whose exact frozen source identities are recorded for provenance from (b) machine-learning stages that are directly runnable from this checkout when their required source/frozen inputs are available.
 
-## 1. Obtain source data
+## 1. Obtain third-party source data
 
-Download the Amazon Reviews'23 Grocery metadata and review resources from the McAuley Lab source repository described in `docs/DATA_ACCESS.md`.
+The study used Amazon Reviews'23 Grocery metadata and review resources released by the UCSD McAuley Lab. Source URLs and the reference DOI are given in `docs/DATA_ACCESS.md` and the repository README.
 
-## 2. Screen eligible infusion products
+Raw Amazon review text and third-party product-image binaries are not redistributed here.
 
-Run the metadata-screening sequence once the publication-facing upstream scripts are present in the release:
+## 2. Historical metadata eligibility screening
 
-```bash
-python scripts/metadata/screen_full_metadata_v2.py --help
-python scripts/metadata/secondary_clean_candidates_v21.py --help
-python scripts/metadata/secondary_clean_candidates_v22.py --help
-```
+The frozen workflow streamed Grocery metadata, applied ordered product-scope rules for dry herbal/fruit infusion products, and retained candidates for secondary cleaning/review. The final study universe contained 5,180 eligible products.
 
-The study universe ultimately contained 5,180 eligible products.
+The exact frozen source-module identities for this stage are recorded in `docs/PREPROCESSING_SOURCE_BINDINGS.md`. Those historical workspace files are not represented as runnable paths in this public checkout.
 
-## 3. Match and preprocess reviews
+## 3. Historical review matching and text preprocessing
 
-```bash
-python scripts/reviews/match_reviews_to_valid_products.py --help
-python scripts/reviews/clean_and_extract_packaging_sentences.py --help
-```
+Reviews were joined to eligible products by `parent_asin`, normalized/cleaned, segmented into sentences, and screened with high-recall packaging-language rules before strict visual-package classification. The manuscript reports 14,318,520 Grocery reviews screened, 151,175 matched reviews, 146,160 clean reviews, 539,132 sentences, and 56,197 high-recall packaging-language candidates.
 
-The manuscript reports 14,318,520 Grocery reviews screened, 151,175 matched reviews, 146,160 clean reviews, 539,132 sentences, and 56,197 high-recall packaging-language candidates.
+Frozen source-module identities are recorded in `docs/PREPROCESSING_SOURCE_BINDINGS.md`. The manuscript Methods should describe these preprocessing operations explicitly because exact regeneration from raw third-party records additionally depends on the original Amazon source files.
 
-## 4. Identify qualifying visual-package language and construct PU outcomes
+## 4. Historical visual-package screening and PU outcome construction
 
-```bash
-python scripts/visual_packaging/strict_visual_packaging_classifier_v11.py --help
-python build_affective_imagery_labels_v21.py --help
-```
+Only clause-level affective expressions referring to the **outer retail package** contributed to modeled outcomes. A value of `1` denotes an observed qualifying mention; `0` is unlabeled/unobserved rather than a confirmed negative.
 
-Only clause-level affective expressions related to the outer retail package contribute to the modeled outcomes. A zero label is unlabeled/unobserved, not a confirmed negative.
+The frozen source identities for strict visual-package screening and affective-imagery label construction are recorded in `docs/PREPROCESSING_SOURCE_BINDINGS.md`.
 
-## 5. Validate the label-construction process
+## 5. Validation/adjudication
 
-The validation protocol and schema are published under `docs/validation/`. The study used two independent, rule-guided ChatGPT (GPT-5.5; OpenAI)-assisted review passes on the same 840 validation tasks, followed by model-assisted adjudication. This is not human-gold annotation. Validation findings were used for reporting and did not change the frozen production labels via a sample-derived mask.
+The publication-facing validation protocol and schema are under `docs/validation/`. The study used two independent, rule-guided ChatGPT (GPT-5.5; OpenAI)-assisted review passes on the same 840 validation tasks, followed by model-assisted adjudication. This is not described as independent human-gold annotation. Validation findings were used for quality reporting and did not create a sample-derived production-label mask.
 
-## 6. Acquire and freeze retail-package images
+## 6. Historical image acquisition, QA, and primary-image freeze
 
-The P7 workflow implements source-inventory audit, image acquisition, QA, and final frozen primary-image selection. Raw third-party image binaries are not redistributed.
+The P7 workflow audited image sources, acquired candidate retail-package images, performed QA, and froze one primary image per product/group under the prespecified contracts. Raw image binaries and source URLs are not redistributed. Frozen source identities for the P7 implementation are recorded in `docs/PREPROCESSING_SOURCE_BINDINGS.md`.
 
 ## 7. Create the leakage-controlled modeling split
 
+Public implementation:
+
 ```bash
+python scripts/modeling/p8_a_analysis_contract.py --help
 python scripts/modeling/p8_b_modeling_ready_split.py --help
 ```
 
@@ -58,7 +51,7 @@ The frozen modeling population contained 5,179 products: 4,143 development produ
 python scripts/modeling/p9_visual_features.py --help
 ```
 
-The frozen image representation stage generated 512-dimensional L2-normalized OpenCLIP ViT-B/32 embeddings, 20 classical raster descriptors, and 16 semantic image-text design-similarity scores (36 interpretable features in total). The semantic prompt bank and interpretable-feature schema are under `config/modeling/`.
+The frozen image-representation stage generated 512-dimensional L2-normalized OpenCLIP ViT-B/32 embeddings, 20 classical raster descriptors, and 16 semantic image-text design-similarity scores (36 interpretable features in total). The semantic prompt bank and interpretable-feature schema are under `config/modeling/`.
 
 ## 9. Development-only model selection and refit
 
@@ -68,9 +61,20 @@ python scripts/modeling/p10_development_models.py --help
 
 For each of three outcomes and two representation tracks, predictors were standardized and logistic regression was selected over the C grid `{0.01, 0.1, 1, 10, 100}` using five grouped development folds and mean validation average precision. The held-out set was not used for preprocessing, model selection, or fitting.
 
-## 10. Held-out evaluation and completed AUROC audit
+## 10. Export publication-safe held-out inputs
 
-The publication-facing evaluator is:
+The release exporter copies only the fields required to audit the held-out results and deliberately excludes raw review text, image URLs/paths, images, and embeddings:
+
+```bash
+python scripts/release/export_audit_inputs.py \
+  --manifest PATH/TO/FROZEN_MODELING_MANIFEST.csv \
+  --predictions PATH/TO/FROZEN_LOCKED_TEST_PREDICTIONS.csv \
+  --output-dir data/derived
+```
+
+For the frozen study this export must contain 5,179 modeling-manifest rows and 6,216 held-out prediction rows (1,036 products × 6 models). The resulting publication-safe files are intended for PeerJ Supplemental Data 1 or a DOI-bearing data/code archive.
+
+## 11. Held-out evaluation and completed AUROC audit
 
 ```bash
 python scripts/modeling/public_heldout_evaluation.py \
@@ -81,28 +85,26 @@ python scripts/modeling/public_heldout_evaluation.py \
   --seed 20260818
 ```
 
-It consumes already-frozen held-out predictions and labels. It performs no model fitting or model selection and never flips scores. Average precision and top-k metrics use the frozen deterministic score-descending ranking convention; AUROC uses conventional `sklearn.metrics.roc_auc_score`, matching P10. Cluster-bootstrap uncertainty uses `primary_response_sha256` as the sampling unit.
+The evaluator consumes already-frozen held-out predictions and labels. It performs no model fitting or selection and never flips scores. Average precision and top-k metrics use deterministic score-descending ranking; AUROC uses conventional `sklearn.metrics.roc_auc_score`, matching P10. Cluster-bootstrap uncertainty uses `primary_response_sha256` as the sampling unit.
 
-The audit is complete. The frozen prediction SHA-256 matches the historical P11 ledger, and the original 5,000-draw/seed-`20260818` bootstrap plan was reproduced exactly. Conventional held-out AUROC is 0.6877-0.7220 across the six models, with all six corrected 95% interval lower bounds above 0.5. Exact values and provenance are under `data/published_results/p11_auroc_correction/` and `docs/AUROC_AUDIT.md`.
+The audit reproduced the original 5,000-draw, seed-`20260818` plan. Conventional held-out AUROC is 0.6877-0.7220 across the six models, with all six corrected 95% interval lower bounds above 0.5. Exact values and provenance are under `data/published_results/p11_auroc_correction/` and `docs/AUROC_AUDIT.md`.
 
-The historical P11 reference oracle and historical result files remain unchanged for audit provenance.
-
-## 11. Post-lock interpretation
+## 12. Post-lock interpretation
 
 Historical P12 is governed by `config/modeling/p12_post_lock_interpretation_contract.json`. It combined development-fold coefficient-direction stability with outcome-level held-out evidence and did not retrain, refit, reselect, rescore, flip scores, change labels, change features, change the split, or select a threshold.
 
 Frozen historical P12 outputs remain under `data/published_results/p12/`. Publication-facing AUROC interpretation is overlaid under `data/published_results/p12_auroc_correction/`. The E2/E1 enrichment grades and resulting Grade A/B design rules are unchanged because they are based on top-10% lift evidence, coefficient stability, and the QA-exclusion lift check rather than AUROC.
 
-## 12. Figures
+## 13. Figures
 
-Figures 1 and 4 retain their frozen manuscript values. Figure 3 is regenerated with the bounded conventional-AUROC correction:
+Figures 1 and 4 retain their frozen manuscript values. Figure 3 is regenerated with the conventional-AUROC correction:
 
 - `scripts/figures/figure01_data_construction_v5.py`
 - `scripts/figures/figure03_recognition_performance_v7_auroc_corrected.py`
 - `scripts/figures/figure04_design_strategies_v6.py`
 
-The historical Figure 3 v6 script is retained for provenance but is not the publication-facing source after the AUROC audit. Figure 2 is a conceptual workflow diagram and is not a statistical output.
+The historical Figure 3 v6 script is retained for provenance but is not the publication-facing source after the AUROC audit. Figure 2 is a conceptual workflow diagram rather than a statistical output.
 
 ## Verification principle
 
-Where exact row-level frozen artifacts are available in the publication-safe derived-data release, use their recorded SHA-256 values. Do not regenerate or reselect a frozen upstream stage merely to obtain a different downstream result. A correction of a verified metric-implementation defect must be bounded, documented, and based on the already-frozen predictions/labels.
+Where exact row-level frozen artifacts are supplied in the publication-safe derived-data release, use their recorded SHA-256 values. Do not regenerate or reselect a frozen upstream stage merely to obtain a different downstream result. Any correction to a verified metric-implementation defect must remain bounded, documented, and based on the already-frozen predictions/labels.
