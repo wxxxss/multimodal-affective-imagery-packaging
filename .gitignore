@@ -1,0 +1,19 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.env
+.env.*
+*.log
+.DS_Store
+
+# Third-party/raw materials are not redistributed in this repository.
+data/raw/
+data/images/
+data/private/
+
+# Local model/checkpoint and generated run products.
+models/
+checkpoints/
+outputs/
+reports/generated/
