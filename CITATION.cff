@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata from this file."
+title: "Multimodal machine learning for screening consumer-expressed affective imagery from retail packaging images and e-commerce reviews of herbal and fruit teas"
+type: software
+authors:
+  - family-names: "Wu"
+    given-names: "Kaiting"
+affiliation: "Jiangxi Institute of Fashion Technology"
+repository-code: "https://github.com/wxxxss/multimodal-affective-imagery-packaging"
+license: MIT
