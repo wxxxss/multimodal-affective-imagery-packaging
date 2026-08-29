@@ -1,0 +1,298 @@
+{
+    "contract_version":  "p12_interpretation_v1.0",
+    "stage":  "P12-B interpretation contract freeze",
+    "execution_status":  "contract_only_not_executed",
+    "baseline":  {
+                     "exact_main_commit":  "061e4f01832bf5a46eafed3a7c41cf468269581b",
+                     "working_branch":  "p12-post-lock-interpretation",
+                     "p11_repository_level_closure":  "COMPLETE / FROZEN",
+                     "scientific_interpretation_started":  false
+                 },
+    "frozen_input_bindings":  {
+                                  "p9":  {
+                                             "visual_feature_contract":  {
+                                                                             "path":  "config/modeling/p9_visual_feature_contract.json",
+                                                                             "git_blob_sha1":  "e274d82b2f8e7f74468b1123bad859367ec540f5"
+                                                                         },
+                                             "interpretable_feature_schema":  {
+                                                                                  "path":  "config/modeling/p9_interpretable_feature_schema.json",
+                                                                                  "git_blob_sha1":  "2d8d7d8fe05c85c36fa326bd6f9d4170dbdef81a",
+                                                                                  "classical_features":  20,
+                                                                                  "semantic_features":  16,
+                                                                                  "total_interpretable_features":  36
+                                                                              },
+                                             "semantic_prompt_bank":  {
+                                                                          "path":  "config/modeling/p9_semantic_prompt_bank.json",
+                                                                          "git_blob_sha1":  "d6830ea16e97015cd350ef9b76145e754626dc3b",
+                                                                          "semantic_score_semantics":  "semantic design similarity score; not presence probability and not human gold label"
+                                                                      },
+                                             "interpretable_feature_artifact_sha256":  "D4A9045DB75F9233BE10D4C155DD66E34B850E65C2706C2D749C2EB7286C4753"
+                                         },
+                                  "p10":  {
+                                              "tracked_summary":  {
+                                                                      "path":  "docs/stages/modeling/p10_development_model_summary.json",
+                                                                      "git_blob_sha1":  "bd42530b53081a261f8322824b1d651d14044308"
+                                                                  },
+                                              "producer":  {
+                                                               "path":  "scripts/modeling/p10_development_models.py",
+                                                               "git_blob_sha1":  "28fb64e6b848a458c34917eeb2d86160540005af"
+                                                           },
+                                              "coefficient_stability":  {
+                                                                            "path":  "data/processed/modeling_p10_5180/p10_development_model_freeze/06_interpretable_coefficient_stability.csv",
+                                                                            "expected_sha256":  "2D9CE00D4EE9FF37A7D23AC28D80429E5B8AFE1CAC81DA9CC49B7F018EFC870D",
+                                                                            "expected_rows":  108,
+                                                                            "expected_outcomes":  3,
+                                                                            "expected_features_per_outcome":  36,
+                                                                            "actual_row_values_read_during_p12_b":  false,
+                                                                            "fields":  [
+                                                                                           "outcome",
+                                                                                           "feature_name",
+                                                                                           "final_standardized_coef",
+                                                                                           "fold0",
+                                                                                           "fold1",
+                                                                                           "fold2",
+                                                                                           "fold3",
+                                                                                           "fold4",
+                                                                                           "sign_agreement_count",
+                                                                                           "abs_final_coef"
+                                                                                       ]
+                                                                        },
+                                              "final_model_parameters_sha256":  "5E17175BFC1D5BD7E1D333935E38F8C95355AA48E6D5E78E2572D2B6993DCE5B",
+                                              "outcomes":  [
+                                                               "has_any_outer_imagery_observed",
+                                                               "general_visual_appeal_observed_positive_core",
+                                                               "cute_friendly_observed_positive_core"
+                                                           ],
+                                              "track":  "interpretable_36_logistic"
+                                          },
+                                  "p11":  {
+                                              "tracked_report":  {
+                                                                     "path":  "docs/stages/modeling/p11_locked_test_report.md",
+                                                                     "git_blob_sha1":  "f28e38d9fa9bf2b1b875f7325485aad9551194a7"
+                                                                 },
+                                              "tracked_summary":  {
+                                                                      "path":  "docs/stages/modeling/p11_locked_test_summary.json",
+                                                                      "git_blob_sha1":  "c8cd6819a7b512e81fc3a95ebda601d2d131434c"
+                                                                  },
+                                              "formal_sha256":  {
+                                                                    "03_product_row_metrics.csv":  "812AFEEE71AC3E89D81A1C0554E1625AA6C704B7BF41E1EA29FBB341D6553360",
+                                                                    "05_cluster_bootstrap_uncertainty.csv":  "9B10FE9053C5CBF6B37923305A6B00A472D464B8F0BCB0F5B240074BDE9E54F2",
+                                                                    "06_r1_qa_exception_sensitivity.csv":  "3037857EACABCBD8F911FFB2297D366AC175D7EC080FA328B226A55A5E119ABD",
+                                                                    "07_r2_alternative_image_sensitivity.csv":  "D73EA4ED53CF68F1D477B65BD7B0BB0FF800FAF6D0F041BE6B4C67FCBB26B924",
+                                                                    "08_r3_g_exposure_sensitivity.csv":  "390B1BDDB736C61F52AFB9F9CD58223E802B2A5011C055DE7B500A5BF91C2ECD",
+                                                                    "09_r4_label_definition_robustness.csv":  "280170B6D9A61ADF0B8D10CA34D6A864D8F304F9C799D07696438876F043A735",
+                                                                    "10_r5_image_exception_diagnostics.csv":  "AE022FB706DFDB6C90D438A0066F65DB5C3A757008D531EEDB7AE260CF95503A",
+                                                                    "11_p11_summary.json":  "0D58EDB78E88908F76E5AC9AA7FECA2C08CF15209E3AA712D465A77E91DCC894",
+                                                                    "12_p11_provenance.json":  "CFB46FB09B5FEC30E8F858A2E4D8B56D06B76EA958F0D0F5A00A5AC2DE253A49"
+                                                                },
+                                              "external_provenance_sha256":  "CFB46FB09B5FEC30E8F858A2E4D8B56D06B76EA958F0D0F5A00A5AC2DE253A49",
+                                              "locked_test_rows":  1036,
+                                              "bootstrap_iterations":  5000,
+                                              "bootstrap_seed":  20260818,
+                                              "robustness_family":  [
+                                                                        "R1",
+                                                                        "R2",
+                                                                        "R3",
+                                                                        "R4",
+                                                                        "R5"
+                                                                    ]
+                                          }
+                              },
+    "coefficient_stability_rules":  {
+                                        "basis":  "sign of final development standardized coefficient compared with five selected-C development-fold coefficient signs",
+                                        "five_of_five":  {
+                                                             "sign_agreement_count":  5,
+                                                             "classification":  "directionally stable"
+                                                         },
+                                        "four_of_five":  {
+                                                             "sign_agreement_count":  4,
+                                                             "classification":  "mostly stable"
+                                                         },
+                                        "zero_to_three_of_five":  {
+                                                                      "minimum":  0,
+                                                                      "maximum":  3,
+                                                                      "classification":  "unstable"
+                                                                  },
+                                        "coefficient_semantics":  "multivariable regularized development-stage standardized logistic coefficient; association only",
+                                        "abs_coefficient_semantics":  "descriptive salience/ranking only; not significance, marginal effect, or causal effect size",
+                                        "feature_selection_or_refit_allowed":  false,
+                                        "manuscript_display":  {
+                                                                   "supplementary_policy":  "retain all 36 features for each outcome",
+                                                                   "main_figure_policy":  "show 5/5 directionally stable features only",
+                                                                   "max_features_per_outcome":  8,
+                                                                   "overflow_rule":  "if more than 8 stable features occur, rank by descending abs_final_coef and display top 8",
+                                                                   "omission_means_null":  false
+                                                               }
+                                    },
+    "locked_test_evidence_rules":  {
+                                       "enrichment_metric":  "lift_at_top10",
+                                       "uncertainty":  "P11 primary_response_sha256 cluster bootstrap, 5000 iterations, 95% percentile interval",
+                                       "E2":  {
+                                                  "label":  "interval-supported top-tail enrichment",
+                                                  "rule":  "point_estimate \u003e 1 AND ci_lower \u003e 1"
+                                              },
+                                       "E1":  {
+                                                  "label":  "uncertain top-tail enrichment",
+                                                  "rule":  "point_estimate \u003e 1 AND 95% CI includes 1"
+                                              },
+                                       "E0":  {
+                                                  "label":  "no top-tail enrichment",
+                                                  "rule":  "point_estimate \u003c= 1"
+                                              },
+                                       "auroc_global_ordering_flag":  {
+                                                                          "below_half":  "ci_upper \u003c 0.5",
+                                                                          "indeterminate":  "ci_lower \u003c= 0.5 AND ci_upper \u003e= 0.5",
+                                                                          "above_half":  "ci_lower \u003e 0.5"
+                                                                      },
+                                       "paired_reporting_required":  true,
+                                       "paired_reporting_rule":  "top-tail enrichment and AUROC/global-ordering evidence must be reported together",
+                                       "score_flipping_allowed":  false
+                                   },
+    "robustness_rules":  {
+                             "R1":  {
+                                        "role":  "eligibility context",
+                                        "preserved_enrichment_rule":  "R1 lift_at_top10 \u003e 1",
+                                        "invent_posthoc_change_tolerance":  false
+                                    },
+                             "R2":  {
+                                        "role":  "descriptive caveat only",
+                                        "design_grade_gate":  false,
+                                        "retraining_allowed":  false
+                                    },
+                             "R3":  {
+                                        "role":  "heterogeneity/context only",
+                                        "thresholds":  [
+                                                           0,
+                                                           1,
+                                                           3,
+                                                           5,
+                                                           10,
+                                                           20,
+                                                           50,
+                                                           100
+                                                       ],
+                                        "strata":  [
+                                                       "0",
+                                                       "1-2",
+                                                       "3-4",
+                                                       "5-9",
+                                                       "10-19",
+                                                       "20-49",
+                                                       "50-99",
+                                                       "100+"
+                                                   ],
+                                        "performance_best_threshold_selection_allowed":  false,
+                                        "favorable_subgroup_promotion_allowed":  false,
+                                        "preserve_insufficient_class_support":  true
+                                    },
+                             "R4":  {
+                                        "role":  "label-definition robustness context",
+                                        "core_remains_primary":  true,
+                                        "pilot_or_robust_promotion_allowed":  false,
+                                        "relabeling_allowed":  false
+                                    },
+                             "R5":  {
+                                        "role":  "descriptive diagnostics only",
+                                        "inferential_claim":  false,
+                                        "design_grade_gate":  false
+                                    }
+                         },
+    "design_hypothesis_grades":  {
+                                     "A":  {
+                                               "label":  "qualified design hypothesis",
+                                               "rule":  "5/5 feature stability AND E2 outcome evidence AND R1 lift_at_top10 \u003e 1",
+                                               "global_ordering_caveat_required":  true
+                                           },
+                                     "B":  {
+                                               "label":  "exploratory design hypothesis",
+                                               "rule":  "(5/5 feature stability AND E1 outcome evidence) OR (4/5 stability AND E2 outcome evidence)",
+                                               "tentative_language_required":  true
+                                           },
+                                     "C":  {
+                                               "label":  "development-stage association only",
+                                               "rule":  "feature stability \u003e= 4/5 but Grade A and Grade B conditions are not met",
+                                               "core_practical_applications_recommendation_allowed":  false
+                                           },
+                                     "D":  {
+                                               "label":  "do not highlight",
+                                               "rule":  "feature stability \u003c= 3/5",
+                                               "retain_in_supplement":  true
+                                           }
+                                 },
+    "feature_level_locked_validation_firewall":  {
+                                                     "locked_test_validates":  "complete frozen outcome-level model performance, not an individual feature effect",
+                                                     "individual_feature_locked_validation_claim_allowed":  false,
+                                                     "causal_language_allowed":  false,
+                                                     "forbidden_claim_examples":  [
+                                                                                      "feature X was validated on the locked test",
+                                                                                      "feature X predicts the locked-test outcome",
+                                                                                      "feature X increases consumer perception",
+                                                                                      "feature X decreases consumer perception",
+                                                                                      "feature X causes affective imagery",
+                                                                                      "feature X makes consumers feel",
+                                                                                      "locked-test feature effect",
+                                                                                      "causal packaging recommendation"
+                                                                                  ],
+                                                     "allowed_language_examples":  [
+                                                                                       "associated with",
+                                                                                       "directionally stable development-stage visual correlate",
+                                                                                       "observed-positive propensity",
+                                                                                       "outcome-level locked-test top-tail enrichment",
+                                                                                       "qualified design hypothesis",
+                                                                                       "exploratory design hypothesis"
+                                                                                   ]
+                                                 },
+    "no_pvalue_no_bh_posthoc_boundary":  {
+                                             "p10_reserved_confirmatory_family_size":  2,
+                                             "p10_reserved_bh_q":  0.05,
+                                             "p11_frozen_contract_generated_p_values":  false,
+                                             "p11_frozen_contract_executed_bh":  false,
+                                             "new_p_values_allowed_in_p12":  false,
+                                             "new_bh_pipeline_allowed_in_p12":  false,
+                                             "future_pvalue_or_bh_work_requires_new_contract":  true,
+                                             "future_pvalue_or_bh_work_requires_separate_authorization":  true,
+                                             "current_evidence_basis":  "frozen ranking metrics, frozen cluster-bootstrap uncertainty, and predeclared R1-R5 robustness evidence"
+                                         },
+    "p12_b_execution_firewall":  {
+                                     "coefficient_row_values_read":  false,
+                                     "scientific_interpretation_run":  false,
+                                     "model_training":  false,
+                                     "model_refit":  false,
+                                     "model_reselection":  false,
+                                     "locked_test_rescoring":  false,
+                                     "score_flipping":  false,
+                                     "outcome_change":  false,
+                                     "label_change":  false,
+                                     "feature_change":  false,
+                                     "split_change":  false,
+                                     "threshold_selection":  false,
+                                     "p7_through_p11_modification":  false
+                                 },
+    "planned_future_outputs":  [
+                                   "01_p12_input_binding.json",
+                                   "02_feature_interpretation_ledger.csv",
+                                   "03_outcome_evidence_grade.csv",
+                                   "04_design_hypothesis_matrix.csv",
+                                   "05_manuscript_claim_ledger.csv",
+                                   "06_p12_summary.json",
+                                   "07_p12_provenance.json"
+                               ],
+    "manuscript_destinations":  {
+                                    "results":  "3.4 Interpretable Visual Features and Evidence-Based Design Implications",
+                                    "discussion":  "4.3 Implications for Packaging Design",
+                                    "later_updates":  [
+                                                          "Abstract",
+                                                          "Practical Applications",
+                                                          "4.1 Principal Findings",
+                                                          "Conclusion"
+                                                      ]
+                                },
+    "authorization_boundary":  {
+                                   "scientific_interpretation_authorized":  false,
+                                   "coefficient_value_read_authorized":  false,
+                                   "commit_authorized":  false,
+                                   "push_authorized":  false,
+                                   "merge_authorized":  false,
+                                   "next_scientific_step_requires_separate_explicit_authorization":  true
+                               }
+}

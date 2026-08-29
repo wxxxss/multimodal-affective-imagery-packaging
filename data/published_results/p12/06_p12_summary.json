@@ -1,0 +1,329 @@
+{
+    "stage":  "P12-D",
+    "status":  "MATERIALIZED_NOT_COMMITTED",
+    "contract_commit":  "f60cdd7e305bbcba962653cccd68111a0f41b0f0",
+    "feature_ledger_rows":  108,
+    "outcome_evidence_rows":  3,
+    "design_matrix_rows":  108,
+    "manuscript_claim_rows":  27,
+    "overall_design_grade_counts":  {
+                                        "A":  49,
+                                        "B":  36,
+                                        "C":  9,
+                                        "D":  14
+                                    },
+    "outcomes":  [
+                     {
+                         "outcome":  "has_any_outer_imagery_observed",
+                         "outcome_label":  "Any outer-package affective imagery",
+                         "locked_test_enrichment_grade":  "E2",
+                         "auroc_global_ordering_flag":  "below_half",
+                         "r1_enrichment_preserved":  true,
+                         "counts":  {
+                                        "directionally_stable_5of5":  24,
+                                        "mostly_stable_4of5":  9,
+                                        "unstable_0to3of5":  3,
+                                        "grade_A":  24,
+                                        "grade_B":  9,
+                                        "grade_C":  0,
+                                        "grade_D":  3
+                                    },
+                         "main_figure_top8":  [
+                                                  {
+                                                      "rank":  1,
+                                                      "feature_name":  "sparse_layout_score",
+                                                      "coefficient":  "-1.1910837348852517",
+                                                      "direction":  "negative",
+                                                      "design_hypothesis_grade":  "A"
+                                                  },
+                                                  {
+                                                      "rank":  2,
+                                                      "feature_name":  "edge_density",
+                                                      "coefficient":  "-0.8339447779748175",
+                                                      "direction":  "negative",
+                                                      "design_hypothesis_grade":  "A"
+                                                  },
+                                                  {
+                                                      "rank":  3,
+                                                      "feature_name":  "dense_ornament_score",
+                                                      "coefficient":  "0.7060870491456278",
+                                                      "direction":  "positive",
+                                                      "design_hypothesis_grade":  "A"
+                                                  },
+                                                  {
+                                                      "rank":  4,
+                                                      "feature_name":  "edge_strength_mean",
+                                                      "coefficient":  "0.643477059038845",
+                                                      "direction":  "positive",
+                                                      "design_hypothesis_grade":  "A"
+                                                  },
+                                                  {
+                                                      "rank":  5,
+                                                      "feature_name":  "luminance_p10",
+                                                      "coefficient":  "-0.5854838564210413",
+                                                      "direction":  "negative",
+                                                      "design_hypothesis_grade":  "A"
+                                                  },
+                                                  {
+                                                      "rank":  6,
+                                                      "feature_name":  "geometric_layout_score",
+                                                      "coefficient":  "0.4952816412536643",
+                                                      "direction":  "positive",
+                                                      "design_hypothesis_grade":  "A"
+                                                  },
+                                                  {
+                                                      "rank":  7,
+                                                      "feature_name":  "luminance_p90",
+                                                      "coefficient":  "0.39715141903714485",
+                                                      "direction":  "positive",
+                                                      "design_hypothesis_grade":  "A"
+                                                  },
+                                                  {
+                                                      "rank":  8,
+                                                      "feature_name":  "vivid_multicolor_palette_score",
+                                                      "coefficient":  "0.3732603201418176",
+                                                      "direction":  "positive",
+                                                      "design_hypothesis_grade":  "A"
+                                                  }
+                                              ]
+                     },
+                     {
+                         "outcome":  "general_visual_appeal_observed_positive_core",
+                         "outcome_label":  "General visual appeal",
+                         "locked_test_enrichment_grade":  "E2",
+                         "auroc_global_ordering_flag":  "below_half",
+                         "r1_enrichment_preserved":  true,
+                         "counts":  {
+                                        "directionally_stable_5of5":  25,
+                                        "mostly_stable_4of5":  6,
+                                        "unstable_0to3of5":  5,
+                                        "grade_A":  25,
+                                        "grade_B":  6,
+                                        "grade_C":  0,
+                                        "grade_D":  5
+                                    },
+                         "main_figure_top8":  [
+                                                  {
+                                                      "rank":  1,
+                                                      "feature_name":  "sparse_layout_score",
+                                                      "coefficient":  "-1.2062724753539622",
+                                                      "direction":  "negative",
+                                                      "design_hypothesis_grade":  "A"
+                                                  },
+                                                  {
+                                                      "rank":  2,
+                                                      "feature_name":  "geometric_layout_score",
+                                                      "coefficient":  "0.73884374260686",
+                                                      "direction":  "positive",
+                                                      "design_hypothesis_grade":  "A"
+                                                  },
+                                                  {
+                                                      "rank":  3,
+                                                      "feature_name":  "edge_density",
+                                                      "coefficient":  "-0.706720593183189",
+                                                      "direction":  "negative",
+                                                      "design_hypothesis_grade":  "A"
+                                                  },
+                                                  {
+                                                      "rank":  4,
+                                                      "feature_name":  "luminance_p10",
+                                                      "coefficient":  "-0.6529424166010287",
+                                                      "direction":  "negative",
+                                                      "design_hypothesis_grade":  "A"
+                                                  },
+                                                  {
+                                                      "rank":  5,
+                                                      "feature_name":  "floral_illustration_score",
+                                                      "coefficient":  "0.6281588004206307",
+                                                      "direction":  "positive",
+                                                      "design_hypothesis_grade":  "A"
+                                                  },
+                                                  {
+                                                      "rank":  6,
+                                                      "feature_name":  "edge_strength_mean",
+                                                      "coefficient":  "0.55419183580825",
+                                                      "direction":  "positive",
+                                                      "design_hypothesis_grade":  "A"
+                                                  },
+                                                  {
+                                                      "rank":  7,
+                                                      "feature_name":  "luminance_p90",
+                                                      "coefficient":  "0.54410317442028",
+                                                      "direction":  "positive",
+                                                      "design_hypothesis_grade":  "A"
+                                                  },
+                                                  {
+                                                      "rank":  8,
+                                                      "feature_name":  "ingredient_photography_score",
+                                                      "coefficient":  "-0.49027871676480783",
+                                                      "direction":  "negative",
+                                                      "design_hypothesis_grade":  "A"
+                                                  }
+                                              ]
+                     },
+                     {
+                         "outcome":  "cute_friendly_observed_positive_core",
+                         "outcome_label":  "Cute/friendly",
+                         "locked_test_enrichment_grade":  "E1",
+                         "auroc_global_ordering_flag":  "below_half",
+                         "r1_enrichment_preserved":  true,
+                         "counts":  {
+                                        "directionally_stable_5of5":  21,
+                                        "mostly_stable_4of5":  9,
+                                        "unstable_0to3of5":  6,
+                                        "grade_A":  0,
+                                        "grade_B":  21,
+                                        "grade_C":  9,
+                                        "grade_D":  6
+                                    },
+                         "main_figure_top8":  [
+                                                  {
+                                                      "rank":  1,
+                                                      "feature_name":  "dense_ornament_score",
+                                                      "coefficient":  "1.3628411230908242",
+                                                      "direction":  "positive",
+                                                      "design_hypothesis_grade":  "B"
+                                                  },
+                                                  {
+                                                      "rank":  2,
+                                                      "feature_name":  "sparse_layout_score",
+                                                      "coefficient":  "-1.0226443213471852",
+                                                      "direction":  "negative",
+                                                      "design_hypothesis_grade":  "B"
+                                                  },
+                                                  {
+                                                      "rank":  3,
+                                                      "feature_name":  "leaf_herb_illustration_score",
+                                                      "coefficient":  "-0.8705877653862636",
+                                                      "direction":  "negative",
+                                                      "design_hypothesis_grade":  "B"
+                                                  },
+                                                  {
+                                                      "rank":  4,
+                                                      "feature_name":  "edge_density",
+                                                      "coefficient":  "-0.8412784945356365",
+                                                      "direction":  "negative",
+                                                      "design_hypothesis_grade":  "B"
+                                                  },
+                                                  {
+                                                      "rank":  5,
+                                                      "feature_name":  "edge_strength_mean",
+                                                      "coefficient":  "0.7706996589956482",
+                                                      "direction":  "positive",
+                                                      "design_hypothesis_grade":  "B"
+                                                  },
+                                                  {
+                                                      "rank":  6,
+                                                      "feature_name":  "luminance_p10",
+                                                      "coefficient":  "-0.6426964794413174",
+                                                      "direction":  "negative",
+                                                      "design_hypothesis_grade":  "B"
+                                                  },
+                                                  {
+                                                      "rank":  7,
+                                                      "feature_name":  "transparent_window_score",
+                                                      "coefficient":  "0.5043114025006747",
+                                                      "direction":  "positive",
+                                                      "design_hypothesis_grade":  "B"
+                                                  },
+                                                  {
+                                                      "rank":  8,
+                                                      "feature_name":  "heritage_ornament_score",
+                                                      "coefficient":  "-0.5015403730815253",
+                                                      "direction":  "negative",
+                                                      "design_hypothesis_grade":  "B"
+                                                  }
+                                              ]
+                     }
+                 ],
+    "robustness":  {
+                       "R1":  {
+                                  "role":  "eligibility_context",
+                                  "all_three_interpretable_outcomes_lift10_gt_1":  true
+                              },
+                       "R2":  {
+                                  "role":  "descriptive_caveat_only",
+                                  "rows":  48,
+                                  "model_mean_score_delta_min":  "-0.0068790576623975041",
+                                  "model_mean_score_delta_max":  "0.0007638693462596153",
+                                  "design_grade_gate":  false,
+                                  "retraining":  false,
+                                  "model_means":  [
+                                                      {
+                                                          "model_id":  "cute_friendly_observed_positive_core__interpretable_36_logistic",
+                                                          "outcome":  "cute_friendly_observed_positive_core",
+                                                          "track":  "interpretable_36_logistic",
+                                                          "row_count":  8,
+                                                          "mean_score_delta":  "-0.00029111565971930934"
+                                                      },
+                                                      {
+                                                          "model_id":  "cute_friendly_observed_positive_core__openclip_512_logistic",
+                                                          "outcome":  "cute_friendly_observed_positive_core",
+                                                          "track":  "openclip_512_logistic",
+                                                          "row_count":  8,
+                                                          "mean_score_delta":  "0.0007638693462596153"
+                                                      },
+                                                      {
+                                                          "model_id":  "general_visual_appeal_observed_positive_core__interpretable_36_logistic",
+                                                          "outcome":  "general_visual_appeal_observed_positive_core",
+                                                          "track":  "interpretable_36_logistic",
+                                                          "row_count":  8,
+                                                          "mean_score_delta":  "-0.0035202243497293355"
+                                                      },
+                                                      {
+                                                          "model_id":  "general_visual_appeal_observed_positive_core__openclip_512_logistic",
+                                                          "outcome":  "general_visual_appeal_observed_positive_core",
+                                                          "track":  "openclip_512_logistic",
+                                                          "row_count":  8,
+                                                          "mean_score_delta":  "-0.0045504161311873776"
+                                                      },
+                                                      {
+                                                          "model_id":  "has_any_outer_imagery_observed__interpretable_36_logistic",
+                                                          "outcome":  "has_any_outer_imagery_observed",
+                                                          "track":  "interpretable_36_logistic",
+                                                          "row_count":  8,
+                                                          "mean_score_delta":  "-0.001690597908549865"
+                                                      },
+                                                      {
+                                                          "model_id":  "has_any_outer_imagery_observed__openclip_512_logistic",
+                                                          "outcome":  "has_any_outer_imagery_observed",
+                                                          "track":  "openclip_512_logistic",
+                                                          "row_count":  8,
+                                                          "mean_score_delta":  "-0.0068790576623975041"
+                                                      }
+                                                  ]
+                              },
+                       "R3":  {
+                                  "role":  "heterogeneity_context_only",
+                                  "rows":  96,
+                                  "threshold_rows":  48,
+                                  "stratum_rows":  48,
+                                  "performance_best_threshold_selection":  false,
+                                  "favorable_subgroup_promotion":  false
+                              },
+                       "R4":  {
+                                  "role":  "label_definition_robustness_context",
+                                  "rows":  16,
+                                  "core_remains_primary":  true,
+                                  "promotion_or_relabeling":  false
+                              },
+                       "R5":  {
+                                  "role":  "descriptive_diagnostics_only",
+                                  "rows":  24,
+                                  "inferential_claim":  false,
+                                  "design_grade_gate":  false
+                              }
+                   },
+    "hard_boundaries":  {
+                            "feature_level_locked_validation":  false,
+                            "causal_claim":  false,
+                            "model_training":  false,
+                            "model_refit":  false,
+                            "model_reselection":  false,
+                            "locked_test_rescoring":  false,
+                            "score_flipping":  false,
+                            "threshold_selection":  false,
+                            "p_value_pipeline":  false,
+                            "bh_posthoc_pipeline":  false
+                        }
+}

@@ -1,0 +1,74 @@
+{
+    "stage":  "P12-D",
+    "status":  "MATERIALIZED_NOT_COMMITTED",
+    "branch":  "p12-post-lock-interpretation",
+    "contract_commit":  "f60cdd7e305bbcba962653cccd68111a0f41b0f0",
+    "contract_parent_main":  "061e4f01832bf5a46eafed3a7c41cf468269581b",
+    "frozen_input_sha256":  {
+                                "p12_contract_json":  "5F0FABFDFD992EAA8DB226AF40C7E063E232585E06000258A43401F49E03A176",
+                                "p12_contract_markdown":  "AB47816212D8FAB372728CB7EAF7CA023542A348F7A526E8B9447DBD39B0A9DE",
+                                "p10_interpretable_coefficient_stability":  "2D9CE00D4EE9FF37A7D23AC28D80429E5B8AFE1CAC81DA9CC49B7F018EFC870D",
+                                "p11":  {
+                                            "03_product_row_metrics.csv":  "812AFEEE71AC3E89D81A1C0554E1625AA6C704B7BF41E1EA29FBB341D6553360",
+                                            "05_cluster_bootstrap_uncertainty.csv":  "9B10FE9053C5CBF6B37923305A6B00A472D464B8F0BCB0F5B240074BDE9E54F2",
+                                            "06_r1_qa_exception_sensitivity.csv":  "3037857EACABCBD8F911FFB2297D366AC175D7EC080FA328B226A55A5E119ABD",
+                                            "07_r2_alternative_image_sensitivity.csv":  "D73EA4ED53CF68F1D477B65BD7B0BB0FF800FAF6D0F041BE6B4C67FCBB26B924",
+                                            "08_r3_g_exposure_sensitivity.csv":  "390B1BDDB736C61F52AFB9F9CD58223E802B2A5011C055DE7B500A5BF91C2ECD",
+                                            "09_r4_label_definition_robustness.csv":  "280170B6D9A61ADF0B8D10CA34D6A864D8F304F9C799D07696438876F043A735",
+                                            "10_r5_image_exception_diagnostics.csv":  "AE022FB706DFDB6C90D438A0066F65DB5C3A757008D531EEDB7AE260CF95503A"
+                                        }
+                            },
+    "p12c_certified_checkpoints":  {
+                                       "coefficient_rows":  108,
+                                       "outcome_rows":  3,
+                                       "overall_grade_A":  49,
+                                       "overall_grade_B":  36,
+                                       "overall_grade_C":  9,
+                                       "overall_grade_D":  14,
+                                       "outcome_evidence":  {
+                                                                "has_any_outer_imagery_observed":  "E2",
+                                                                "general_visual_appeal_observed_positive_core":  "E2",
+                                                                "cute_friendly_observed_positive_core":  "E1"
+                                                            },
+                                       "all_auroc_global_ordering_flags":  "below_half",
+                                       "all_r1_enrichment_preserved":  true
+                                   },
+    "powershell_51_compatibility":  {
+                                        "generic_list_array_subexpression_used":  false,
+                                        "derived_collection_implementation":  "native Object[] arrays",
+                                        "prior_diagnostic_confirmed_toarray_ok":  true,
+                                        "prior_diagnostic_confirmed_array_subexpression_on_generic_list_fails":  true
+                                    },
+    "execution_firewall":  {
+                               "model_training":  false,
+                               "model_refit":  false,
+                               "model_reselection":  false,
+                               "locked_test_rescoring":  false,
+                               "score_flipping":  false,
+                               "outcome_change":  false,
+                               "label_change":  false,
+                               "feature_change":  false,
+                               "split_change":  false,
+                               "threshold_selection":  false,
+                               "p_value_pipeline":  false,
+                               "bh_posthoc_pipeline":  false,
+                               "p7_p11_modification":  false,
+                               "commit":  false,
+                               "push":  false,
+                               "pull_request":  false,
+                               "merge":  false
+                           },
+    "generated_file_sha256_before_provenance":  {
+                                                    "01_p12_input_binding.json":  "812F4F803357369B3263151A1C2B9F0890DD4C6DCBF089AE6B793A448729E4E1",
+                                                    "02_feature_interpretation_ledger.csv":  "698BA699177D6074C24D87C9BABD683A05CB7B6921E48320F4EF6DB70C483A65",
+                                                    "03_outcome_evidence_grade.csv":  "EFED639EC4C486BC95F30A9550521943BA6A851046B3E97C4B43483BC795172F",
+                                                    "04_design_hypothesis_matrix.csv":  "E45BBD6E8D85F9E169AC347B10BAD861DE0BC03201F3A4519CEF7D0CCC21ACF6",
+                                                    "05_manuscript_claim_ledger.csv":  "49317DFFD8A9A42DAFBDDD531B6039672D69C72C4969EE7870F39304245893F7",
+                                                    "06_p12_summary.json":  "E06AE1EC78CD7053CBA1F782F783F9BF41E9086207EE10542587E1E9B8CEFAF4",
+                                                    "docs/stages/modeling/p12_interpretation_report.md":  "990DBC761F177A3AF77127E2A2D130F27FF7CB7395DBF6989B51B35A4FED53C1"
+                                                },
+    "toolchain":  {
+                      "powershell_version":  "5.1.26100.9168",
+                      "materialization_method":  "authorized deterministic PowerShell 5.1-compatible in-memory derivation"
+                  }
+}

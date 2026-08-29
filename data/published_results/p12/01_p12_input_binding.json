@@ -1,0 +1,53 @@
+{
+    "stage":  "P12-D formal interpretation artifact materialization",
+    "contract_version":  "p12_interpretation_v1.0",
+    "contract_commit":  "f60cdd7e305bbcba962653cccd68111a0f41b0f0",
+    "contract_parent_main":  "061e4f01832bf5a46eafed3a7c41cf468269581b",
+    "branch":  "p12-post-lock-interpretation",
+    "contract_files":  {
+                           "json":  {
+                                        "path":  "config/modeling/p12_post_lock_interpretation_contract.json",
+                                        "sha256":  "5F0FABFDFD992EAA8DB226AF40C7E063E232585E06000258A43401F49E03A176"
+                                    },
+                           "markdown":  {
+                                            "path":  "docs/stages/modeling/p12_post_lock_interpretation_contract.md",
+                                            "sha256":  "AB47816212D8FAB372728CB7EAF7CA023542A348F7A526E8B9447DBD39B0A9DE"
+                                        }
+                       },
+    "p9":  {
+               "total_interpretable_features":  36,
+               "classical_features":  20,
+               "semantic_features":  16
+           },
+    "p10":  {
+                "coefficient_stability_path":  "data/processed/modeling_p10_5180/p10_development_model_freeze/06_interpretable_coefficient_stability.csv",
+                "coefficient_stability_sha256":  "2D9CE00D4EE9FF37A7D23AC28D80429E5B8AFE1CAC81DA9CC49B7F018EFC870D",
+                "coefficient_rows":  108,
+                "outcomes":  3,
+                "features_per_outcome":  36
+            },
+    "p11":  {
+                "directory":  "data/processed/modeling_p11_5180/p11_locked_test_evaluation_freeze",
+                "locked_test_rows":  1036,
+                "bootstrap_iterations":  5000,
+                "bootstrap_seed":  20260818,
+                "input_sha256":  {
+                                     "03_product_row_metrics.csv":  "812AFEEE71AC3E89D81A1C0554E1625AA6C704B7BF41E1EA29FBB341D6553360",
+                                     "05_cluster_bootstrap_uncertainty.csv":  "9B10FE9053C5CBF6B37923305A6B00A472D464B8F0BCB0F5B240074BDE9E54F2",
+                                     "06_r1_qa_exception_sensitivity.csv":  "3037857EACABCBD8F911FFB2297D366AC175D7EC080FA328B226A55A5E119ABD",
+                                     "07_r2_alternative_image_sensitivity.csv":  "D73EA4ED53CF68F1D477B65BD7B0BB0FF800FAF6D0F041BE6B4C67FCBB26B924",
+                                     "08_r3_g_exposure_sensitivity.csv":  "390B1BDDB736C61F52AFB9F9CD58223E802B2A5011C055DE7B500A5BF91C2ECD",
+                                     "09_r4_label_definition_robustness.csv":  "280170B6D9A61ADF0B8D10CA34D6A864D8F304F9C799D07696438876F043A735",
+                                     "10_r5_image_exception_diagnostics.csv":  "AE022FB706DFDB6C90D438A0066F65DB5C3A757008D531EEDB7AE260CF95503A"
+                                 }
+            },
+    "interpretation_firewall":  {
+                                    "feature_level_locked_validation":  false,
+                                    "causal_interpretation":  false,
+                                    "score_flipping":  false,
+                                    "p_value_pipeline":  false,
+                                    "bh_posthoc_pipeline":  false,
+                                    "main_figure_stable_only":  true,
+                                    "main_figure_max_features_per_outcome":  8
+                                }
+}

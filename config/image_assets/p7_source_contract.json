@@ -1,0 +1,108 @@
+{
+  "contract_version": "p7_v1.2",
+  "primary_input_path": "data/processed/review_matching_5180/01_valid_products.csv",
+  "primary_input_sha256": "CDF80D7BA5E917982DDCBEC5153C6115CBD1BC5A5B5C158B382D614DFF94A08B",
+  "raw_metadata": {
+    "logical_source": "Amazon Reviews'23 Grocery and Gourmet Food metadata",
+    "local_path": "data/meta_Grocery_and_Gourmet_Food.jsonl/meta_Grocery_and_Gourmet_Food.jsonl",
+    "sha256": "ED9B24EA707F7010B5CB321462A8E896AD1FCD59620FBC55F05084C3DA59842E",
+    "record_format": "jsonl"
+  },
+  "prior_audit_sanity_expected": {
+    "all_image_url_total_count": 60888,
+    "all_image_url_minimum": 2,
+    "all_image_url_median": 11,
+    "all_image_url_maximum": 51,
+    "duplicate_main_url_group_count": 153,
+    "largest_duplicate_group_size": 13,
+    "gif_main_url_count": 15
+  },
+  "primary_image_definition": {
+    "statement": "PRIMARY IMAGE = frozen metadata snapshot + same parent_asin source record + source-declared MAIN variant",
+    "not_primary": [
+      "historical first-image fallback",
+      "metadata secondary image",
+      "current external web image",
+      "child/variant image"
+    ]
+  },
+  "temporal_definition": {
+    "temporal_alignment_status_enum": [
+      "frozen_metadata_snapshot_2023",
+      "current_only_fallback",
+      "variant_proxy",
+      "unresolved"
+    ],
+    "frozen_definition": "frozen_metadata_snapshot_2023"
+  },
+  "image_role_enum": [
+    "declared_main",
+    "existing_first_image_fallback",
+    "metadata_secondary",
+    "external_current",
+    "child_variant_proxy",
+    "none"
+  ],
+  "identity_resolution_status_enum": [
+    "exact_single_parent_record",
+    "exact_unique_image_match",
+    "missing_source_record",
+    "ambiguous_multiple_image_matches",
+    "source_url_mismatch"
+  ],
+  "source_size_role_enum": [
+    "hi_res",
+    "large",
+    "thumb",
+    "none"
+  ],
+  "source_record_hash_definition": "SHA-256 of the exact uncompressed UTF-8 JSON line bytes with terminal CR/LF removed only; parsing and re-serialization is forbidden because it changes bytes",
+  "label_blindness_rules": [
+    "P7-A code and formal run must not read frozen 39, 39b, V2.1 product labels, P5/R2 adjudication, A1/A2 annotations, review text, review-derived label columns, or G exposure outputs",
+    "all source/image-role judgments derive only from 01_valid_products.csv and the frozen raw metadata source",
+    "no label-driven image selection logic is permitted in the P7-A code path or Git-visible PR"
+  ],
+  "parent_child_rules": [
+    "analysis unit is parent_asin",
+    "P7-A does not use child images",
+    "child image != primary parent image",
+    "image_role = child_variant_proxy may only enter a secondary/sensitivity layer, never primary",
+    "without a deterministic parent-child mapping, child images must not be merged into primary"
+  ],
+  "fallback_separation_rules": [
+    "first-image fallback (no usable MAIN candidate) is not primary",
+    "existing_first_image_fallback is recorded distinctly from declared_main",
+    "selection_fallback_used=true only when no usable MAIN candidate exists and the historical logic selects the first usable image"
+  ],
+  "p7_a_output_schema": {
+    "inventory_columns": [
+      "parent_asin",
+      "source_record_count",
+      "source_record_index",
+      "source_image_variant",
+      "source_image_position",
+      "source_size_role",
+      "main_role_verified",
+      "selection_fallback_used",
+      "reconstructed_selected_url",
+      "existing_main_image_url",
+      "selected_url_matches_existing",
+      "source_record_sha256",
+      "identity_resolution_status",
+      "image_role",
+      "temporal_alignment_status",
+      "main_url_duplicate_group_id",
+      "main_url_duplicate_group_size",
+      "main_url_format_hint",
+      "main_url_is_gif",
+      "main_url_has_amazon_size_transform",
+      "all_image_url_count"
+    ],
+    "formal_output_dir": "data/processed/retail_outer_package_images_p7_5180/p7_a_source_inventory/",
+    "formal_output_files": [
+      "01_source_identity_inventory.csv",
+      "02_p7_a_summary.json",
+      "03_p7_a_provenance.json"
+    ]
+  }
+}
