@@ -75,7 +75,11 @@ def export_audit_inputs(
     if any(not value for value in parent_ids) or len(parent_ids) != len(set(parent_ids)):
         raise ExportError("modeling manifest parent_asin values must be unique and non-empty")
 
-    for row in manifest_rows:
+    modeling_rows = [
+        row for row in manifest_rows
+        if row["main_analysis_included"].strip().lower() == "true"
+    ]
+    for row in modeling_rows:
         for outcome in OUTCOMES:
             if row[outcome].strip() not in {"0", "1"}:
                 raise ExportError(f"invalid PU outcome value in {outcome}")
@@ -96,12 +100,13 @@ def export_audit_inputs(
 
     if require_frozen_counts:
         locked = [
-            row for row in manifest_rows
-            if row["main_analysis_included"].strip().lower() == "true"
-            and row["split_partition"].strip() == "locked_test"
+            row for row in modeling_rows
+            if row["split_partition"].strip() == "locked_test"
         ]
-        if len(manifest_rows) != 5179:
-            raise ExportError(f"expected 5,179 modeling rows, found {len(manifest_rows)}")
+        if len(manifest_rows) != 5180:
+            raise ExportError(f"expected 5,180 frozen source rows, found {len(manifest_rows)}")
+        if len(modeling_rows) != 5179:
+            raise ExportError(f"expected 5,179 modeling rows, found {len(modeling_rows)}")
         if len(locked) != 1036:
             raise ExportError(f"expected 1,036 locked-test rows, found {len(locked)}")
         locked_ids = {row["parent_asin"] for row in locked}
@@ -115,11 +120,11 @@ def export_audit_inputs(
 
     manifest_out = output_dir / "01_modeling_ready_manifest.csv"
     predictions_out = output_dir / "02_locked_test_predictions.csv"
-    _write_selected(manifest_out, manifest_rows, MANIFEST_COLUMNS)
+    _write_selected(manifest_out, modeling_rows, MANIFEST_COLUMNS)
     _write_selected(predictions_out, prediction_rows, PREDICTION_COLUMNS)
 
     result = {
-        "manifest_rows": len(manifest_rows),
+        "manifest_rows": len(modeling_rows),
         "prediction_rows": len(prediction_rows),
         "manifest_columns": list(MANIFEST_COLUMNS),
         "prediction_columns": list(PREDICTION_COLUMNS),
