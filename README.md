@@ -27,7 +27,7 @@ This public repository is a clean reproducibility export from the frozen researc
 
 Source snapshot used for this export: `1d72e3ba798f93d328c37bfe75b37032b9f21246`.
 
-The code export is being prepared for PeerJ AI Application resubmission. A de-identified analysis-ready derived-data package required for exact manuscript-result reproduction will be added before resubmission; raw review text and copyrighted image binaries will not be redistributed.
+Frozen scientific source code, contracts, validation documentation, aggregate modeling summaries, and non-sensitive post-lock interpretation outputs are published here. Row-level intermediate artifacts that were intentionally gitignored in the research repository are not reconstructed or fabricated in this Git-only export. If the journal requires an additional row-level derived-data deposit, it must be exported separately from the frozen local research workspace after a publication-safety review; raw review text and copyrighted image binaries will not be redistributed.
 
 ## Computing environment
 
@@ -79,7 +79,8 @@ See `docs/ENVIRONMENT.md` for the recorded runtime and `docs/REPRODUCIBILITY.md`
    - `docs/validation/`
 6. **Image acquisition, QA, and frozen primary-image selection**
    - `scripts/images/`
-7. **Modeling-ready split**
+7. **Analysis contract and modeling-ready split**
+   - `scripts/modeling/p8_a_analysis_contract.py`
    - `scripts/modeling/p8_b_modeling_ready_split.py`
 8. **OpenCLIP and interpretable visual feature extraction**
    - `scripts/modeling/p9_visual_features.py`
@@ -87,6 +88,8 @@ See `docs/ENVIRONMENT.md` for the recorded runtime and `docs/REPRODUCIBILITY.md`
    - `scripts/modeling/p10_development_models.py`
 10. **Locked held-out evaluation and sensitivity analyses**
    - `scripts/modeling/p11_locked_test_evaluation.py`
+   - `scripts/modeling/p11_locked_test_repair.py`
+   - `scripts/modeling/p11_locked_test_reference_oracle.py`
 11. **Post-lock interpretation**
    - frozen rules: `config/modeling/p12_post_lock_interpretation_contract.json`
    - frozen non-sensitive outputs: `data/published_results/p12/`
@@ -95,7 +98,9 @@ See `docs/ENVIRONMENT.md` for the recorded runtime and `docs/REPRODUCIBILITY.md`
    - `scripts/figures/figure03_recognition_performance_v6.py`
    - `scripts/figures/figure04_design_strategies_v6.py`
 
-Run `python <script> --help` for stage-specific command-line arguments. The manuscript workflow deliberately preserves the development/held-out firewall; do not use held-out results for model selection, threshold selection, score inversion, or feature selection.
+The frozen P11 implementation contains integrity bindings to the original research-repository Git history and locally frozen upstream artifacts. Those bindings are retained as audit evidence; they are not a claim that the full P11 transaction can be rerun from this public Git checkout alone without the corresponding frozen local artifacts.
+
+The manuscript workflow deliberately preserves the development/held-out firewall; do not use held-out results for model selection, threshold selection, score inversion, or feature selection.
 
 ## Positive-unlabeled semantics
 
@@ -103,7 +108,7 @@ A label of `1` means that a qualifying consumer-expressed affective-imagery ment
 
 ## Model-assisted validation disclosure
 
-The validation sample comprised 600 sentence-level tasks and 240 product-dimension tasks. The same 840 tasks were reviewed in two separate, independent ChatGPT (GPT-5.5; OpenAI)-assisted contexts under a predefined annotation schema, followed by rule-guided model-assisted adjudication. This process is **not** described as independent human-gold annotation. Validation findings were used for quality reporting and did not create a sample-derived production-label mask.
+The validation sample comprised 600 sentence-level tasks and 240 product-dimension tasks. The same 840 tasks were reviewed in two separate, independent **ChatGPT (OpenAI)-assisted** contexts under a predefined annotation schema, followed by rule-guided model-assisted adjudication. The exact ChatGPT model/version was not recorded in the frozen project documentation and is therefore not inferred here. This process is **not** described as independent human-gold annotation. Validation findings were used for quality reporting and did not create a sample-derived production-label mask.
 
 ## Reproducibility boundaries
 
@@ -111,11 +116,12 @@ The repository publishes scientific code and non-sensitive configuration/provena
 
 - raw Amazon review text;
 - raw third-party product images;
+- the large third-party/OpenCLIP checkpoint binary;
 - credentials, API responses, and runtime logs;
 - internal collaboration/history documents unrelated to reproducing the manuscript;
 - personally identifying reviewer/account information.
 
-See `docs/DATA_ACCESS.md` for the exact data-access boundary and the files required for exact frozen-result reproduction.
+See `docs/DATA_ACCESS.md` for the exact data-access boundary and `docs/SOURCE_PROVENANCE.md` for source-snapshot bindings.
 
 ## Citation
 
