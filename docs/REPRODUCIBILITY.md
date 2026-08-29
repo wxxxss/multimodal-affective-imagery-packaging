@@ -68,7 +68,7 @@ python scripts/modeling/p10_development_models.py --help
 
 For each of three outcomes and two representation tracks, predictors were standardized and logistic regression was selected over the C grid `{0.01, 0.1, 1, 10, 100}` using five grouped development folds and mean validation average precision. The held-out set was not used for preprocessing, model selection, or fitting.
 
-## 10. Held-out evaluation and AUROC audit
+## 10. Held-out evaluation and completed AUROC audit
 
 The publication-facing evaluator is:
 
@@ -81,19 +81,27 @@ python scripts/modeling/public_heldout_evaluation.py \
   --seed 20260818
 ```
 
-It consumes already-frozen held-out predictions and labels. It performs no model fitting or model selection and never flips scores. Average precision and top-k metrics use the frozen deterministic score-descending ranking convention; AUROC uses conventional `sklearn.metrics.roc_auc_score`, matching the P10 definition. Cluster-bootstrap uncertainty uses `primary_response_sha256` as the sampling unit.
+It consumes already-frozen held-out predictions and labels. It performs no model fitting or model selection and never flips scores. Average precision and top-k metrics use the frozen deterministic score-descending ranking convention; AUROC uses conventional `sklearn.metrics.roc_auc_score`, matching P10. Cluster-bootstrap uncertainty uses `primary_response_sha256` as the sampling unit.
 
-A metric-consistency audit is required because the historical P11 reference oracle used a different AUROC rank orientation. See `docs/AUROC_AUDIT.md`. The historical P11/P12 files are retained unchanged for provenance until the audit is reconciled with the manuscript.
+The audit is complete. The frozen prediction SHA-256 matches the historical P11 ledger, and the original 5,000-draw/seed-`20260818` bootstrap plan was reproduced exactly. Conventional held-out AUROC is 0.6877-0.7220 across the six models, with all six corrected 95% interval lower bounds above 0.5. Exact values and provenance are under `data/published_results/p11_auroc_correction/` and `docs/AUROC_AUDIT.md`.
+
+The historical P11 reference oracle and historical result files remain unchanged for audit provenance.
 
 ## 11. Post-lock interpretation
 
 Historical P12 is governed by `config/modeling/p12_post_lock_interpretation_contract.json`. It combined development-fold coefficient-direction stability with outcome-level held-out evidence and did not retrain, refit, reselect, rescore, flip scores, change labels, change features, change the split, or select a threshold.
 
-Frozen historical non-sensitive P12 outputs are published under `data/published_results/p12/`. Any AUROC-dependent P12 language or grade flag must be reconciled after the bounded AUROC audit; feature coefficients themselves are not being re-estimated by that audit.
+Frozen historical P12 outputs remain under `data/published_results/p12/`. Publication-facing AUROC interpretation is overlaid under `data/published_results/p12_auroc_correction/`. The E2/E1 enrichment grades and resulting Grade A/B design rules are unchanged because they are based on top-10% lift evidence, coefficient stability, and the QA-exclusion lift check rather than AUROC.
 
 ## 12. Figures
 
-Figures 1, 3, and 4 are generated from fixed manuscript/frozen-result values using the scripts in `scripts/figures/`. Figure 2 is a conceptual workflow diagram and is not a statistical output. Figure 3 must be regenerated if the AUROC audit changes held-out AUROC values or intervals.
+Figures 1 and 4 retain their frozen manuscript values. Figure 3 is regenerated with the bounded conventional-AUROC correction:
+
+- `scripts/figures/figure01_data_construction_v5.py`
+- `scripts/figures/figure03_recognition_performance_v7_auroc_corrected.py`
+- `scripts/figures/figure04_design_strategies_v6.py`
+
+The historical Figure 3 v6 script is retained for provenance but is not the publication-facing source after the AUROC audit. Figure 2 is a conceptual workflow diagram and is not a statistical output.
 
 ## Verification principle
 
