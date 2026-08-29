@@ -1,0 +1,109 @@
+{
+  "contract_version": "p7_c_v1.0",
+  "stage": "P7-C identity and outer-package QA plus Primary Manifest freeze",
+  "upstream_main_commit": "08edaeb651e0b35b68a4a58fd786ae7bfa23b961",
+  "upstream_p7_a": {
+    "inventory_path": "data/processed/retail_outer_package_images_p7_5180/p7_a_source_inventory/01_source_identity_inventory.csv",
+    "inventory_sha256": "263961C6D04F21A28E4218AC6BFC82F96176339266E1638B3B0F5A0E62A1B9E6",
+    "summary_path": "data/processed/retail_outer_package_images_p7_5180/p7_a_source_inventory/02_p7_a_summary.json",
+    "summary_sha256": "F0E530E09B66D71750F9DB466AAB1AD278EC047E222DF4771E69DF6CF56EE787",
+    "provenance_path": "data/processed/retail_outer_package_images_p7_5180/p7_a_source_inventory/03_p7_a_provenance.json",
+    "provenance_sha256": "8E4F5F66A38415F6FA26411E3CE6CEBA34609D496CF0D05B0286E2439B3727BF"
+  },
+  "upstream_p7_b": {
+    "manifest_path": "data/processed/retail_outer_package_images_p7_5180/p7_b_primary_assets/01_primary_asset_manifest.csv",
+    "manifest_sha256": "B855BBFED7D02945129C2BB90656F738FC69BB914E1C0F9CD064BD388BFA1601",
+    "unique_inventory_path": "data/processed/retail_outer_package_images_p7_5180/p7_b_primary_assets/02_unique_asset_inventory.csv",
+    "unique_inventory_sha256": "F8C84D366CD588891641D13C62B0C56A6E2BDB1B9006AE926ED12336AFBC0695",
+    "summary_path": "data/processed/retail_outer_package_images_p7_5180/p7_b_primary_assets/03_p7_b_summary.json",
+    "summary_sha256": "E02990BEDF7C6580DF07668ACD08084482E0B2EC149391BF1575D7E22ADD3FD1",
+    "provenance_path": "data/processed/retail_outer_package_images_p7_5180/p7_b_primary_assets/04_p7_b_provenance.json",
+    "provenance_sha256": "76165F0C98990EA3FAF628E3309C73A3F5CDA9B1DC4E92217BEF773F193B434A"
+  },
+  "product_universe_count": 5180,
+  "primary_available_count": 5179,
+  "excluded_non_primary_count": 1,
+  "unique_asset_count": 4981,
+  "label_blind": true,
+  "primary_selection_mutable": false,
+  "fallback_allowed": false,
+  "current_web_lookup_allowed": false,
+  "review_model_identifier": "Codex local vision interface",
+  "adjudicator_model_identifier": "Codex local vision interface",
+  "review_prompt_sha256": "1A4818DD039F80C7820B776EB378B12DB798A51F16DBCFFF347425E499BEDCBC",
+  "identity_reference_columns": ["parent_asin", "title", "store", "categories", "automatic_tea_type", "product_form"],
+  "forbidden_evidence_columns": ["description", "features", "details", "matched_primary_target_terms", "matched_category_target_terms", "matched_ingredient_terms", "matched_context_terms", "matched_true_tea_terms", "matched_form_exclusion_terms", "matched_scope_exclusion_terms", "matched_ambiguous_terms", "v21_group", "v21_reason", "v21_evidence_terms", "v21_risk_flags", "v21_original_group", "v21_original_reason", "decision", "rationale_cn"],
+  "identity_status_enum": ["consistent", "contradiction", "indeterminate"],
+  "outer_package_status_enum": ["outer_retail_package", "inner_packaging_only", "product_content_only", "lifestyle_or_serving", "composite_or_collage", "ambiguous", "unavailable_or_corrupt"],
+  "confidence_enum": ["high", "medium", "low"],
+  "sample_algorithm": {
+    "version": "p7c_v1",
+    "baseline_prefix": "p7c_v1|",
+    "baseline_count": 400,
+    "duplicate_product_rule": "all eligible rows with exact_duplicate_asset_group_size > 1",
+    "gif_product_rule": "all eligible rows with decoded_format == GIF",
+    "low_dimension_unique_count": 50,
+    "low_byte_unique_count": 50,
+    "low_dimension_sort": ["min(width,height) ascending", "asset_sha256 ascending"],
+    "low_byte_sort": ["response_byte_count ascending", "asset_sha256 ascending"],
+    "sample_order": "input_order ascending",
+    "strata_join": "sorted strata names joined by |"
+  },
+  "formal_paths": {
+    "output_dir": "data/processed/retail_outer_package_images_p7_5180/p7_c_primary_manifest",
+    "qa_sample": "data/processed/retail_outer_package_images_p7_5180/p7_c_primary_manifest/01_qa_sample.csv",
+    "review_pass_a": "data/processed/retail_outer_package_images_p7_5180/p7_c_primary_manifest/02_review_pass_a.csv",
+    "review_pass_b": "data/processed/retail_outer_package_images_p7_5180/p7_c_primary_manifest/03_review_pass_b.csv",
+    "adjudicated": "data/processed/retail_outer_package_images_p7_5180/p7_c_primary_manifest/04_adjudicated_qa.csv",
+    "primary_manifest": "data/processed/retail_outer_package_images_p7_5180/p7_c_primary_manifest/05_primary_manifest.csv",
+    "summary": "data/processed/retail_outer_package_images_p7_5180/p7_c_primary_manifest/06_p7_c_summary.json",
+    "provenance": "data/processed/retail_outer_package_images_p7_5180/p7_c_primary_manifest/07_p7_c_provenance.json"
+  },
+  "decoded_placeholder_signatures": [
+    {
+      "name": "no_image_available_gif",
+      "response_sha256": "E58401062077E3648CDFB7797A124026265792617F300EC1F53C1C23FB8CD8DB",
+      "decoded_format": "GIF",
+      "width": 60,
+      "height": 40,
+      "response_byte_count": 1015,
+      "expected_sampled_product_count": 13
+    },
+    {
+      "name": "no_image_available_jpeg",
+      "response_sha256": "FDE2FA682CFA73AACDECA176A4A5E974DF1E27FF41E1445500C65F6E8F7170B4",
+      "decoded_format": "JPEG",
+      "width": 60,
+      "height": 40,
+      "response_byte_count": 1043,
+      "expected_sampled_product_count": 2
+    },
+    {
+      "name": "image_coming_soon_jpeg",
+      "response_sha256": "E4AF71FCC5CE97604D89F9CA4F67EF82BEF5DEB18256FF695E91F86A253F103F",
+      "decoded_format": "JPEG",
+      "width": 1000,
+      "height": 1000,
+      "response_byte_count": 38699,
+      "expected_sampled_product_count": 2
+    }
+  ],
+  "unavailable_or_corrupt_semantics": "The frozen bytes exist and decode, but the rendered asset is an explicit upstream no-image or image-coming-soon placeholder; this is a semantic visual-evidence failure, not a transport, storage, or decoder failure. Such rows must remain identity indeterminate and unavailable_or_corrupt, and require adjudication.",
+  "qa_sanity": {
+    "baseline_identity_contradiction_upper95_max": 0.01,
+    "baseline_outer_exception_upper95_max": 0.05,
+    "baseline_identity_indeterminate_rate_max": 0.10,
+    "sampled_unavailable_or_corrupt_count_max": 0,
+    "duplicate_risk_identity_contradiction_status": "REVIEW_REQUIRED",
+    "status_when_threshold_exceeded": "REVIEW_REQUIRED"
+  },
+  "safety": {
+    "label_sources_read": false,
+    "review_text_read": false,
+    "current_product_pages_accessed": false,
+    "web_search_used": false,
+    "fallback_used": false,
+    "primary_asset_substitution_count": 0,
+    "p7_d_started": false
+  }
+}

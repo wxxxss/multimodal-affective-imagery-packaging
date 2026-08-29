@@ -6,13 +6,15 @@ Before resubmission, confirm **every unchecked item below is resolved**.
 
 - [x] Public publication-facing code repository created.
 - [x] Public machine-learning split, feature-extraction, model-selection/refit, held-out evaluation, interpretation, figure, and safe-export code is present.
-- [x] README and reproducibility documentation no longer point reviewers to nonexistent public script paths.
+- [x] Public publication-safe copies of the upstream P1–P7 preprocessing, validation, and image-workflow source modules are present.
+- [x] README and reproducibility documentation point to the public upstream source paths.
 - [x] Frozen upstream preprocessing/validation/image-workflow source identities are recorded by original Git blob SHA-1 in `PREPROCESSING_SOURCE_BINDINGS.md`.
+- [x] The validation runtime mapping contract `config/affective_imagery/action_error_mapping_v21.json` is public.
 - [x] Amazon Reviews'23 source URL and reference DOI are documented.
 - [x] Computing environment is documented without inventing unrecorded hardware details.
 - [x] Positive-unlabeled semantics are documented.
 - [x] GPT-5.5 model-assisted validation disclosure is documented.
-- [ ] **PeerJ code-completeness decision:** either (a) add publication-safe copies of the historical upstream preprocessing/validation/image workflow source modules to the public archival release, or (b) upload those source modules as a PeerJ supplemental **code** file. A Git-SHA provenance table alone should not be treated as satisfying PeerJ's request for “Algorithms and code used to implement them.”
+- [x] **PeerJ code-completeness gate:** publication-safe copies of the historical upstream preprocessing/validation/image workflow source modules are included in the public repository, with frozen-source provenance bindings. Raw third-party reviews/images remain excluded.
 - [ ] Export the publication-safe frozen analysis data with `scripts/release/export_audit_inputs.py` and include the resulting files in `Supplemental_Data_1_PeerJ.zip` or a DOI-bearing archive. The frozen target is 5,179 modeling-manifest rows and 6,216 held-out prediction rows (1,036 products × 6 models).
 - [ ] Archive the final code/data release in a DOI-bearing repository (for example Zenodo) **or** upload the code/data as PeerJ supplemental files, then enter the DOI/file information in the submission system.
 

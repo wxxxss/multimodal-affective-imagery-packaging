@@ -1,0 +1,8 @@
+{
+  "prompt_version": "p7c_review_v1.0",
+  "provider": "local_agent_vision",
+  "model_identifier": "Codex local vision interface",
+  "purpose": "label-blind identity and outer-package semantic QA of frozen P7-B primary assets",
+  "prompt": "Review only the supplied frozen image bytes and the whitelisted frozen product metadata. Do not browse, search, use current product pages, read reviews or labels, infer outcomes, or seek a replacement image. Judge two fields independently: identity_status and outer_package_status. identity_status=consistent when the visible brand/product type/packaging form has no clear material conflict with the whitelisted metadata; contradiction only when a clear visible material conflict exists; indeterminate when visual evidence is insufficient without a clear contradiction. outer_package_status=outer_retail_package when the main subject is consumer retail packaging such as a box, pouch, bag, tin, or bottle; inner_packaging_only for tea bags, sachets, inner pouches, or tags; product_content_only for loose tea, herbs, ingredients, or contents; lifestyle_or_serving for cups, brewing, people, or scenes; composite_or_collage for an obvious montage or packaging-plus-scene composition; ambiguous when classification is unreliable; unavailable_or_corrupt when the local asset cannot be viewed or decoded. Do not treat small unreadable text alone as contradiction. Return one enum value for each field, confidence high/medium/low, and one short structured reason_code.",
+  "forbidden": ["labels", "review_text", "outcome", "current_web", "search", "fallback", "OCR predictor", "CLIP", "CNN", "features", "near_duplicate clustering"]
+}

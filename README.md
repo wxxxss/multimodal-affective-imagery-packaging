@@ -4,7 +4,7 @@ Reproducibility repository accompanying the PeerJ Computer Science submission by
 
 ## Purpose
 
-This repository is the publication-facing reproducibility package for the manuscript. It contains the machine-learning analysis code, configuration files, validation protocol, provenance records, publication-facing metric correction, and non-sensitive derived artifacts that can be shared without redistributing raw third-party reviews or product images.
+This repository is the publication-facing reproducibility package for the manuscript. It contains the machine-learning analysis code, upstream preprocessing/validation/image-workflow source code, configuration files, validation protocol, provenance records, publication-facing metric correction, and non-sensitive derived artifacts that can be shared without redistributing raw third-party reviews or product images.
 
 The study links publicly available Amazon Reviews'23 review/metadata resources to retail-package images and evaluates two visual representations under a positive-unlabeled (PU) observation framework:
 
@@ -69,6 +69,32 @@ pip install -r requirements.txt
 
 See `docs/ENVIRONMENT.md` for the recorded runtime and `docs/REPRODUCIBILITY.md` for workflow details.
 
+## Public runnable upstream data-construction workflow
+
+The publication checkout now includes the P1–P7 source implementation used to construct the study inputs. Exact public-path ↔ frozen-source bindings are recorded in `docs/PREPROCESSING_SOURCE_BINDINGS.md`.
+
+1. **Metadata eligibility screening**
+   - `scripts/metadata/screen_full_metadata_v2.py`
+   - `scripts/metadata/secondary_clean_candidates_v21.py`
+   - `scripts/metadata/secondary_clean_candidates_v22.py`
+2. **Review matching and sentence extraction**
+   - `scripts/reviews/match_reviews_to_valid_products.py`
+   - `scripts/reviews/clean_and_extract_packaging_sentences.py`
+3. **Strict visual-package screening and affective-imagery labels**
+   - `scripts/visual_packaging/strict_visual_packaging_classifier_v11.py`
+   - `scripts/labels/build_affective_imagery_labels_v21.py`
+4. **Rule-guided validation/adjudication**
+   - implementation under `scripts/validation/`
+   - runtime mapping contract: `config/affective_imagery/action_error_mapping_v21.json`
+5. **P7 image source audit, acquisition, QA, and freeze**
+   - `scripts/images/audit_p7_source_inventory.py`
+   - `scripts/images/acquire_p7_primary_assets.py`
+   - `scripts/images/p7_c_primary_manifest_qa.py`
+   - `scripts/images/p7_d_final_image_freeze.py`
+   - frozen contracts under `config/image_assets/`
+
+These source files can be inspected and invoked from this checkout. Exact end-to-end regeneration of the historical upstream artifacts additionally requires the original Amazon Reviews'23 source files and third-party image assets, which are intentionally not redistributed here.
+
 ## Public runnable machine-learning workflow
 
 The publication-facing checkout directly contains the code used for the leakage-controlled modeling and evaluation stages:
@@ -98,14 +124,6 @@ The publication-facing checkout directly contains the code used for the leakage-
 
 The workflow deliberately preserves the development/held-out firewall. Held-out results must not be used for model selection, threshold selection, score inversion, or feature selection.
 
-## Upstream data construction and preprocessing
-
-The raw-source stages comprised metadata eligibility screening, review-to-product matching, review cleaning/sentence extraction, strict visual-package-language screening, affective-imagery label construction, rule-guided validation/adjudication, and image acquisition/QA/freeze. These stages were executed in the frozen research workspace before the modeling-ready artifacts were locked.
-
-For auditability, `docs/PREPROCESSING_SOURCE_BINDINGS.md` records the original frozen Git blob SHA-1 for every source module used in those stages. `docs/REPRODUCIBILITY.md` describes the processing sequence and its outputs, and `docs/validation/` contains the publication-facing validation protocol/schema. The public checkout does not claim that absent historical workspace modules can be executed from this repository.
-
-This separation is intentional: raw Amazon review text, product-image binaries/URLs, workstation-specific runtime material, and internal administrative records are excluded from the public release. The publication-safe supplemental dataset is designed to provide the frozen identifiers, held-out labels/grouping variable, and six frozen model scores needed to check the reported held-out metrics without redistributing those third-party materials.
-
 ## Positive-unlabeled semantics
 
 A label of `1` means that a qualifying consumer-expressed affective-imagery mention was observed. A label of `0` means **unobserved/unlabeled**, not confirmed absence of the underlying impression. Model scores are therefore interpreted as rankings or propensities for observed qualifying mentions, not calibrated probabilities of a latent psychological state.
@@ -116,7 +134,7 @@ The validation sample comprised 600 sentence-level tasks and 240 product-dimensi
 
 ## Reproducibility boundaries
 
-The repository publishes the scientific machine-learning code needed to inspect and rerun the publication-facing modeling/evaluation logic from the frozen publication-safe inputs, together with configuration and provenance materials. It excludes raw Amazon review text, raw third-party product images, image-source URLs, the large third-party/OpenCLIP checkpoint binary, credentials/API responses/runtime logs, internal collaboration-history documents unrelated to the manuscript, and personally identifying reviewer/account information.
+The repository publishes the scientific source code needed to inspect the upstream P1–P7 data-construction logic and rerun the publication-facing modeling/evaluation logic when required source inputs are available, together with configuration and provenance materials. It excludes raw Amazon review text, raw third-party product images, image-source URLs, the large third-party/OpenCLIP checkpoint binary, credentials/API responses/runtime logs, internal collaboration-history documents unrelated to the manuscript, and personally identifying reviewer/account information.
 
 See `docs/DATA_ACCESS.md` for the exact data boundary, `docs/PREPROCESSING_SOURCE_BINDINGS.md` for frozen upstream source-code bindings, and `docs/SOURCE_PROVENANCE.md` for source-snapshot provenance.
 
