@@ -1,4 +1,4 @@
-outcome,outcome_role,outcome_evidence_grade,average_precision,auroc,auroc_ci_low,auroc_ci_high,top10_lift,top10_lift_ci_low,top10_lift_ci_high,r1_exclusion_top10_lift,all_auroc_global_ordering_flag
-has_any_outer_imagery_observed,primary,E2,0.0892,0.3124,0.2416,0.3867,2.5987,1.37,3.77,2.65,below_half
-general_visual_appeal_observed_positive_core,secondary,E2,0.0675,0.2834,0.1944,0.3751,3.3205,1.20,5.00,,below_half
-cute_friendly_observed_positive_core,secondary,E1,0.0474,0.2782,0.1602,0.4177,2.9299,0.77,5.00,,below_half
+"outcome","outcome_label","track","average_precision","roc_auc","roc_auc_ci_lower","roc_auc_ci_upper","lift_at_top10","lift_at_top10_ci_lower","lift_at_top10_ci_upper","locked_test_enrichment_grade","auroc_global_ordering_flag","r1_lift_at_top10","r1_enrichment_preserved","feature_level_locked_validation"
+"has_any_outer_imagery_observed","Any outer-package affective imagery","interpretable_36_logistic","0.0892092248237394","0.31238471673254281","0.24163957874646039","0.38667551837869063","2.5986622073578598","1.3671521035598706","3.7742393162393157","E2","below_half","2.4320987654320989","True","False"
+"general_visual_appeal_observed_positive_core","General visual appeal","interpretable_36_logistic","0.067527584398593354","0.28343273691186216","0.19438876753549297","0.37505103858572053","3.3205128205128207","1.2029420893571838","4.99514679798357","E2","below_half","3.3164983164983162","True","False"
+"cute_friendly_observed_positive_core","Cute/friendly","interpretable_36_logistic","0.047420215832912303","0.27818507186976854","0.16022991636165565","0.41770753998476756","2.9298642533936654","0.7654966392830469","4.9951456310679614","E1","below_half","2.4873737373737375","True","False"
