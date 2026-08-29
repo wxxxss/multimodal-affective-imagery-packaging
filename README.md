@@ -21,15 +21,19 @@ The third-party source dataset is **Amazon Reviews'23**, released by the UCSD Mc
 
 This repository does **not** redistribute raw Amazon review text or third-party image binaries. Users should obtain those materials from the original source subject to its terms.
 
-## Repository status
+## Repository status and AUROC correction
 
-This public repository is a clean reproducibility export from the frozen research codebase used for the manuscript. The internal research repository remains private and is not required to understand the publication-facing workflow.
+This public repository is a publication-facing reproducibility export from the frozen research codebase. Source snapshot used for the export: `1d72e3ba798f93d328c37bfe75b37032b9f21246`.
 
-Source snapshot used for this export: `1d72e3ba798f93d328c37bfe75b37032b9f21246`.
+During publication preparation, a metric-consistency audit found that the historical P11 reference oracle used a reversed rank orientation for AUROC relative to the conventional P10/scikit-learn definition. The audit was completed from the already-frozen held-out scores and labels. No model was retrained or reselected, scores were not inverted, and no label, feature, threshold, or split was changed.
 
-Frozen scientific source code, contracts, validation documentation, aggregate modeling summaries, and non-sensitive post-lock interpretation outputs are published here. Row-level intermediate artifacts that were intentionally gitignored in the research repository are not reconstructed or fabricated in this Git-only export. A publication-safe row-level derived-data deposit must therefore be exported separately from the frozen local research workspace before PeerJ resubmission; raw review text and copyrighted image binaries will not be redistributed.
+Conventional held-out AUROC is **0.6877-0.7220** across the six frozen models; all six corrected 95% cluster-bootstrap intervals have lower bounds above 0.5. The historical P11/P12 files are preserved unchanged as provenance, while publication-facing correction overlays are provided under:
 
-**Metric-consistency audit before resubmission.** During preparation of this public release, an inconsistency was identified between the conventional P10 development-stage AUROC (`sklearn.metrics.roc_auc_score`) and the historical P11 reference-oracle rank formula. The historical frozen P11/P12 materials are retained as audit evidence, but held-out AUROC and its bootstrap interval must be revalidated from the already-frozen predictions and labels before the manuscript is resubmitted. No model refitting, model reselection, score inversion, threshold selection, label change, feature change, or split change is authorized by this audit. The publication-facing evaluator is `scripts/modeling/public_heldout_evaluation.py`.
+- `data/published_results/p11_auroc_correction/`
+- `data/published_results/p12_auroc_correction/`
+- `docs/AUROC_AUDIT.md`
+
+Average precision and top-k recall/lift retain the frozen deterministic ranking definitions and values. P12 E2/E1 enrichment grades and Grade A/B design rules are unchanged because they are driven by top-10% lift, coefficient stability, and the prespecified QA-exclusion check rather than AUROC.
 
 ## Computing environment
 
@@ -88,16 +92,18 @@ See `docs/ENVIRONMENT.md` for the recorded runtime and `docs/REPRODUCIBILITY.md`
    - `scripts/modeling/p9_visual_features.py`
 9. **Development-only model selection/refit**
    - `scripts/modeling/p10_development_models.py`
-10. **Locked held-out evaluation**
-   - publication-facing metric implementation: `scripts/modeling/public_heldout_evaluation.py`
+10. **Held-out evaluation**
+   - publication-facing evaluator: `scripts/modeling/public_heldout_evaluation.py`
+   - completed metric audit: `docs/AUROC_AUDIT.md`
    - historical audit/reference modules: `scripts/modeling/p11_locked_test_reference_oracle.py`, `scripts/modeling/p11_locked_test_reference_oracle_legacy.py`, `scripts/modeling/p11_locked_test_repair.py`
 11. **Post-lock interpretation**
-   - frozen historical rules: `config/modeling/p12_post_lock_interpretation_contract.json`
-   - frozen historical non-sensitive outputs: `data/published_results/p12/`
-   - these are retained for provenance and will be reconciled with the AUROC audit before resubmission
+   - historical frozen rules: `config/modeling/p12_post_lock_interpretation_contract.json`
+   - historical frozen outputs: `data/published_results/p12/`
+   - publication-facing AUROC overlay: `data/published_results/p12_auroc_correction/`
 12. **Manuscript figures**
    - `scripts/figures/figure01_data_construction_v5.py`
-   - `scripts/figures/figure03_recognition_performance_v6.py`
+   - corrected Figure 3: `scripts/figures/figure03_recognition_performance_v7_auroc_corrected.py`
+   - historical Figure 3 source retained for provenance: `scripts/figures/figure03_recognition_performance_v6.py`
    - `scripts/figures/figure04_design_strategies_v6.py`
 
 The internal P11 implementation contains integrity bindings to the original research-repository Git history and locally frozen upstream artifacts. Those bindings are retained as audit evidence; they are not a claim that the historical P11 transaction can be rerun from this public Git checkout alone without the corresponding frozen local artifacts.
@@ -114,16 +120,9 @@ The validation sample comprised 600 sentence-level tasks and 240 product-dimensi
 
 ## Reproducibility boundaries
 
-The repository publishes scientific code and non-sensitive configuration/provenance materials. It excludes:
+The repository publishes scientific code and non-sensitive configuration/provenance materials. It excludes raw Amazon review text, raw third-party product images, the large third-party/OpenCLIP checkpoint binary, credentials/API responses/runtime logs, internal collaboration-history documents unrelated to the manuscript, and personally identifying reviewer/account information.
 
-- raw Amazon review text;
-- raw third-party product images;
-- the large third-party/OpenCLIP checkpoint binary;
-- credentials, API responses, and runtime logs;
-- internal collaboration/history documents unrelated to reproducing the manuscript;
-- personally identifying reviewer/account information.
-
-See `docs/DATA_ACCESS.md` for the exact data-access boundary and `docs/SOURCE_PROVENANCE.md` for source-snapshot bindings.
+A publication-safe derived-data package can contain product identifiers, frozen split/group assignments, observed-positive outcome fields, and frozen model scores without redistributing raw review text or copyrighted image binaries. See `docs/DATA_ACCESS.md` for the exact boundary and `docs/SOURCE_PROVENANCE.md` for source-snapshot bindings.
 
 ## Citation
 
