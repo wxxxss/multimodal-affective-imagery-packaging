@@ -195,7 +195,7 @@ def validate_contract(contract: Mapping[str, Any]) -> None:
     _expect_equal(contract.get("source_artifact_sha256"), {
         "p7_b_primary_asset_manifest": "B855BBFED7D02945129C2BB90656F738FC69BB914E1C0F9CD064BD388BFA1601",
         "p7_b_provenance": "76165F0C98990EA3FAF628E3309C73A3F5CDA9B1DC4E92217BEF773F193B434A",
-        "p7_d_provenance": "7A29A4F1B649D23BA2837126E8DD48FA39B5851A79BE301CA8F1B5B51853BC76",
+        "p7_d_provenance": "7A29A4F1B649D23BA2837126E8DD48FA39B5851A79BE301CA8F1B5D51853BC76",
     }, "source_artifact_sha256")
     _expect_equal(contract.get("p8_a_formal_output_sha256"), {
         "01_upstream_freeze_audit.json": "E24C6C9A8FF60B4679E20C714FC8EDFF98ABD4CB0C480D37D82241DE67A884D9",
@@ -241,6 +241,7 @@ def load_contract() -> dict[str, Any]:
     contract = read_json(CONTRACT_PATH)
     validate_contract(contract)
     return contract
+
 
 
 def normalize_repo_path(path_value: Any) -> str:
@@ -436,6 +437,7 @@ def manifest_columns(p8a_contract: Mapping[str, Any] | None = None) -> tuple[str
     return MANIFEST_BASE_COLUMNS + tuple(p8a.canonical_pu_outcomes(contract))
 
 
+
 def validate_manifest_schema(schema: Mapping[str, Any], p8a_contract: Mapping[str, Any] | None = None) -> None:
     if schema.get("schema_version") != "p8b_modeling_ready_manifest_v1":
         raise ContractError("unexpected P8-B manifest schema version")
@@ -570,6 +572,7 @@ def validate_split_plan(
         raise ContractError("development assignment contains an invalid fold")
 
 
+
 def duplicate_group_partition_distribution(
     rows: Iterable[Mapping[str, Any]],
     groups: Iterable[Mapping[str, Any]] | None = None,
@@ -625,6 +628,7 @@ def _csv_bytes(rows: Iterable[Mapping[str, Any]], columns: Iterable[str]) -> byt
 
 def _source_path(path_value: str) -> Path:
     return Path(path_value.replace("\\", "/")) if Path(path_value).is_absolute() else ROOT / path_value.replace("\\", "/")
+
 
 
 def read_csv_header(path: Path) -> list[str]:
