@@ -1,0 +1,98 @@
+{
+  "contract_version": "p9_v1.0",
+  "templates": [
+    "a front-facing retail herbal tea package with {phrase}",
+    "product packaging featuring {phrase}",
+    "a tea package design showing {phrase}"
+  ],
+  "attributes": [
+    {
+      "name": "leaf_herb_illustration_score",
+      "phrase": "illustrated leaves, herbs, or plant sprigs"
+    },
+    {
+      "name": "floral_illustration_score",
+      "phrase": "prominent illustrated flowers or blossoms"
+    },
+    {
+      "name": "fruit_motif_score",
+      "phrase": "prominent fruit illustrations or fruit motifs"
+    },
+    {
+      "name": "ingredient_photography_score",
+      "phrase": "photographic images of herbs, flowers, fruit, or tea ingredients"
+    },
+    {
+      "name": "character_mascot_score",
+      "phrase": "a drawn character, mascot, animal, or person"
+    },
+    {
+      "name": "sparse_layout_score",
+      "phrase": "a sparse layout with few visual elements and generous empty space"
+    },
+    {
+      "name": "dense_ornament_score",
+      "phrase": "dense decorative borders, flourishes, patterns, and many visual elements"
+    },
+    {
+      "name": "heritage_ornament_score",
+      "phrase": "heritage-style seals, badges, decorative borders, and serif lettering"
+    },
+    {
+      "name": "geometric_layout_score",
+      "phrase": "clean geometric shapes, blocks, lines, and grid-like organization"
+    },
+    {
+      "name": "kraft_craft_score",
+      "phrase": "brown kraft-paper texture, handmade stamp cues, or craft-paper styling"
+    },
+    {
+      "name": "ribbon_bow_box_cues_score",
+      "phrase": "ribbon, bow, decorative box, or boxed display cues"
+    },
+    {
+      "name": "pale_pastel_palette_score",
+      "phrase": "predominantly pale pastel colors"
+    },
+    {
+      "name": "vivid_multicolor_palette_score",
+      "phrase": "many vivid highly saturated colors"
+    },
+    {
+      "name": "typography_dominant_score",
+      "phrase": "large prominent typography occupying most of the front panel"
+    },
+    {
+      "name": "image_dominant_score",
+      "phrase": "a large illustration or photograph dominating the front panel"
+    },
+    {
+      "name": "transparent_window_score",
+      "phrase": "a transparent window showing the tea or ingredients inside"
+    }
+  ],
+  "encoding": {
+    "normalize_each_prompt": true,
+    "mean_prompt_vectors": true,
+    "renormalize_centroid": true,
+    "image_score": "normalized_image_embedding dot normalized_attribute_text_centroid",
+    "softmax": false,
+    "threshold": false,
+    "outcome_label_prompt_guard": true
+  },
+  "anti_circularity": {
+    "normalization": "NFKC lowercase; underscores/hyphens/punctuation to spaces; collapse whitespace",
+    "forbidden_outcome_aliases": [
+      "cheerful colorful",
+      "calming soft",
+      "cute friendly",
+      "gift presentation",
+      "general visual appeal",
+      "negative appearance",
+      "natural botanical",
+      "premium refined",
+      "simple modern",
+      "traditional vintage"
+    ]
+  }
+}
