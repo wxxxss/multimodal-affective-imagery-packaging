@@ -41,6 +41,10 @@ UPSTREAM_PUBLIC_PATHS = [
     "scripts/validation/validate_affective_imagery_annotations_v21.py",
 ]
 
+UPSTREAM_RUNTIME_CONFIG_PATHS = [
+    "config/affective_imagery/action_error_mapping_v21.json",
+]
+
 
 def test_public_runnable_paths_exist():
     missing = [path for path in PUBLIC_RUNNABLE_PATHS if not (ROOT / path).is_file()]
@@ -48,19 +52,21 @@ def test_public_runnable_paths_exist():
 
 
 def test_peerj_upstream_source_release_is_complete():
-    missing = [path for path in UPSTREAM_PUBLIC_PATHS if not (ROOT / path).is_file()]
-    assert not missing, "Missing PeerJ upstream source files: " + ", ".join(missing)
+    required = UPSTREAM_PUBLIC_PATHS + UPSTREAM_RUNTIME_CONFIG_PATHS
+    missing = [path for path in required if not (ROOT / path).is_file()]
+    assert not missing, "Missing PeerJ upstream release files: " + ", ".join(missing)
 
 
 def test_upstream_source_release_is_documented_as_public_code():
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     reproducibility = (ROOT / "docs" / "REPRODUCIBILITY.md").read_text(encoding="utf-8")
     provenance = (ROOT / "docs" / "PREPROCESSING_SOURCE_BINDINGS.md").read_text(encoding="utf-8")
-    for path in UPSTREAM_PUBLIC_PATHS:
+    for path in UPSTREAM_PUBLIC_PATHS + UPSTREAM_RUNTIME_CONFIG_PATHS:
         assert f"`{path}`" in provenance, f"Missing provenance mapping for {path}"
     assert "scripts/metadata/screen_full_metadata_v2.py" in readme
     assert "scripts/reviews/clean_and_extract_packaging_sentences.py" in reproducibility
     assert "scripts/labels/build_affective_imagery_labels_v21.py" in reproducibility
+    assert "config/affective_imagery/action_error_mapping_v21.json" in reproducibility
 
 
 def test_peerj_required_source_and_environment_disclosures_are_present():
