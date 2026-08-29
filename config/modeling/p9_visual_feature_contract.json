@@ -1,0 +1,135 @@
+{
+  "contract_version": "p9_v1.0",
+  "stage": "P9 final visual feature freeze",
+  "baseline_main_commit": "ccc3ddc0f778988d5251f536afe1674fb05969b5",
+  "feature_firewall": {
+    "row_level_source_only": [
+      "data/processed/retail_outer_package_images_p7_5180/p7_d_final_image_freeze/04_final_image_manifest.csv",
+      "data/images/retail_outer_package_p7_5180 actual frozen image bytes"
+    ],
+    "forbidden_row_level_sources": [
+      "labels", "review text", "G", "P8-B modeling manifest", "P8-B split assignment",
+      "outcomes", "split_partition", "development_fold", "primary observed-positive count",
+      "secondary outcome", "model performance"
+    ],
+    "forbidden_methods": [
+      "model fitting", "PCA", "supervised dimensionality reduction", "feature selection",
+      "OCR", "object detection", "segmentation", "VLM", "encoder comparison", "performance metrics"
+    ],
+    "labels_read": false,
+    "review_text_read": false,
+    "G_read": false,
+    "split_read": false,
+    "model_fitted": false,
+    "pca": false,
+    "feature_selection": false
+  },
+  "upstream": {
+    "p7_d_final_manifest_path": "data/processed/retail_outer_package_images_p7_5180/p7_d_final_image_freeze/04_final_image_manifest.csv",
+    "p7_d_final_manifest_sha256": "D3B29B0E075DE1137B7A004D12ED5A1764BD548684E067E55D62E63B75416F31",
+    "p8_b_formal_sha256": {
+      "01_modeling_ready_manifest.csv": "4CC5D4389BE9FEC94CAAC0601A24A49841D3EAB0D0787BAE8A8DD4ACF52B86E9",
+      "02_split_group_inventory.csv": "C834E5D71125DD32D69E6A4E8A791F2BB0EFEEAB2702576B300C3C1CB8C5FB89",
+      "03_split_assignment.csv": "A0570644DA3BF6078B749562AEF80B120E100596932C0DE348911B48AB6EE6FE",
+      "04_split_quality_audit.json": "E7DD1EE95CC340D9CEB13ECB15A005D434CC43760C4FE8834A858351231262B3",
+      "05_modeling_ready_summary.json": "EA15823425FF5C589982D88513C9A1BCF0F1A88916EBC9C8655AD567F655DDC5",
+      "06_p8_b_provenance.json": "994082F8EE943A2005E2C4C9CA45FC265FC755612D43E568B768F41B3FC2220B"
+    }
+  },
+  "model": {
+    "library": "open_clip_torch",
+    "version": "3.3.0",
+    "name": "ViT-B-32",
+    "pretrained_tag": "laion2b_s34b_b79k",
+    "local_checkpoint_path": "data/models/p9_openclip_vit_b32_laion2b_s34b_b79k/open_clip_vit_b32_laion2b_s34b_b79k.pt",
+    "checkpoint_sha256": "ABC9E5336889F261DA3D79936A97B6815C97F546C406337C623AEF4262BAFC19",
+    "checkpoint_size_bytes": 605230035,
+    "embedding_dimension": 512,
+    "inference": {
+      "eval": true,
+      "inference_mode": true,
+      "gradients": false,
+      "dtype": "float32",
+      "l2_normalized": true,
+      "device": "cpu",
+      "batch_size": 16,
+      "autocast": false,
+      "stochastic_augmentation": false,
+      "random_crop": false
+    },
+    "preprocessing": {
+      "input_resolution": 224,
+      "resize": "shortest-side to 224 before center crop",
+      "crop": "center crop 224x224",
+      "interpolation": "bicubic",
+      "resize_mode": "shortest",
+      "mean": [0.48145466, 0.4578275, 0.40821073],
+      "std": [0.26862954, 0.26130258, 0.27577711]
+    }
+  },
+  "classical_analysis_raster": {
+    "exif_transpose": true,
+    "first_decoded_frame": true,
+    "convert": "RGB",
+    "preserve_aspect_ratio": true,
+    "longest_side": 512,
+    "resample": "LANCZOS",
+    "crop": false,
+    "segmentation": false
+  },
+  "source_manifest": {
+    "path": "data/processed/modeling_features_p9_5180/p9_visual_feature_freeze/01_feature_source_manifest.csv",
+    "rows": 5180,
+    "main_rows": 5179,
+    "excluded_rows": 1,
+    "primary_available": 5179,
+    "sensitivity_available_full": 14,
+    "sensitivity_available_main": 13,
+    "allowed_fields": [
+      "parent_asin", "input_order", "primary_freeze_status", "main_analysis_included",
+      "primary_response_sha256", "primary_local_path", "primary_decoded_format",
+      "primary_width", "primary_height", "sensitivity_status", "sensitivity_response_sha256",
+      "sensitivity_local_path", "sensitivity_decoded_format", "sensitivity_width",
+      "sensitivity_height", "excluded_non_primary"
+    ]
+  },
+  "feature_outputs": {
+    "directory": "data/processed/modeling_features_p9_5180/p9_visual_feature_freeze",
+    "files": [
+      "01_feature_source_manifest.csv",
+      "02_unique_image_inventory.csv",
+      "03_openclip_image_embeddings.npy",
+      "04_interpretable_image_features.csv",
+      "05_product_feature_map.csv",
+      "06_feature_quality_audit.json",
+      "07_feature_summary.json",
+      "08_p9_provenance.json"
+    ],
+    "git_tracked": false
+  },
+  "feature_schema": {
+    "classical_count": 20,
+    "semantic_count": 16,
+    "total_interpretable_count": 36,
+    "embedding_shape": ["N_unique_images", 512],
+    "duplicate_sha_rule": "one image_sha256 maps to one feature_row_index"
+  },
+  "prompt_bank_path": "config/modeling/p9_semantic_prompt_bank.json",
+  "interpretable_schema_path": "config/modeling/p9_interpretable_feature_schema.json",
+  "producer_path": "scripts/modeling/p9_visual_features.py",
+  "verification_policy": {
+    "formal_prepare_network_calls": 0,
+    "verify_existing_network_calls": 0,
+    "verify_existing_writes": 0,
+    "verify_recompute_network_calls": 0,
+    "verify_recompute_writes": 0,
+    "verify_recompute_model_training": 0,
+    "recompute_embedding_max_abs_diff": 1e-6,
+    "recompute_semantic_max_abs_diff": 1e-6
+  },
+  "no_modeling_state": {
+    "feature_extraction_only": true,
+    "training_started": false,
+    "p10_started": false
+  }
+}
