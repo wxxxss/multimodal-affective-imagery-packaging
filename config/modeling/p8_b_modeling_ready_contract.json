@@ -1,0 +1,104 @@
+{
+  "contract_version": "p8b_v1.0",
+  "stage": "P8-B modeling-ready manifest and deterministic split freeze",
+  "upstream_contract_path": "config/modeling/p8_a_analysis_contract.json",
+  "formal_output_directory": "data/processed/modeling_readiness_p8_5180/p8_b_modeling_ready_split",
+  "formal_output_files": [
+    "01_modeling_ready_manifest.csv",
+    "02_split_group_inventory.csv",
+    "03_split_assignment.csv",
+    "04_split_quality_audit.json",
+    "05_modeling_ready_summary.json",
+    "06_p8_b_provenance.json"
+  ],
+  "source_artifacts": {
+    "p7_d_final_manifest": "data/processed/retail_outer_package_images_p7_5180/p7_d_final_image_freeze/04_final_image_manifest.csv",
+    "canonical_label_source": "data/processed/affective_imagery_labels_v21_5180/39_product_imagery_labels_v21.csv",
+    "g_product_exposure_table": "data/processed/review_exposure_pu_diagnostics_v21_5180/01_product_exposure_label_table.csv",
+    "g_threshold_summary": "data/processed/review_exposure_pu_diagnostics_v21_5180/02_exposure_threshold_summary.csv",
+    "g_strata_summary": "data/processed/review_exposure_pu_diagnostics_v21_5180/03_exposure_strata_summary.csv",
+    "p7_d_provenance": "data/processed/retail_outer_package_images_p7_5180/p7_d_final_image_freeze/07_p7_d_provenance.json",
+    "p7_b_provenance": "data/processed/retail_outer_package_images_p7_5180/p7_b_primary_assets/04_p7_b_provenance.json",
+    "p7_b_primary_asset_manifest": "data/processed/retail_outer_package_images_p7_5180/p7_b_primary_assets/01_primary_asset_manifest.csv"
+  },
+  "population": {
+    "full_universe_rows": 5180,
+    "main_population_statuses": [
+      "frozen_primary",
+      "frozen_primary_with_qa_exception"
+    ],
+    "expected_main_rows": 5179,
+    "excluded_status": "excluded_non_primary",
+    "excluded_rows": 1,
+    "excluded_split_partition": "excluded",
+    "known_qa_exception_count": 83
+  },
+  "split": {
+    "algorithm_version": "p8b_split_v1",
+    "group_key": "primary_response_sha256",
+    "primary_stratification_outcome": "has_any_outer_imagery_observed",
+    "locked_test_proportion": 0.2,
+    "development_proportion": 0.8,
+    "development_fold_count": 5,
+    "development_fold_target_proportion": 0.2,
+    "loss": "joint_additive_normalized_absolute_deviation",
+    "weights": {
+      "product_count": 1.0,
+      "observed_positive_count": 1.0
+    },
+    "hash_expression": "SHA256(p8b_split_v1 + group key)",
+    "hash_purpose": "deterministic ordering and tie-break only",
+    "no_seed_search": true,
+    "no_manual_assignment": true,
+    "no_performance_tuning": true
+  },
+  "output_policy": {
+    "prepare_refuses_nonempty_formal_directory": true,
+    "verify_existing_writes": 0,
+    "git_tracked_formal_data": false,
+    "feature_extraction_started": false,
+    "model_fitting_started": false,
+    "predictions_or_performance_metrics_started": false,
+    "p9_started": false
+  },
+  "provenance_policy": {
+    "provenance_filename": "06_p8_b_provenance.json",
+    "provenance_self_sha_forbidden": true,
+    "binds_formal_outputs": [
+      "01_modeling_ready_manifest.csv",
+      "02_split_group_inventory.csv",
+      "03_split_assignment.csv",
+      "04_split_quality_audit.json",
+      "05_modeling_ready_summary.json"
+    ],
+    "binds_tracked": [
+      "scripts/modeling/p8_b_modeling_ready_split.py",
+      "config/modeling/p8_b_modeling_ready_contract.json",
+      "config/modeling/p8_b_modeling_manifest_schema.json",
+      "config/modeling/p8_a_analysis_contract.json"
+    ],
+    "binds_baseline_main_commit": true,
+    "binds_p8_a_formal_output_sha256": [
+      "01_upstream_freeze_audit.json",
+      "02_modeling_population_and_outcome_audit.json",
+      "03_g_role_and_sensitivity_audit.json",
+      "04_analysis_contract_snapshot.json",
+      "05_p8_a_provenance.json"
+    ]
+  },
+  "baseline_main_commit": "84f7518eebe8e1b77bb210b5cea384805a33c35b",
+  "schema_path": "config/modeling/p8_b_modeling_manifest_schema.json",
+  "asset_root_repo_relative": "data/images/retail_outer_package_p7_5180",
+  "p8_a_formal_output_sha256": {
+    "01_upstream_freeze_audit.json": "E24C6C9A8FF60B4679E20C714FC8EDFF98ABD4CB0C480D37D82241DE67A884D9",
+    "02_modeling_population_and_outcome_audit.json": "CE96912D0A0CBF385A0F9EACBCCDE719048B0FEBEDD7DCD7B76C844A73DFD9A6",
+    "03_g_role_and_sensitivity_audit.json": "7EAFE463FBCFD2CDDD73B8574EF18D495DB4B11EA85C8FCFE436806E1F83EC90",
+    "04_analysis_contract_snapshot.json": "E5640861A8844198F1396F5A1DCDF0E04C63D08BA0E0A158EBDFD3C81F5097E3",
+    "05_p8_a_provenance.json": "D45BA91F4D705232E7ED9326A978E60D64F4D8F236B9C6E1D05EF2129A77ED51"
+  },
+  "source_artifact_sha256": {
+    "p7_b_primary_asset_manifest": "B855BBFED7D02945129C2BB90656F738FC69BB914E1C0F9CD064BD388BFA1601",
+    "p7_b_provenance": "76165F0C98990EA3FAF628E3309C73A3F5CDA9B1DC4E92217BEF773F193B434A",
+    "p7_d_provenance": "7A29A4F1B649D23BA2837126E8DD48FA39B5851A79BE301CA8F1B5D51853BC76"
+  }
+}
