@@ -1,0 +1,347 @@
+{
+  "contract_version": "p10_v1.0",
+  "stage": "P10 development-trained predictive and interpretable model freeze",
+  "baseline_main_commit": "d0cf90ca6a2bb3836bfb9c368d37efb124ae230b",
+  "producer_path": "scripts/modeling/p10_development_models.py",
+  "formal_output_directory": "data/processed/modeling_p10_5180/p10_development_model_freeze",
+  "formal_output_files": [
+    "01_development_modeling_manifest.csv",
+    "02_cv_model_selection.csv",
+    "03_development_oof_scores.csv",
+    "04_final_model_specification.json",
+    "05_final_model_parameters.npz",
+    "06_interpretable_coefficient_stability.csv",
+    "07_development_model_summary.json",
+    "08_p10_provenance.json"
+  ],
+  "upstream": {
+    "p8_b_contract_path": "config/modeling/p8_b_modeling_ready_contract.json",
+    "p8_b_formal_directory": "data/processed/modeling_readiness_p8_5180/p8_b_modeling_ready_split",
+    "p8_b_formal_sha256": {
+      "01_modeling_ready_manifest.csv": "4CC5D4389BE9FEC94CAAC0601A24A49841D3EAB0D0787BAE8A8DD4ACF52B86E9",
+      "02_split_group_inventory.csv": "C834E5D71125DD32D69E6A4E8A791F2BB0EFEEAB2702576B300C3C1CB8C5FB89",
+      "03_split_assignment.csv": "A0570644DA3BF6078B749562AEF80B120E100596932C0DE348911B48AB6EE6FE",
+      "04_split_quality_audit.json": "E7DD1EE95CC340D9CEB13ECB15A005D434CC43760C4FE8834A858351231262B3",
+      "05_modeling_ready_summary.json": "EA15823425FF5C589982D88513C9A1BCF0F1A88916EBC9C8655AD567F655DDC5",
+      "06_p8_b_provenance.json": "994082F8EE943A2005E2C4C9CA45FC265FC755612D43E568B768F41B3FC2220B"
+    },
+    "p8_b_baseline_main_commit": "84f7518eebe8e1b77bb210b5cea384805a33c35b",
+    "p9_contract_path": "config/modeling/p9_visual_feature_contract.json",
+    "p9_formal_directory": "data/processed/modeling_features_p9_5180/p9_visual_feature_freeze",
+    "p9_formal_sha256": {
+      "01_feature_source_manifest.csv": "10EB94784100E0F9D54007A8A7B3D7C3A6A7AAA2C19989BD0ECC7314CC698037",
+      "02_unique_image_inventory.csv": "D48B1233C1AECA398F6016DFB4AA37B357447FBEE6CA44BE57DB5DD104F24769",
+      "03_openclip_image_embeddings.npy": "7366A15B5247416AA950EB91ED024883D1FDAC6DEC917A3683CB4831BF44568C",
+      "04_interpretable_image_features.csv": "D4A9045DB75F9233BE10D4C155DD66E34B850E65C2706C2D749C2EB7286C4753",
+      "05_product_feature_map.csv": "CAD01B7EC4664F8B5FBF66E59BD8B10E8509D28EE3E4989C638278C6BF94DEA8",
+      "06_feature_quality_audit.json": "ABF4BF39106CB407922960A4E92B212B093101B58DF037AE5BAFA3EADAF5828B",
+      "07_feature_summary.json": "EB63506B3BF778A5BB52738234CA8FEED7A71E8A741DDAFD8C43BDD30C9AC1D5",
+      "08_p9_provenance.json": "888410C27326DEE036474E873AF60F6A51F67AB516CA672F49534B0058FE90FA"
+    },
+    "p9_baseline_main_commit": "ccc3ddc0f778988d5251f536afe1674fb05969b5",
+    "p9_product_feature_map": "data/processed/modeling_features_p9_5180/p9_visual_feature_freeze/05_product_feature_map.csv",
+    "p9_embeddings": "data/processed/modeling_features_p9_5180/p9_visual_feature_freeze/03_openclip_image_embeddings.npy",
+    "p9_interpretable_features": "data/processed/modeling_features_p9_5180/p9_visual_feature_freeze/04_interpretable_image_features.csv",
+    "p9_inventory": "data/processed/modeling_features_p9_5180/p9_visual_feature_freeze/02_unique_image_inventory.csv"
+  },
+  "development_population": {
+    "source_manifest": "data/processed/modeling_readiness_p8_5180/p8_b_modeling_ready_split/01_modeling_ready_manifest.csv",
+    "main_population_rows": 5179,
+    "development_rows": 4143,
+    "locked_test_rows": 1036,
+    "development_fold_count": 5,
+    "development_fold_counts": {
+      "0": 837,
+      "1": 828,
+      "2": 828,
+      "3": 828,
+      "4": 822
+    },
+    "development_positive_count": 186,
+    "development_positive_by_fold": {
+      "0": 37,
+      "1": 37,
+      "2": 37,
+      "3": 37,
+      "4": 38
+    },
+    "group_key": "primary_response_sha256",
+    "no_locked_rows_in_modeling": true,
+    "no_resplit": true
+  },
+  "pu_semantics": {
+    "label_one": "observed spontaneous affective-imagery mention / observed-positive",
+    "label_zero": "PU-unlabeled / unobserved; never confirmed negative",
+    "allowed_terms": [
+      "observed-positive score",
+      "observed-positive propensity",
+      "observed-positive discrimination"
+    ],
+    "predict_proba_one_warning": "model-estimated probability under observational labeling, not latent true perception probability",
+    "forbidden_unqualified_terms": [
+      "negative",
+      "true negative",
+      "absence",
+      "not perceived"
+    ]
+  },
+  "outcomes": [
+    {
+      "name": "has_any_outer_imagery_observed",
+      "role": "primary",
+      "p8_source_field": "has_any_outer_imagery_observed",
+      "global_positive_count": 232,
+      "development_positive_count": 186,
+      "locked_test_positive_count": 46
+    },
+    {
+      "name": "general_visual_appeal_observed_positive_core",
+      "role": "secondary_confirmatory",
+      "p8_source_field": "general_visual_appeal_observed_positive_core"
+    },
+    {
+      "name": "cute_friendly_observed_positive_core",
+      "role": "secondary_confirmatory",
+      "p8_source_field": "cute_friendly_observed_positive_core"
+    }
+  ],
+  "confirmatory_family": {
+    "size": 2,
+    "bh_q": 0.05,
+    "in_p10": false,
+    "reserved_for": "P11/P12"
+  },
+  "tracks": [
+    {
+      "name": "openclip_512_logistic",
+      "feature_source": "P9 512-dimensional frozen OpenCLIP embedding",
+      "feature_count": 512,
+      "feature_order": "P9 03 row order resolved by primary_feature_row_index",
+      "scaler": "StandardScaler",
+      "model": "LogisticRegression"
+    },
+    {
+      "name": "interpretable_36_logistic",
+      "feature_source": "P9 20 classical + 16 semantic features",
+      "feature_count": 36,
+      "feature_order": "P9 04 exact header order",
+      "scaler": "StandardScaler",
+      "model": "LogisticRegression",
+      "all_features_retained": true
+    }
+  ],
+  "runtime": {
+    "python_version": "3.12.7",
+    "numpy_version": "1.26.4",
+    "scipy_version": "1.13.1",
+    "pandas_version": "2.2.2",
+    "scikit_learn_version": "1.9.0",
+    "joblib_version": "1.4.2",
+    "threadpoolctl_version": "3.5.0",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "device": "cpu",
+    "network_calls": 0,
+    "thread_env": {
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    }
+  },
+  "logistic": {
+    "class": "sklearn.linear_model.LogisticRegression",
+    "solver": "lbfgs",
+    "l1_ratio": 0.0,
+    "fit_intercept": true,
+    "class_weight": null,
+    "max_iter": 5000,
+    "tol": 1e-08,
+    "warm_start": false,
+    "random_state": 20260818,
+    "penalty_explicitly_set": false,
+    "n_jobs_explicitly_set": false,
+    "sample_weight": false
+  },
+  "selection": {
+    "c_grid": [
+      0.01,
+      0.1,
+      1.0,
+      10.0,
+      100.0
+    ],
+    "cv_folds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "selection_metric": "unweighted arithmetic mean of five validation average precision values",
+    "tie_break": "exact equal mean average precision chooses smaller C",
+    "fits": {
+      "cv": 150,
+      "final": 6,
+      "total": 156
+    },
+    "no_model_family_search": true,
+    "no_threshold_search": true,
+    "no_sampling": true,
+    "no_pca": true,
+    "no_pu_native_method": true,
+    "ledger_rows": 150,
+    "ledger_fields": [
+      "outcome",
+      "outcome_role",
+      "track",
+      "C",
+      "fold",
+      "fold_average_precision",
+      "fold_auroc",
+      "train_rows",
+      "validation_rows",
+      "train_observed_positives",
+      "validation_observed_positives",
+      "n_iter",
+      "convergence_status",
+      "selected"
+    ],
+    "convergence_warning_is_fail": true,
+    "n_iter_strictly_less_than_max_iter": true
+  },
+  "metrics": {
+    "primary_selection": "average_precision",
+    "descriptive": [
+      "average_precision",
+      "roc_auc",
+      "recall_at_top5",
+      "recall_at_top10",
+      "recall_at_top20",
+      "lift_at_top5",
+      "lift_at_top10",
+      "lift_at_top20"
+    ],
+    "top_k_rule": "ceil(n * fraction), descending score, exact score ties parent_asin ascending",
+    "accuracy_in_main_diagnostics": false,
+    "f1_in_main_diagnostics": false,
+    "p_values": false,
+    "bh_in_p10": false
+  },
+  "oof": {
+    "rows": 24858,
+    "shape": "4143 rows x 3 outcomes x 2 tracks",
+    "exactly_one_score_per_development_row_outcome_track": true,
+    "locked_test_rows": 0,
+    "coverage_key": [
+      "parent_asin",
+      "outcome",
+      "track"
+    ]
+  },
+  "final_refit": {
+    "fit_rows": 4143,
+    "fit_scope": "all development rows only",
+    "final_fit_count": 6,
+    "sensitivity_features": "not fitted and not used for model choice",
+    "convergence_warning_is_fail": true,
+    "n_iter_strictly_less_than_max_iter": true,
+    "required_convergence_status": "PASS"
+  },
+  "parameter_serialization": {
+    "path": "05_final_model_parameters.npz",
+    "authoritative": true,
+    "pickle_authoritative": false,
+    "dtype": "float64",
+    "arrays_per_model": [
+      "scaler_mean",
+      "scaler_scale",
+      "coef",
+      "intercept"
+    ],
+    "reconstruction_formula": "z=(x-mean)/scale; decision=intercept+sum(z*coef); score=sigmoid(decision)",
+    "constant_scaler_scale": 1.0,
+    "sklearn_probability_max_abs_tolerance": 1e-12,
+    "recompute_score_max_abs_tolerance": 1e-10,
+    "recompute_parameter_max_abs_tolerance": 1e-10
+  },
+  "locked_test_firewall": {
+    "locked_rows_allowed_in_modeling_table": false,
+    "locked_performance_allowed": false,
+    "locked_predictions_allowed": false,
+    "locked_scores_allowed": false,
+    "locked_distribution_allowed": false,
+    "locked_model_choice_allowed": false,
+    "locked_threshold_allowed": false,
+    "locked_features_allowed": false,
+    "aggregate_counts_only": true,
+    "locked_rows_to_development_manifest": false,
+    "locked_rows_to_scaler_fit": false,
+    "locked_rows_to_model_fit": false,
+    "locked_rows_to_metrics": false,
+    "locked_rows_to_oof": false,
+    "locked_rows_to_parameter_outputs": false,
+    "locked_rows_to_scoring": false
+  },
+  "p11_contract_path": "config/modeling/p11_locked_test_evaluation_contract.json",
+  "provenance_policy": {
+    "provenance_self_sha_forbidden": true,
+    "binds_formal_outputs": [
+      "01_development_modeling_manifest.csv",
+      "02_cv_model_selection.csv",
+      "03_development_oof_scores.csv",
+      "04_final_model_specification.json",
+      "05_final_model_parameters.npz",
+      "06_interpretable_coefficient_stability.csv",
+      "07_development_model_summary.json"
+    ],
+    "binds_contract_blobs": [
+      "config/modeling/p10_development_model_contract.json",
+      "config/modeling/p11_locked_test_evaluation_contract.json"
+    ],
+    "binds_producer_path": true,
+    "binds_baseline_main_commit": true,
+    "external_provenance_sha_record": "tracked report/summary/PR body",
+    "formal_output_sha_ledger_excludes_self": true,
+    "provenance_self_sha256_key": "provenance_self_sha256",
+    "convergence_audit_bound": true
+  },
+  "output_policy": {
+    "prepare_refuses_nonempty_formal_directory": true,
+    "verify_existing_writes": 0,
+    "verify_recompute_writes": 0,
+    "verify_recompute_network_calls": 0,
+    "formal_data_git_tracked": false,
+    "p11_executed": false,
+    "p11_predictions_or_performance_started": false,
+    "prepare_network_calls": 0,
+    "verify_existing_model_fits": 0,
+    "verify_recompute_model_fits": 156,
+    "formal_output_ledger_exact": true
+  },
+  "cv_audit": {
+    "ledger_rows": 150,
+    "cv_fit_count": 150,
+    "final_fit_count": 6,
+    "total_fit_count": 156,
+    "convergence_warning_is_fail": true,
+    "max_iter": 5000,
+    "n_iter_rule": "strictly less than max_iter for every CV and final fit",
+    "required_status": "PASS",
+    "required_fields": [
+      "outcome",
+      "outcome_role",
+      "track",
+      "C",
+      "fold",
+      "fold_average_precision",
+      "fold_auroc",
+      "train_rows",
+      "validation_rows",
+      "train_observed_positives",
+      "validation_observed_positives",
+      "n_iter",
+      "convergence_status",
+      "selected"
+    ]
+  }
+}
