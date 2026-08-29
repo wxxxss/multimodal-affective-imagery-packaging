@@ -4,93 +4,361 @@
   "canonical_outcome_source": "config/modeling/p8_a_analysis_contract.json::canonical_pu_outcomes",
   "pu_zero_semantics": "unlabeled; zero is not a confirmed negative",
   "columns": [
-    {"name": "parent_asin", "role": "identity_join_only"},
-    {"name": "input_order", "role": "frozen_order_metadata"},
-    {"name": "primary_freeze_status", "role": "frozen_exposure_admin"},
-    {"name": "main_analysis_included", "role": "population_admin"},
-    {"name": "main_analysis_exclusion_reason", "role": "population_admin"},
-    {"name": "split_eligible", "role": "split_admin"},
-    {"name": "split_partition", "role": "split_assignment"},
-    {"name": "development_fold", "role": "split_assignment"},
-    {"name": "split_group_key", "role": "split_grouping_only"},
-    {"name": "split_algorithm_version", "role": "split_provenance"},
-    {"name": "split_salt", "role": "split_provenance"},
-    {"name": "split_hash_order_key", "role": "split_provenance"},
-    {"name": "final_image_stage_status", "role": "frozen_exposure_stage_status"},
-    {"name": "primary_response_sha256", "role": "frozen_exposure_integrity"},
-    {"name": "primary_asset_path", "role": "frozen_exposure_asset_root_relative"},
-    {"name": "primary_local_path", "role": "frozen_exposure_repo_relative"},
-    {"name": "primary_source_url", "role": "frozen_exposure_requested_url"},
-    {"name": "primary_decoded_format", "role": "frozen_exposure_diagnostic"},
-    {"name": "primary_width", "role": "frozen_exposure_diagnostic"},
-    {"name": "primary_height", "role": "frozen_exposure_diagnostic"},
-    {"name": "primary_n_frames", "role": "frozen_exposure_diagnostic"},
-    {"name": "primary_response_byte_count", "role": "frozen_exposure_diagnostic"},
-    {"name": "primary_qa_sampled", "role": "frozen_exposure_diagnostic"},
-    {"name": "primary_qa_identity_status", "role": "frozen_exposure_diagnostic"},
-    {"name": "primary_qa_outer_package_status", "role": "frozen_exposure_diagnostic"},
-    {"name": "primary_qa_exception_flag", "role": "frozen_exposure_diagnostic"},
-    {"name": "known_p7c_qa_exception", "role": "frozen_exposure_diagnostic"},
-    {"name": "primary_asset_substituted", "role": "frozen_exposure_integrity"},
-    {"name": "sensitivity_queue", "role": "sensitivity_admin"},
-    {"name": "sensitivity_status", "role": "sensitivity_admin"},
-    {"name": "sensitivity_source_tier", "role": "sensitivity_provenance"},
-    {"name": "sensitivity_temporal_alignment_status", "role": "sensitivity_diagnostic"},
-    {"name": "sensitivity_response_sha256", "role": "sensitivity_integrity"},
-    {"name": "sensitivity_asset_path", "role": "sensitivity_asset_root_relative"},
-    {"name": "sensitivity_local_path", "role": "sensitivity_repo_relative"},
-    {"name": "sensitivity_available_for_sensitivity_only", "role": "sensitivity_admin"},
-    {"name": "g_clean_review_count", "role": "g_sensitivity_diagnostic"},
-    {"name": "g_clean_unique_reviewer_count", "role": "g_sensitivity_diagnostic"},
-    {"name": "g_clean_sentence_count", "role": "g_sensitivity_diagnostic"},
-    {"name": "g_packaging_candidate_review_count", "role": "g_sensitivity_diagnostic"},
-    {"name": "g_packaging_candidate_sentence_count", "role": "g_sensitivity_diagnostic"},
-    {"name": "g_packaging_candidate_reviewer_count", "role": "g_sensitivity_diagnostic"},
-    {"name": "g_visual_strict_review_count", "role": "g_sensitivity_diagnostic"},
-    {"name": "g_visual_strict_sentence_count", "role": "g_sensitivity_diagnostic"},
-    {"name": "g_visual_strict_reviewer_count", "role": "g_sensitivity_diagnostic"},
-    {"name": "g_existing_stratum", "role": "g_sensitivity_diagnostic"},
-    {"name": "g_clean_review_count_threshold_0", "role": "g_sensitivity_diagnostic"},
-    {"name": "g_clean_review_count_threshold_1", "role": "g_sensitivity_diagnostic"},
-    {"name": "g_clean_review_count_threshold_3", "role": "g_sensitivity_diagnostic"},
-    {"name": "g_clean_review_count_threshold_5", "role": "g_sensitivity_diagnostic"},
-    {"name": "g_clean_review_count_threshold_10", "role": "g_sensitivity_diagnostic"},
-    {"name": "g_clean_review_count_threshold_20", "role": "g_sensitivity_diagnostic"},
-    {"name": "g_clean_review_count_threshold_50", "role": "g_sensitivity_diagnostic"},
-    {"name": "g_clean_review_count_threshold_100", "role": "g_sensitivity_diagnostic"},
-    {"name": "pu_zero_semantics", "role": "outcome_semantics"},
-    {"name": "has_any_outer_imagery_observed", "role": "primary_outcome"},
-    {"name": "has_any_all_level_imagery_evidence", "role": "robustness_outcome"},
-    {"name": "general_visual_appeal_observed_positive_core", "role": "confirmatory_outcome"},
-    {"name": "cute_friendly_observed_positive_core", "role": "confirmatory_outcome"},
-    {"name": "premium_refined_observed_positive_core", "role": "structural_zero_outcome"},
-    {"name": "gift_presentation_observed_positive_core", "role": "structural_zero_outcome"},
-    {"name": "simple_modern_observed_positive_core", "role": "structural_zero_outcome"},
-    {"name": "natural_botanical_observed_positive_core", "role": "structural_zero_outcome"},
-    {"name": "calming_soft_observed_positive_core", "role": "structural_zero_outcome"},
-    {"name": "cheerful_colorful_observed_positive_core", "role": "structural_zero_outcome"},
-    {"name": "traditional_vintage_observed_positive_core", "role": "structural_zero_outcome"},
-    {"name": "negative_appearance_observed_positive_core", "role": "structural_zero_outcome"},
-    {"name": "general_visual_appeal_observed_positive_pilot", "role": "robustness_outcome"},
-    {"name": "cute_friendly_observed_positive_pilot", "role": "robustness_outcome"},
-    {"name": "premium_refined_observed_positive_pilot", "role": "robustness_outcome"},
-    {"name": "gift_presentation_observed_positive_pilot", "role": "robustness_outcome"},
-    {"name": "simple_modern_observed_positive_pilot", "role": "robustness_outcome"},
-    {"name": "natural_botanical_observed_positive_pilot", "role": "robustness_outcome"},
-    {"name": "calming_soft_observed_positive_pilot", "role": "robustness_outcome"},
-    {"name": "cheerful_colorful_observed_positive_pilot", "role": "robustness_outcome"},
-    {"name": "traditional_vintage_observed_positive_pilot", "role": "robustness_outcome"},
-    {"name": "negative_appearance_observed_positive_pilot", "role": "robustness_outcome"},
-    {"name": "general_visual_appeal_observed_positive_robust", "role": "robustness_outcome"},
-    {"name": "cute_friendly_observed_positive_robust", "role": "robustness_outcome"},
-    {"name": "premium_refined_observed_positive_robust", "role": "robustness_outcome"},
-    {"name": "gift_presentation_observed_positive_robust", "role": "robustness_outcome"},
-    {"name": "simple_modern_observed_positive_robust", "role": "robustness_outcome"},
-    {"name": "natural_botanical_observed_positive_robust", "role": "robustness_outcome"},
-    {"name": "calming_soft_observed_positive_robust", "role": "robustness_outcome"},
-    {"name": "cheerful_colorful_observed_positive_robust", "role": "robustness_outcome"},
-    {"name": "traditional_vintage_observed_positive_robust", "role": "robustness_outcome"},
-    {"name": "negative_appearance_observed_positive_robust", "role": "robustness_outcome"}
+    {
+      "name": "parent_asin",
+      "role": "identity_join_only"
+    },
+    {
+      "name": "input_order",
+      "role": "frozen_order_metadata"
+    },
+    {
+      "name": "primary_freeze_status",
+      "role": "frozen_exposure_admin"
+    },
+    {
+      "name": "main_analysis_included",
+      "role": "population_admin"
+    },
+    {
+      "name": "main_analysis_exclusion_reason",
+      "role": "population_admin"
+    },
+    {
+      "name": "split_eligible",
+      "role": "split_admin"
+    },
+    {
+      "name": "split_partition",
+      "role": "split_assignment"
+    },
+    {
+      "name": "development_fold",
+      "role": "split_assignment"
+    },
+    {
+      "name": "split_group_key",
+      "role": "split_grouping_only"
+    },
+    {
+      "name": "split_algorithm_version",
+      "role": "split_provenance"
+    },
+    {
+      "name": "split_salt",
+      "role": "split_provenance"
+    },
+    {
+      "name": "split_hash_order_key",
+      "role": "split_provenance"
+    },
+    {
+      "name": "final_image_stage_status",
+      "role": "frozen_exposure_stage_status"
+    },
+    {
+      "name": "primary_response_sha256",
+      "role": "frozen_exposure_integrity"
+    },
+    {
+      "name": "primary_asset_path",
+      "role": "frozen_exposure_asset_root_relative"
+    },
+    {
+      "name": "primary_local_path",
+      "role": "frozen_exposure_repo_relative"
+    },
+    {
+      "name": "primary_source_url",
+      "role": "frozen_exposure_requested_url"
+    },
+    {
+      "name": "primary_decoded_format",
+      "role": "frozen_exposure_diagnostic"
+    },
+    {
+      "name": "primary_width",
+      "role": "frozen_exposure_diagnostic"
+    },
+    {
+      "name": "primary_height",
+      "role": "frozen_exposure_diagnostic"
+    },
+    {
+      "name": "primary_n_frames",
+      "role": "frozen_exposure_diagnostic"
+    },
+    {
+      "name": "primary_response_byte_count",
+      "role": "frozen_exposure_diagnostic"
+    },
+    {
+      "name": "primary_qa_sampled",
+      "role": "frozen_exposure_diagnostic"
+    },
+    {
+      "name": "primary_qa_identity_status",
+      "role": "frozen_exposure_diagnostic"
+    },
+    {
+      "name": "primary_qa_outer_package_status",
+      "role": "frozen_exposure_diagnostic"
+    },
+    {
+      "name": "primary_qa_exception_flag",
+      "role": "frozen_exposure_diagnostic"
+    },
+    {
+      "name": "known_p7c_qa_exception",
+      "role": "frozen_exposure_diagnostic"
+    },
+    {
+      "name": "primary_asset_substituted",
+      "role": "frozen_exposure_integrity"
+    },
+    {
+      "name": "sensitivity_queue",
+      "role": "sensitivity_admin"
+    },
+    {
+      "name": "sensitivity_status",
+      "role": "sensitivity_admin"
+    },
+    {
+      "name": "sensitivity_source_tier",
+      "role": "sensitivity_provenance"
+    },
+    {
+      "name": "sensitivity_temporal_alignment_status",
+      "role": "sensitivity_diagnostic"
+    },
+    {
+      "name": "sensitivity_response_sha256",
+      "role": "sensitivity_integrity"
+    },
+    {
+      "name": "sensitivity_asset_path",
+      "role": "sensitivity_asset_root_relative"
+    },
+    {
+      "name": "sensitivity_local_path",
+      "role": "sensitivity_repo_relative"
+    },
+    {
+      "name": "sensitivity_available_for_sensitivity_only",
+      "role": "sensitivity_admin"
+    },
+    {
+      "name": "g_clean_review_count",
+      "role": "g_sensitivity_diagnostic"
+    },
+    {
+      "name": "g_clean_unique_reviewer_count",
+      "role": "g_sensitivity_diagnostic"
+    },
+    {
+      "name": "g_clean_sentence_count",
+      "role": "g_sensitivity_diagnostic"
+    },
+    {
+      "name": "g_packaging_candidate_review_count",
+      "role": "g_sensitivity_diagnostic"
+    },
+    {
+      "name": "g_packaging_candidate_sentence_count",
+      "role": "g_sensitivity_diagnostic"
+    },
+    {
+      "name": "g_packaging_candidate_reviewer_count",
+      "role": "g_sensitivity_diagnostic"
+    },
+    {
+      "name": "g_visual_strict_review_count",
+      "role": "g_sensitivity_diagnostic"
+    },
+    {
+      "name": "g_visual_strict_sentence_count",
+      "role": "g_sensitivity_diagnostic"
+    },
+    {
+      "name": "g_visual_strict_reviewer_count",
+      "role": "g_sensitivity_diagnostic"
+    },
+    {
+      "name": "g_existing_stratum",
+      "role": "g_sensitivity_diagnostic"
+    },
+    {
+      "name": "g_clean_review_count_threshold_0",
+      "role": "g_sensitivity_diagnostic"
+    },
+    {
+      "name": "g_clean_review_count_threshold_1",
+      "role": "g_sensitivity_diagnostic"
+    },
+    {
+      "name": "g_clean_review_count_threshold_3",
+      "role": "g_sensitivity_diagnostic"
+    },
+    {
+      "name": "g_clean_review_count_threshold_5",
+      "role": "g_sensitivity_diagnostic"
+    },
+    {
+      "name": "g_clean_review_count_threshold_10",
+      "role": "g_sensitivity_diagnostic"
+    },
+    {
+      "name": "g_clean_review_count_threshold_20",
+      "role": "g_sensitivity_diagnostic"
+    },
+    {
+      "name": "g_clean_review_count_threshold_50",
+      "role": "g_sensitivity_diagnostic"
+    },
+    {
+      "name": "g_clean_review_count_threshold_100",
+      "role": "g_sensitivity_diagnostic"
+    },
+    {
+      "name": "pu_zero_semantics",
+      "role": "outcome_semantics"
+    },
+    {
+      "name": "has_any_outer_imagery_observed",
+      "role": "primary_outcome"
+    },
+    {
+      "name": "has_any_all_level_imagery_evidence",
+      "role": "robustness_outcome"
+    },
+    {
+      "name": "general_visual_appeal_observed_positive_core",
+      "role": "confirmatory_outcome"
+    },
+    {
+      "name": "cute_friendly_observed_positive_core",
+      "role": "confirmatory_outcome"
+    },
+    {
+      "name": "premium_refined_observed_positive_core",
+      "role": "structural_zero_outcome"
+    },
+    {
+      "name": "gift_presentation_observed_positive_core",
+      "role": "structural_zero_outcome"
+    },
+    {
+      "name": "simple_modern_observed_positive_core",
+      "role": "structural_zero_outcome"
+    },
+    {
+      "name": "natural_botanical_observed_positive_core",
+      "role": "structural_zero_outcome"
+    },
+    {
+      "name": "calming_soft_observed_positive_core",
+      "role": "structural_zero_outcome"
+    },
+    {
+      "name": "cheerful_colorful_observed_positive_core",
+      "role": "structural_zero_outcome"
+    },
+    {
+      "name": "traditional_vintage_observed_positive_core",
+      "role": "structural_zero_outcome"
+    },
+    {
+      "name": "negative_appearance_observed_positive_core",
+      "role": "structural_zero_outcome"
+    },
+    {
+      "name": "general_visual_appeal_observed_positive_pilot",
+      "role": "robustness_outcome"
+    },
+    {
+      "name": "cute_friendly_observed_positive_pilot",
+      "role": "robustness_outcome"
+    },
+    {
+      "name": "premium_refined_observed_positive_pilot",
+      "role": "robustness_outcome"
+    },
+    {
+      "name": "gift_presentation_observed_positive_pilot",
+      "role": "robustness_outcome"
+    },
+    {
+      "name": "simple_modern_observed_positive_pilot",
+      "role": "robustness_outcome"
+    },
+    {
+      "name": "natural_botanical_observed_positive_pilot",
+      "role": "robustness_outcome"
+    },
+    {
+      "name": "calming_soft_observed_positive_pilot",
+      "role": "robustness_outcome"
+    },
+    {
+      "name": "cheerful_colorful_observed_positive_pilot",
+      "role": "robustness_outcome"
+    },
+    {
+      "name": "traditional_vintage_observed_positive_pilot",
+      "role": "robustness_outcome"
+    },
+    {
+      "name": "negative_appearance_observed_positive_pilot",
+      "role": "robustness_outcome"
+    },
+    {
+      "name": "general_visual_appeal_observed_positive_robust",
+      "role": "robustness_outcome"
+    },
+    {
+      "name": "cute_friendly_observed_positive_robust",
+      "role": "robustness_outcome"
+    },
+    {
+      "name": "premium_refined_observed_positive_robust",
+      "role": "robustness_outcome"
+    },
+    {
+      "name": "gift_presentation_observed_positive_robust",
+      "role": "robustness_outcome"
+    },
+    {
+      "name": "simple_modern_observed_positive_robust",
+      "role": "robustness_outcome"
+    },
+    {
+      "name": "natural_botanical_observed_positive_robust",
+      "role": "robustness_outcome"
+    },
+    {
+      "name": "calming_soft_observed_positive_robust",
+      "role": "robustness_outcome"
+    },
+    {
+      "name": "cheerful_colorful_observed_positive_robust",
+      "role": "robustness_outcome"
+    },
+    {
+      "name": "traditional_vintage_observed_positive_robust",
+      "role": "robustness_outcome"
+    },
+    {
+      "name": "negative_appearance_observed_positive_robust",
+      "role": "robustness_outcome"
+    }
   ],
-  "forbidden": ["feature_matrix", "embedding", "prediction", "model_metric", "auc", "average_precision"]
+  "forbidden": [
+    "feature_matrix",
+    "embedding",
+    "prediction",
+    "model_metric",
+    "auc",
+    "average_precision"
+  ]
 }
