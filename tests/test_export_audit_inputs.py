@@ -19,6 +19,11 @@ def _read_header(path: Path) -> list[str]:
         return next(csv.reader(handle))
 
 
+def _read_rows(path: Path) -> list[dict[str, str]]:
+    with path.open("r", encoding="utf-8", newline="") as handle:
+        return list(csv.DictReader(handle))
+
+
 def test_export_keeps_only_metric_audit_columns(tmp_path: Path):
     manifest = tmp_path / "source_manifest.csv"
     predictions = tmp_path / "source_predictions.csv"
@@ -67,3 +72,48 @@ def test_export_keeps_only_metric_audit_columns(tmp_path: Path):
     assert _read_header(output / "02_locked_test_predictions.csv") == [
         "parent_asin", "outcome", "track", "model_id", "score"
     ]
+
+
+def test_export_excludes_non_modeling_manifest_rows(tmp_path: Path):
+    manifest = tmp_path / "source_manifest.csv"
+    predictions = tmp_path / "source_predictions.csv"
+    output = tmp_path / "derived"
+
+    _write_csv(
+        manifest,
+        [
+            {
+                "parent_asin": "A1",
+                "main_analysis_included": "true",
+                "split_partition": "locked_test",
+                "primary_response_sha256": "abc",
+                "has_any_outer_imagery_observed": "1",
+                "general_visual_appeal_observed_positive_core": "0",
+                "cute_friendly_observed_positive_core": "0",
+            },
+            {
+                "parent_asin": "X1",
+                "main_analysis_included": "false",
+                "split_partition": "excluded",
+                "primary_response_sha256": "",
+                "has_any_outer_imagery_observed": "0",
+                "general_visual_appeal_observed_positive_core": "0",
+                "cute_friendly_observed_positive_core": "0",
+            },
+        ],
+    )
+    _write_csv(
+        predictions,
+        [{
+            "parent_asin": "A1",
+            "outcome": "has_any_outer_imagery_observed",
+            "track": "openclip_512_logistic",
+            "model_id": "has_any_outer_imagery_observed__openclip_512_logistic",
+            "score": "0.7",
+        }],
+    )
+
+    result = export_audit_inputs(manifest, predictions, output, require_frozen_counts=False)
+
+    assert result["manifest_rows"] == 1
+    assert [row["parent_asin"] for row in _read_rows(output / "01_modeling_ready_manifest.csv")] == ["A1"]
