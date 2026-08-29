@@ -4,7 +4,9 @@ Reproducibility repository accompanying the PeerJ Computer Science submission by
 
 ## Purpose
 
-This repository contains the code, configuration files, validation protocol, and non-sensitive derived artifacts used in the study. The work links publicly available Amazon Reviews'23 review/metadata resources to retail-package images and evaluates two visual representations under a positive-unlabeled (PU) observation framework:
+This repository is the publication-facing reproducibility package for the manuscript. It contains the machine-learning analysis code, configuration files, validation protocol, provenance records, publication-facing metric correction, and non-sensitive derived artifacts that can be shared without redistributing raw third-party reviews or product images.
+
+The study links publicly available Amazon Reviews'23 review/metadata resources to retail-package images and evaluates two visual representations under a positive-unlabeled (PU) observation framework:
 
 - a 512-dimensional OpenCLIP ViT-B/32 image embedding;
 - 36 interpretable visual features (20 classical raster descriptors + 16 semantic image-text design-similarity scores).
@@ -23,7 +25,7 @@ This repository does **not** redistribute raw Amazon review text or third-party 
 
 ## Repository status and AUROC correction
 
-This public repository is a publication-facing reproducibility export from the frozen research codebase. Source snapshot used for the export: `1d72e3ba798f93d328c37bfe75b37032b9f21246`.
+This public repository is a publication-facing export from the frozen research codebase. Source snapshot used for provenance: `1d72e3ba798f93d328c37bfe75b37032b9f21246`.
 
 During publication preparation, a metric-consistency audit found that the historical P11 reference oracle used a reversed rank orientation for AUROC relative to the conventional P10/scikit-learn definition. The audit was completed from the already-frozen held-out scores and labels. No model was retrained or reselected, scores were not inverted, and no label, feature, threshold, or split was changed.
 
@@ -67,48 +69,42 @@ pip install -r requirements.txt
 
 See `docs/ENVIRONMENT.md` for the recorded runtime and `docs/REPRODUCIBILITY.md` for workflow details.
 
-## Manuscript workflow mapped to code
+## Public runnable machine-learning workflow
 
-1. **Metadata screening**
-   - `scripts/metadata/screen_full_metadata_v2.py`
-   - `scripts/metadata/secondary_clean_candidates_v21.py`
-   - `scripts/metadata/secondary_clean_candidates_v22.py`
-2. **Review matching and preprocessing**
-   - `scripts/reviews/match_reviews_to_valid_products.py`
-   - `scripts/reviews/clean_and_extract_packaging_sentences.py`
-3. **Visual-package language screening**
-   - `scripts/visual_packaging/strict_visual_packaging_classifier_v11.py`
-4. **Affective-imagery label construction**
-   - `build_affective_imagery_labels_v21.py`
-5. **Rule-guided validation/adjudication utilities**
-   - `scripts/validation/`
-   - `docs/validation/`
-6. **Image acquisition, QA, and frozen primary-image selection**
-   - `scripts/images/`
-7. **Analysis contract and modeling-ready split**
+The publication-facing checkout directly contains the code used for the leakage-controlled modeling and evaluation stages:
+
+1. **Analysis contract and modeling-ready split**
    - `scripts/modeling/p8_a_analysis_contract.py`
    - `scripts/modeling/p8_b_modeling_ready_split.py`
-8. **OpenCLIP and interpretable visual feature extraction**
+2. **OpenCLIP and interpretable visual feature extraction**
    - `scripts/modeling/p9_visual_features.py`
-9. **Development-only model selection/refit**
+3. **Development-only model selection/refit**
    - `scripts/modeling/p10_development_models.py`
-10. **Held-out evaluation**
+4. **Held-out evaluation**
    - publication-facing evaluator: `scripts/modeling/public_heldout_evaluation.py`
    - completed metric audit: `docs/AUROC_AUDIT.md`
    - historical audit/reference modules: `scripts/modeling/p11_locked_test_reference_oracle.py`, `scripts/modeling/p11_locked_test_reference_oracle_legacy.py`, `scripts/modeling/p11_locked_test_repair.py`
-11. **Post-lock interpretation**
+5. **Post-lock interpretation**
    - historical frozen rules: `config/modeling/p12_post_lock_interpretation_contract.json`
    - historical frozen outputs: `data/published_results/p12/`
    - publication-facing AUROC overlay: `data/published_results/p12_auroc_correction/`
-12. **Manuscript figures**
+6. **Publication-safe data export**
+   - `scripts/release/export_audit_inputs.py`
+7. **Manuscript figures**
    - `scripts/figures/figure01_data_construction_v5.py`
    - corrected Figure 3: `scripts/figures/figure03_recognition_performance_v7_auroc_corrected.py`
    - historical Figure 3 source retained for provenance: `scripts/figures/figure03_recognition_performance_v6.py`
    - `scripts/figures/figure04_design_strategies_v6.py`
 
-The internal P11 implementation contains integrity bindings to the original research-repository Git history and locally frozen upstream artifacts. Those bindings are retained as audit evidence; they are not a claim that the historical P11 transaction can be rerun from this public Git checkout alone without the corresponding frozen local artifacts.
-
 The workflow deliberately preserves the development/held-out firewall. Held-out results must not be used for model selection, threshold selection, score inversion, or feature selection.
+
+## Upstream data construction and preprocessing
+
+The raw-source stages comprised metadata eligibility screening, review-to-product matching, review cleaning/sentence extraction, strict visual-package-language screening, affective-imagery label construction, rule-guided validation/adjudication, and image acquisition/QA/freeze. These stages were executed in the frozen research workspace before the modeling-ready artifacts were locked.
+
+For auditability, `docs/PREPROCESSING_SOURCE_BINDINGS.md` records the original frozen Git blob SHA-1 for every source module used in those stages. `docs/REPRODUCIBILITY.md` describes the processing sequence and its outputs, and `docs/validation/` contains the publication-facing validation protocol/schema. The public checkout does not claim that absent historical workspace modules can be executed from this repository.
+
+This separation is intentional: raw Amazon review text, product-image binaries/URLs, workstation-specific runtime material, and internal administrative records are excluded from the public release. The publication-safe supplemental dataset is designed to provide the frozen identifiers, held-out labels/grouping variable, and six frozen model scores needed to check the reported held-out metrics without redistributing those third-party materials.
 
 ## Positive-unlabeled semantics
 
@@ -120,10 +116,10 @@ The validation sample comprised 600 sentence-level tasks and 240 product-dimensi
 
 ## Reproducibility boundaries
 
-The repository publishes scientific code and non-sensitive configuration/provenance materials. It excludes raw Amazon review text, raw third-party product images, the large third-party/OpenCLIP checkpoint binary, credentials/API responses/runtime logs, internal collaboration-history documents unrelated to the manuscript, and personally identifying reviewer/account information.
+The repository publishes the scientific machine-learning code needed to inspect and rerun the publication-facing modeling/evaluation logic from the frozen publication-safe inputs, together with configuration and provenance materials. It excludes raw Amazon review text, raw third-party product images, image-source URLs, the large third-party/OpenCLIP checkpoint binary, credentials/API responses/runtime logs, internal collaboration-history documents unrelated to the manuscript, and personally identifying reviewer/account information.
 
-A publication-safe derived-data package can contain product identifiers, frozen split/group assignments, observed-positive outcome fields, and frozen model scores without redistributing raw review text or copyrighted image binaries. See `docs/DATA_ACCESS.md` for the exact boundary and `docs/SOURCE_PROVENANCE.md` for source-snapshot bindings.
+See `docs/DATA_ACCESS.md` for the exact data boundary, `docs/PREPROCESSING_SOURCE_BINDINGS.md` for frozen upstream source-code bindings, and `docs/SOURCE_PROVENANCE.md` for source-snapshot provenance.
 
-## Citation
+## Citation and archival DOI
 
-If this repository is used before the article receives a final bibliographic record, cite the manuscript title above, author Kaiting Wu, and this GitHub repository. A versioned archival DOI can be added after the reproducibility release is finalized.
+If this repository is used before the article receives a final bibliographic record, cite the manuscript title above, author Kaiting Wu, and this GitHub repository. For PeerJ resubmission, archive the final release in a DOI-bearing repository (for example, Zenodo) or upload the code as a PeerJ supplemental file, then enter the resulting DOI/file information in the submission system.
