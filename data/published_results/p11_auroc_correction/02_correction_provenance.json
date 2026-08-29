@@ -1,0 +1,46 @@
+{
+  "correction_type": "bounded metric-implementation correction",
+  "scientific_scope": {
+    "model_refit": false,
+    "model_reselection": false,
+    "score_inversion": false,
+    "threshold_selection": false,
+    "label_change": false,
+    "feature_change": false,
+    "split_change": false,
+    "average_precision_change": false,
+    "top_k_recall_lift_change": false,
+    "auroc_point_estimate_change": true,
+    "auroc_bootstrap_interval_change": true
+  },
+  "root_cause": "The legacy P11 oracle sorted observations by descending score and then applied the positive-rank Mann-Whitney AUROC formula whose conventional orientation assumes ascending ranks. This reversed AUROC orientation. Exact score ties were additionally given deterministic key ranks rather than conventional tie averaging.",
+  "correct_definition": "sklearn.metrics.roc_auc_score(y_true, frozen_score)",
+  "inputs": {
+    "p8b_manifest_sha256": "4CC5D4389BE9FEC94CAAC0601A24A49841D3EAB0D0787BAE8A8DD4ACF52B86E9",
+    "p11_locked_test_predictions_sha256": "F927730318275EF33EF7C74251E6FAAED67512A20C4678C493AF14C65E85336F",
+    "locked_test_products": 1036,
+    "locked_test_primary_response_groups": 838,
+    "model_count": 6,
+    "prediction_rows": 6216
+  },
+  "bootstrap": {
+    "unit": "primary_response_sha256",
+    "iterations": 5000,
+    "seed": 20260818,
+    "confidence_level": 0.95,
+    "method": "percentile",
+    "plan_sha256": "26DC4E42EC8B23E1CAFD1A0D432EE327A31197DFE6BC5F0B1B7EC8122C9DB32E"
+  },
+  "additional_checks": {
+    "locked_test_positive_counts": {
+      "has_any_outer_imagery_observed": 46,
+      "general_visual_appeal_observed_positive_core": 30,
+      "cute_friendly_observed_positive_core": 17
+    },
+    "group_level_corrected_auroc_range": [0.682253649635036, 0.718141727493917],
+    "r1_primary_openclip_corrected_auroc": 0.698534278959811,
+    "p11_prediction_sha_matches_frozen_ledger": true,
+    "bootstrap_plan_sha_reproduced": true
+  },
+  "interpretation": "The previous manuscript claim that all held-out AUROC values were below 0.5 and that development-to-held-out AUROC reversed was caused by the P11 metric implementation defect. The frozen scores themselves show above-chance global ranking under conventional AUROC. PU semantics, AP/top-k enrichment results, model fitting, and design-grade rules based on lift remain unchanged."
+}
