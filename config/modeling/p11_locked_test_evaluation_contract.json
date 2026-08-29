@@ -1,0 +1,97 @@
+{
+  "contract_version": "p11_v1.0",
+  "stage": "P11 locked-test evaluation contract freeze",
+  "execution_status": "contract_only_not_executed",
+  "baseline_p10_contract": "config/modeling/p10_development_model_contract.json",
+  "locked_test_source": "data/processed/modeling_readiness_p8_5180/p8_b_modeling_ready_split/01_modeling_ready_manifest.csv",
+  "locked_test_partition": "locked_test",
+  "group_key": "primary_response_sha256",
+  "group_rule": "one primary_response_sha256 group is one evaluation unit; group observed label is max product observed label",
+  "preserve_product_row_metrics": true,
+  "metrics": {
+    "primary": "average_precision",
+    "point_estimates": [
+      "average_precision",
+      "roc_auc",
+      "recall_at_top5",
+      "recall_at_top10",
+      "recall_at_top20",
+      "lift_at_top5",
+      "lift_at_top10",
+      "lift_at_top20"
+    ],
+    "no_threshold_accuracy": true,
+    "no_threshold_f1": true
+  },
+  "uncertainty": {
+    "unit": "primary_response_sha256 group",
+    "method": "cluster bootstrap",
+    "iterations": 5000,
+    "random_seed": 20260818,
+    "confidence_level": 0.95,
+    "percentile_metrics": [
+      "average_precision",
+      "roc_auc",
+      "recall_at_top10",
+      "lift_at_top10"
+    ],
+    "other_metrics": "point estimates only"
+  },
+  "r2_sensitivity": {
+    "comparison": "frozen final primary model versus sensitivity feature source",
+    "same_frozen_split_grouping": true,
+    "available_products_only": true,
+    "retrain_sensitivity": false,
+    "no_retrain": true
+  },
+  "firewall": {
+    "execution_in_p10": false,
+    "locked_rows_read_for_modeling": false,
+    "locked_rows_read_for_model_choice": false,
+    "locked_predictions_in_p10": false,
+    "locked_metrics_in_p10": false,
+    "locked_source_read_in_p10": false,
+    "locked_partition_in_development_table": false,
+    "locked_rows_to_scaler_fit": false,
+    "locked_rows_to_model_fit": false,
+    "locked_rows_to_metrics": false,
+    "locked_rows_to_oof": false,
+    "locked_rows_to_scoring_in_p10": false,
+    "p11_execution_in_p10": false
+  },
+  "p8_a_binding": {
+    "contract_path": "config/modeling/p8_a_analysis_contract.json",
+    "contract_sha256": "A22948361EC2C3FAD9F0046D9B6200623222E3F9EC2617951AF7A4E62B7D75C8",
+    "contract_git_blob_sha256": "FE1DA301962FB08A4D6962B744592DDF1FAD4480"
+  },
+  "robustness_analyses": {
+    "R1": {
+      "name": "known-QA-exception exclusion",
+      "definition": "exclude only the 83 known P7-C QA exceptions",
+      "promotion_or_relabeling": false
+    },
+    "R2": {
+      "name": "primary-versus-frozen-sensitivity-exposure",
+      "definition": "compare primary exposure with frozen sensitivity exposure for available products without changing split grouping",
+      "same_frozen_split_grouping": true,
+      "retrain_sensitivity": false,
+      "promotion_or_relabeling": false
+    },
+    "R3": {
+      "name": "G exposure-quality sensitivity",
+      "definition": "use the complete frozen G grid/rules or continuous diagnostic; never select a performance-best exposure threshold",
+      "performance_best_threshold_selection": false,
+      "promotion_or_relabeling": false
+    },
+    "R4": {
+      "name": "core-versus-pilot-robust label-definition robustness",
+      "definition": "compare frozen core with pilot/robust definitions without promotion",
+      "promotion_or_relabeling": false
+    },
+    "R5": {
+      "name": "known-placeholder-image-exception subgroup",
+      "definition": "descriptive score behavior for known placeholder/image-exception subgroup",
+      "inferential_claim": false
+    }
+  }
+}
