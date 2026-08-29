@@ -1,0 +1,126 @@
+{
+  "contract_version": "p7_d_v1.0",
+  "stage": "P7-D post-freeze sensitivity layer and final image-stage freeze",
+  "upstream_main_commit": "be7341dd230679aa8047481e52ee09fb2e06a80c",
+  "p7_c_formal_run_git_commit": "591d679aedeb37721dcfe373bf1ee63bc8d9476b",
+  "p7_c_portability_repair_commit": "c875fa595b2241ad39627f26741b002c0427e674",
+  "p7_c_formal_output_sha256": {
+    "01_qa_sample.csv": "12735759B1B29B1769CD612A98BFBDC6FC841BAD7F902A68B726ABF702580296",
+    "02_review_pass_a.csv": "AB53D5A630FAC81E10B16B67CF64CB6B15BAAD79098D3AB3BAC3E13D505BFF7D",
+    "03_review_pass_b.csv": "F0F1A83DFAABF2574EB2EF334A61683F87A51DCC02FE615A3989585703567DA4",
+    "04_adjudicated_qa.csv": "4C4F7DDAF4E6A3B9B9C60E806FD0CCB8298168BFE8C035C2C10D9ABB5261700F",
+    "05_primary_manifest.csv": "793B450BD5FD9587AB623E4E574838D0EB58C33C2DBCD398A6F8F12E59545078",
+    "06_p7_c_summary.json": "E12D8FE96889D38F36505DBF1F038B637FB9A9D084B0836B4016E986D10E1872",
+    "07_p7_c_provenance.json": "2D8E630CC865D2115B5A2CED6311E39B9FB314505F7218975C458A43AF1B6B30"
+  },
+  "p7_c_paths": {
+    "contract": "config/image_assets/p7_c_qa_contract.json",
+    "review_prompt": "config/image_assets/p7_c_review_prompt.json",
+    "qa_sample": "data/processed/retail_outer_package_images_p7_5180/p7_c_primary_manifest/01_qa_sample.csv",
+    "primary_manifest": "data/processed/retail_outer_package_images_p7_5180/p7_c_primary_manifest/05_primary_manifest.csv",
+    "summary": "data/processed/retail_outer_package_images_p7_5180/p7_c_primary_manifest/06_p7_c_summary.json",
+    "provenance": "data/processed/retail_outer_package_images_p7_5180/p7_c_primary_manifest/07_p7_c_provenance.json"
+  },
+  "product_universe_count": 5180,
+  "primary_available_count": 5179,
+  "excluded_non_primary_count": 1,
+  "primary_manifest_mutable": false,
+  "sensitivity_is_primary_replacement": false,
+  "label_blind_before_sensitivity_freeze": true,
+  "g_final_threshold_selected": false,
+  "modeling_started": false,
+  "image_feature_extraction_started": false,
+  "formal_paths": {
+    "output_dir": "data/processed/retail_outer_package_images_p7_5180/p7_d_final_image_freeze",
+    "exception_inventory": "data/processed/retail_outer_package_images_p7_5180/p7_d_final_image_freeze/01_exception_inventory.csv",
+    "candidate_inventory": "data/processed/retail_outer_package_images_p7_5180/p7_d_final_image_freeze/02_sensitivity_candidate_inventory.csv",
+    "candidate_adjudication": "data/processed/retail_outer_package_images_p7_5180/p7_d_final_image_freeze/03_sensitivity_candidate_adjudication.csv",
+    "final_manifest": "data/processed/retail_outer_package_images_p7_5180/p7_d_final_image_freeze/04_final_image_manifest.csv",
+    "label_diagnostics": "data/processed/retail_outer_package_images_p7_5180/p7_d_final_image_freeze/05_postfreeze_label_diagnostics.csv",
+    "summary": "data/processed/retail_outer_package_images_p7_5180/p7_d_final_image_freeze/06_p7_d_summary.json",
+    "provenance": "data/processed/retail_outer_package_images_p7_5180/p7_d_final_image_freeze/07_p7_d_provenance.json"
+  },
+  "sensitivity_asset_root": "data/images/retail_outer_package_p7_5180/sensitivity",
+  "sensitivity_queue_rules": [
+    "primary_freeze_status == frozen_primary_with_qa_exception",
+    "primary_freeze_status == excluded_non_primary",
+    "primary response_sha256 matches a decoded_placeholder_signature across all 5179 primary rows"
+  ],
+  "source_tiers": {
+    "frozen_2023_metadata_secondary": {
+      "rank": 1,
+      "temporal_alignment_status": "frozen_metadata_snapshot_2023"
+    },
+    "historical_existing_first_image_fallback": {
+      "rank": 2,
+      "temporal_alignment_status": "frozen_metadata_snapshot_2023"
+    },
+    "current_exact_parent_asin": {
+      "rank": 3,
+      "temporal_alignment_status": "current_only_fallback"
+    }
+  },
+  "candidate_review_prompt_path": "config/image_assets/p7_c_review_prompt.json",
+  "candidate_review_prompt_sha256": "1A4818DD039F80C7820B776EB378B12DB798A51F16DBCFFF347425E499BEDCBC",
+  "candidate_review_model_identifier": "Codex local vision interface",
+  "candidate_identity_status_enum": ["consistent", "contradiction", "indeterminate"],
+  "candidate_outer_package_status_enum": ["outer_retail_package", "inner_packaging_only", "product_content_only", "lifestyle_or_serving", "composite_or_collage", "ambiguous", "unavailable_or_corrupt"],
+  "candidate_confidence_enum": ["high", "medium", "low"],
+  "candidate_qualified_rule": "identity_status == consistent AND outer_package_status == outer_retail_package",
+  "sensitivity_status_enum": ["not_required", "available", "unresolved"],
+  "placeholder_signatures": [
+    {
+      "name": "no_image_available_gif",
+      "response_sha256": "E58401062077E3648CDFB7797A124026265792617F300EC1F53C1C23FB8CD8DB"
+    },
+    {
+      "name": "no_image_available_jpeg",
+      "response_sha256": "FDE2FA682CFA73AACDECA176A4A5E974DF1E27FF41E1445500C65F6E8F7170B4"
+    },
+    {
+      "name": "image_coming_soon_jpeg",
+      "response_sha256": "E4AF71FCC5CE97604D89F9CA4F67EF82BEF5DEB18256FF695E91F86A253F103F"
+    }
+  ],
+  "network_policy": {
+    "method": "GET",
+    "user_agent": "P7D-SensitivityCandidateAcquisition/1.0 (+https://github.com/wxxxss/herbal-tea-packaging-feasibility)",
+    "cookies": false,
+    "authenticated_session": false,
+    "browser_automation": false,
+    "product_page_scraping": false,
+    "exact_parent_asin_page_lookup": true,
+    "search_engine": false,
+    "max_workers": 8,
+    "connect_timeout_seconds": 10,
+    "read_timeout_seconds": 30,
+    "max_redirects": 5,
+    "max_attempts": 4,
+    "backoff_seconds": [1, 2, 4],
+    "retry_status_codes": [408, 429, 500, 502, 503, 504],
+    "respect_retry_after": true
+  },
+  "response_limits": {
+    "maximum_response_bytes": 26214400,
+    "maximum_decoded_pixels": 100000000,
+    "preserve_exact_entity_body_bytes": true,
+    "resize": false,
+    "crop": false,
+    "reencode": false,
+    "format_conversion": false,
+    "atomic_write": true
+  },
+  "label_firewall": {
+    "phase1_label_sources_read": false,
+    "forbidden_phase1_concepts": ["V2.1 labels", "39", "39b", "P5/P6 adjudication", "review labels", "review text", "G outcomes"],
+    "phase1_allowed_inputs": ["P7-A frozen inventory", "P7-B frozen primary manifest", "P7-C frozen sample/Primary Manifest", "frozen 2023 raw metadata", "candidate image bytes", "whitelisted frozen product metadata"]
+  },
+  "safety": {
+    "primary_asset_substitution_count_must_equal": 0,
+    "final_threshold_selected": false,
+    "modeling_started": false,
+    "image_feature_extraction_started": false,
+    "formal_data_committed": false,
+    "images_committed": false
+  }
+}

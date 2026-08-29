@@ -1,0 +1,202 @@
+{
+  "contract_version": "p7_b_v1.0",
+  "stage": "P7-B Primary Image Asset Acquisition",
+  "label_blind": true,
+  "upstream_p7_a": {
+    "inventory_path": "data/processed/retail_outer_package_images_p7_5180/p7_a_source_inventory/01_source_identity_inventory.csv",
+    "inventory_sha256": "263961C6D04F21A28E4218AC6BFC82F96176339266E1638B3B0F5A0E62A1B9E6",
+    "summary_path": "data/processed/retail_outer_package_images_p7_5180/p7_a_source_inventory/02_p7_a_summary.json",
+    "summary_sha256": "F0E530E09B66D71750F9DB466AAB1AD278EC047E222DF4771E69DF6CF56EE787",
+    "provenance_path": "data/processed/retail_outer_package_images_p7_5180/p7_a_source_inventory/03_p7_a_provenance.json",
+    "provenance_sha256": "8E4F5F66A38415F6FA26411E3CE6CEBA34609D496CF0D05B0286E2439B3727BF",
+    "input_product_path": "data/processed/review_matching_5180/01_valid_products.csv",
+    "input_product_sha256": "CDF80D7BA5E917982DDCBEC5153C6115CBD1BC5A5B5C158B382D614DFF94A08B"
+  },
+  "product_universe_count": 5180,
+  "primary_eligible_count": 5179,
+  "excluded_non_declared_main_count": 1,
+  "eligible_image_role": "declared_main",
+  "excluded_image_role": "existing_first_image_fallback",
+  "primary_temporal_alignment_status": "frozen_metadata_snapshot_2023",
+  "input_order_definition": "zero_based_order_of_p7_a_source_inventory_csv",
+  "url_policy": {
+    "requested_url_source": "existing_main_image_url",
+    "exact_match_required": true,
+    "reconstructed_url_must_equal_existing_url": true,
+    "allowed_transport_behavior": [
+      "HTTP redirects are allowed and recorded as final_url and redirect_count"
+    ],
+    "forbidden_url_behavior": [
+      "strip Amazon size-transform parameters",
+      "change URL path",
+      "change filename",
+      "select all_image_urls candidate",
+      "query current product page",
+      "add alternate image source",
+      "use child ASIN",
+      "use secondary image",
+      "use fallback source"
+    ]
+  },
+  "network_policy": {
+    "method": "GET",
+    "user_agent": "P7B-PrimaryAssetAcquisition/1.0 (+https://github.com/wxxxss/herbal-tea-packaging-feasibility)",
+    "cookies": false,
+    "authenticated_session": false,
+    "browser_automation": false,
+    "product_page_scraping": false,
+    "search_engine": false,
+    "current_retailer_lookup": false,
+    "max_workers": 8,
+    "connect_timeout_seconds": 10,
+    "read_timeout_seconds": 30,
+    "max_redirects": 5,
+    "max_attempts": 4,
+    "backoff_seconds": [
+      1,
+      2,
+      4
+    ],
+    "retry_status_codes": [
+      408,
+      429,
+      500,
+      502,
+      503,
+      504
+    ],
+    "respect_retry_after": true
+  },
+  "response_limits": {
+    "maximum_response_bytes": 26214400,
+    "maximum_decoded_pixels": 100000000,
+    "response_body_definition": "HTTP client entity-body bytes after standard transfer/content decoding, exactly as supplied to the image decoder"
+  },
+  "storage_policy": {
+    "asset_root": "data/images/retail_outer_package_p7_5180",
+    "canonical_subdirectory": "primary",
+    "content_addressed": true,
+    "path_pattern": "primary/<sha256 first 2 uppercase>/<SHA256>.<actual decoded extension>",
+    "preserve_exact_entity_body_bytes": true,
+    "resize": false,
+    "crop": false,
+    "recompress": false,
+    "reencode": false,
+    "exif_normalization": false,
+    "format_conversion": false,
+    "gif_frame_extraction": false,
+    "atomic_write": true,
+    "overwrite_existing_asset": false
+  },
+  "checkpoint_policy": {
+    "format": "append_only_jsonl",
+    "canonical_artifact": false,
+    "worker_writes_checkpoint": false,
+    "final_manifests_only_from_aggregation": true,
+    "resume_success_only_when_local_sha_matches": true
+  },
+  "eligibility_status_enum": [
+    "primary_declared_main",
+    "excluded_non_declared_main",
+    "contract_invalid"
+  ],
+  "download_status_enum": [
+    "not_attempted",
+    "success",
+    "http_error",
+    "timeout",
+    "connection_error",
+    "redirect_error",
+    "response_too_large",
+    "network_error"
+  ],
+  "decode_status_enum": [
+    "not_attempted",
+    "success",
+    "empty_body",
+    "non_image_response",
+    "unsupported_format",
+    "corrupt_image",
+    "pixel_limit_exceeded",
+    "decode_error"
+  ],
+  "final_asset_status_enum": [
+    "available",
+    "excluded_non_primary",
+    "acquisition_failed",
+    "integrity_failed"
+  ],
+  "supported_decoded_format_examples": [
+    "JPEG",
+    "PNG",
+    "GIF",
+    "WEBP",
+    "BMP",
+    "TIFF"
+  ],
+  "product_manifest_columns": [
+    "parent_asin",
+    "input_order",
+    "source_record_sha256",
+    "image_role",
+    "temporal_alignment_status",
+    "eligibility_status",
+    "requested_url",
+    "final_url",
+    "redirect_count",
+    "attempt_count",
+    "http_status",
+    "response_content_type",
+    "response_content_length_header",
+    "response_etag",
+    "response_last_modified",
+    "response_byte_count",
+    "response_sha256",
+    "decoded_format",
+    "width",
+    "height",
+    "n_frames",
+    "download_status",
+    "decode_status",
+    "final_asset_status",
+    "asset_path",
+    "exact_duplicate_asset_id",
+    "exact_duplicate_asset_group_size",
+    "retry_after_seconds",
+    "error_class",
+    "error_detail",
+    "retrieved_at_utc"
+  ],
+  "unique_asset_inventory_columns": [
+    "asset_sha256",
+    "asset_path",
+    "decoded_format",
+    "width",
+    "height",
+    "n_frames",
+    "response_byte_count",
+    "product_count",
+    "source_url_count"
+  ],
+  "formal_output_paths": {
+    "output_dir": "data/processed/retail_outer_package_images_p7_5180/p7_b_primary_assets",
+    "product_manifest": "data/processed/retail_outer_package_images_p7_5180/p7_b_primary_assets/01_primary_asset_manifest.csv",
+    "unique_asset_inventory": "data/processed/retail_outer_package_images_p7_5180/p7_b_primary_assets/02_unique_asset_inventory.csv",
+    "summary": "data/processed/retail_outer_package_images_p7_5180/p7_b_primary_assets/03_p7_b_summary.json",
+    "provenance": "data/processed/retail_outer_package_images_p7_5180/p7_b_primary_assets/04_p7_b_provenance.json",
+    "checkpoint": "data/processed/retail_outer_package_images_p7_5180/p7_b_primary_assets/.p7_b_checkpoint.jsonl"
+  },
+  "acquisition_sanity_thresholds": {
+    "pending_count_must_equal": 0,
+    "http_403_plus_429_rate_review_above": 0.02,
+    "terminal_failure_rate_review_above": 0.1,
+    "decode_or_integrity_failure_rate_among_http_200_review_above": 0.02,
+    "review_status": "REVIEW_REQUIRED"
+  },
+  "provenance_policy": {
+    "tracked_producer_identity": "exact Git blob bytes at formal_run_git_commit",
+    "script_sha256_definition": "SHA-256 of git show <formal_run_git_commit>:scripts/images/acquire_p7_primary_assets.py bytes",
+    "contract_sha256_definition": "SHA-256 of git show <formal_run_git_commit>:config/image_assets/p7_b_asset_contract.json bytes",
+    "provenance_does_not_record_own_sha": true
+  }
+}
