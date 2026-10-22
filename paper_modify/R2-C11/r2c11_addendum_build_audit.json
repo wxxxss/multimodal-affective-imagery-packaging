@@ -1,0 +1,20 @@
+{
+  "status": "LOCAL_RELEASE_ADDENDUM_BUILT_NOT_UPLOADED",
+  "archive": "R2-C11_development_features_addendum_v1.zip",
+  "archive_bytes": 9260698,
+  "archive_sha256": "D783E15249F5D68C48A37AE04AEBC394C7BEC7140EF957E1E5FAAF99B2B68E57",
+  "development_products": 4143,
+  "locked_test_feature_rows": 0,
+  "member_sha256": {
+    "03_openclip512_features.npz": "3BAA339E76AADA016231ACB9B40ACE7EB0E6CD66FC875E86585E2E6D5E144D37",
+    "04_interpretable36_features.csv": "FE5C14A259748345AE66F9A3758D6FEFD4F5BD0445866A31FF18FE81502568AC",
+    "05_development_folds.csv": "800367FF246C5A311D8302EE620C6212C2DD6874AEDFA70C5494CC30411E69CF",
+    "README.md": "F580BBA8C1B393FF4AEDE890881AE519610C35E891D57386AA459C0AC07234E7",
+    "PROVENANCE.json": "DBC97BEEA5F65263A019EC3964750F0D6FAB6BD216B9ADD72A5F7EA34E37BFCB",
+    "SHA256SUMS.txt": "A3F40E53B68BF205847897A9C095613002899E3C92FFCEC3F1809F3E85F00083"
+  },
+  "published_Supplemental_Data_1_manifest_verified": false,
+  "rights_approval_and_public_deposit": false,
+  "original_frozen_source_files_modified": false,
+  "release_notes": "Review contents and source terms before uploading; do not claim previously released."
+}
