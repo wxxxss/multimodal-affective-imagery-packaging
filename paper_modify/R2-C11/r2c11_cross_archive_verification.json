@@ -1,0 +1,29 @@
+{
+  "status": "PASS_FEATURE_ADDENDUM_LINKED_TO_PUBLISHED_DEVELOPMENT_LABELS",
+  "development_rows": 4143,
+  "published_manifest_rows": 5179,
+  "published_heldout_rows": 1036,
+  "published_development_rows": 4143,
+  "five_original_grouped_fold_sizes": {
+    "0": 837,
+    "1": 828,
+    "2": 828,
+    "3": 828,
+    "4": 822
+  },
+  "development_observed_positives": {
+    "has_any_outer_imagery_observed": 186,
+    "general_visual_appeal_observed_positive_core": 120,
+    "cute_friendly_observed_positive_core": 68
+  },
+  "feature_dimensions": {
+    "OpenCLIP": 512,
+    "interpretable": 36
+  },
+  "all_development_IDs_one_to_one_matched": true,
+  "no_identical_primary_image_SHA_split_across_folds": true,
+  "addendum_ZIP_SHA256": "D783E15249F5D68C48A37AE04AEBC394C7BEC7140EF957E1E5FAAF99B2B68E57",
+  "published_Supplemental_Data_1_ZIP_SHA256": "1BD84311A5EA1D228B57975ACF263FD9BCFF92416B74B2C1CAAA6657077806CB",
+  "source_ZIPs_not_modified": true,
+  "public_deposit_not_established_by_this_check": true
+}
